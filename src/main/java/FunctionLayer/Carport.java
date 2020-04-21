@@ -8,10 +8,10 @@ public class Carport {
     double pris;
 
     int carportId;
-    //Materialer!!!!
     Tag tag;
     Skur skur;
 
+    //Materialer???
 
     public Carport(double højde, double bredde, double længde, Skur skur, Tag tag) {
         this.højde = højde;
