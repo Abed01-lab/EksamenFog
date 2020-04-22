@@ -17,7 +17,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="EksamenFog" options="-endorseddirs C:\Users\gustav\EksamenFog\target/endorsed" />
+      <module name="EksamenFog" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
       <module name="Project-Fog" options="-endorseddirs C:\Users\abedh\OneDrive\Skrivebord\Project-Fog\target/endorsed" />
       <module name="ProjektSkabelon-master" options="-endorseddirs &quot;$PROJECT_DIR$/target/endorsed&quot;" />
       <module name="Projektskabelon" options="-endorseddirs $PROJECT_DIR$/target/endorsed" />
