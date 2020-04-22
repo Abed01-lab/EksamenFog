@@ -1,5 +1,6 @@
 package FunctionLayer;
 
+import DBAccess.CarportMapper;
 import DBAccess.UserMapper;
 
 /**
@@ -17,5 +18,11 @@ public class LogicFacade {
         UserMapper.createUser( user );
         return user;
     }
+    public static Carport createCarport(double højde, double bredde, double længde) {
+        Carport carport = new Carport(højde, bredde, længde);
+        CarportMapper.createCarport(carport);
+        return carport;
+    }
+
 
 }
