@@ -4,8 +4,9 @@ import java.util.HashMap;
 
 public class Tag {
 
-    String typeTag;
-    int hældning;
+    String tagtype;
+    double hældning;
+    String materiale;
 
     /*
     burde kører i program
@@ -15,16 +16,33 @@ public class Tag {
     tagTyper.put("tag med ensidigt fladt", "tag med ensidigt fladt");
      */
 
-    public Tag(String typeTag, int hældning) {
-        this.typeTag = typeTag;
+    public Tag(String tagtype, double hældning, String materiale) {
+        this.tagtype = tagtype;
+        this.hældning = hældning;
+        this.materiale = materiale;
+    }
+
+    public String getTagtype() {
+        return tagtype;
+    }
+
+    public void setTagtype(String tagtype) {
+        this.tagtype = tagtype;
+    }
+
+    public double getHældning() {
+        return hældning;
+    }
+
+    public void setHældning(double hældning) {
         this.hældning = hældning;
     }
 
-    public void setTypeTag(String typeTag) {
-        this.typeTag = typeTag;
+    public String getMateriale() {
+        return materiale;
     }
 
-    public String getTypeTag() {
-        return typeTag;
+    public void setMateriale(String materiale) {
+        this.materiale = materiale;
     }
 }

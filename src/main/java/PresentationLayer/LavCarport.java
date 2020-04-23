@@ -9,6 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static DBAccess.CarportMapper.createOrdre;
 import static FunctionLayer.Carport.*;
 
 public class LavCarport extends Command{
@@ -16,13 +17,25 @@ public class LavCarport extends Command{
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        int bredde = Integer.parseInt(request.getParameter("bredde"));
-        int længde = Integer.parseInt(request.getParameter("længde"));
-        int højde = Integer.parseInt(request.getParameter("længde"));
+        double bredde = Double.parseDouble(request.getParameter("bredde"));
+        double længde = Double.parseDouble(request.getParameter("længde"));
+        double højde = Double.parseDouble(request.getParameter("højde"));
+
+        double skurbredde = Double.parseDouble(request.getParameter("skurbredde"));
+        double skurlængde = Double.parseDouble(request.getParameter("skurlængde"));
+
         String tag = request.getParameter("tag");
+        double taghældning = Double.parseDouble(request.getParameter("taghældning"));
 
-        Tag tagobject = new Tag(tag, 10);
+        Carport carportobject = new Carport(højde, bredde, længde);
+        Skur skurobject = new Skur(skurbredde, skurlængde);
+        Tag tagobject = new Tag(tag, taghældning,"stål");
 
-return null;
+        createOrdre(carportobject, tagobject, skurobject);
+
+        System.out.println(carportobject.getBredde());
+        System.out.println(carportobject.getHøjde());
+
+        return "lavcarport";
     }
 }

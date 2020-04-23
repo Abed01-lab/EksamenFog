@@ -17,6 +17,8 @@ public class GoToLavcarport extends Command {
         servletContext.setAttribute("højde", (int[]) højdearray);
         servletContext.setAttribute("tag", (String[]) tagarray);
         servletContext.setAttribute("taghældning", (int[]) taghældning);
-        return "lavcarport";
+        servletContext.setAttribute("skurbredde", (int[]) skurbreddearray);
+        servletContext.setAttribute("skurlængde", (int[]) skurlængdearray);
+        return "designCarport";
     }
 }
