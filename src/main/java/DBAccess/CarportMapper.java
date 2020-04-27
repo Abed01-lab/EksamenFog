@@ -37,7 +37,7 @@ public class CarportMapper {
         int autoIncKeySkur = -1;
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.skur (skurbredde, skurhøjde) VALUES (?, ?)";
+            String SQL = "INSERT INTO fogprojekt.skur (skurbredde, skurlængde) VALUES (?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble( 1, skur.getBredde());
             ps.setDouble(2, skur.getLængde());
@@ -59,7 +59,7 @@ public class CarportMapper {
         int autoIncKeyTag = -1;
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.tag (taghældning, skurhøjde, materiale) VALUES (?, ?, ?)";
+            String SQL = "INSERT INTO fogprojekt.tag (tagtype, taghældning, tagmateriale) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString( 1, tag.getTagtype());
             ps.setDouble(2, tag.getHældning());
@@ -90,7 +90,7 @@ public class CarportMapper {
             ps.setDouble( 1, 1);
             ps.setDouble(2, autoIncKeyCarport);
             ps.setDouble(3, autoIncKeySkur);
-            ps.setDouble(4, 1);
+            ps.setDouble(4, autoIncKeyTag);
             ps.setString(5, "EKODATO");
             ps.executeUpdate();
         }
