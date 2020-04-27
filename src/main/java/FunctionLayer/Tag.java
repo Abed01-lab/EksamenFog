@@ -8,6 +8,10 @@ public class Tag {
     double hældning;
     String materiale;
 
+
+
+
+
     /*
     burde kører i program
     HashMap<String,String> tagTyper = new HashMap<>();
@@ -16,7 +20,8 @@ public class Tag {
     tagTyper.put("tag med ensidigt fladt", "tag med ensidigt fladt");
      */
 
-    public Tag(String tagtype, double hældning, String materiale) {
+    public Tag( String tagtype, double hældning, String materiale) {
+
         this.tagtype = tagtype;
         this.hældning = hældning;
         this.materiale = materiale;

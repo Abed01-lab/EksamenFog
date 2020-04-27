@@ -9,13 +9,15 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static DBAccess.CarportMapper.createOrdre;
+import static DBAccess.CarportMapper.*;
 import static FunctionLayer.Carport.*;
 
 public class LavCarport extends Command{
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+
+
         double bredde = Double.parseDouble(request.getParameter("bredde"));
         double længde = Double.parseDouble(request.getParameter("længde"));
         double højde = Double.parseDouble(request.getParameter("højde"));
@@ -28,7 +30,7 @@ public class LavCarport extends Command{
 
         Carport carportobject = new Carport(højde, bredde, længde);
 
-        Skur skurobject;
+        Skur skurobject = new Skur(skurbredde, skurlængde);
         if(skurbredde == 0){
             skurobject = new Skur();
         } else {
@@ -36,6 +38,8 @@ public class LavCarport extends Command{
         }
         Tag tagobject = new Tag(tag, taghældning,"stål");
 
+        //createSkur(skurobject);
+        //createTag(tagobject);
         createOrdre(carportobject, tagobject, skurobject);
 
         System.out.println(carportobject.getBredde());
