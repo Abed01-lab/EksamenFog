@@ -13,7 +13,17 @@ public class Main {
         Tag tag = new Tag("hældning", 10, "metal");
         Skur skur = new Skur(320, 360);
 
-        createOrdre(carport, tag, skur);
+      createOrdre(carport, tag, skur);
+
+        Skur skur2 = new Skur();
+        if(skur2.getBredde() == 0){
+            System.out.println("EKONULL");
+        }
+        if(skur2.getTag() == null){
+            System.out.println("NULLTWO");
+        }
+
+
 
         System.out.println(carport.getLængde());
     }

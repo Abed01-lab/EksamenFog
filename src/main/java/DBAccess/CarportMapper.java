@@ -44,6 +44,8 @@ public class CarportMapper {
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            autoIncKeySkur = rs.getInt(1);
             if(rs.next()){
                 autoIncKeySkur = rs.getInt(1);
             }
@@ -65,6 +67,8 @@ public class CarportMapper {
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            autoIncKeyTag = rs.getInt(1);
             if(rs.next()){
                 autoIncKeyTag = rs.getInt(1);
             }
@@ -74,9 +78,10 @@ public class CarportMapper {
     }
 
     public static void createOrdre(Carport carport, Tag tag, Skur skur){
+        int autoIncKeySkur = createSkur(skur);
         int autoIncKeyCarport = createCarport(carport);
         int autoIncKeyTag = createTag(tag);
-        int autoIncKeySkur = createSkur(skur);
+
 
         try {
             Connection con = Connector.connection();
@@ -84,7 +89,7 @@ public class CarportMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble( 1, 1);
             ps.setDouble(2, autoIncKeyCarport);
-            ps.setDouble(3, 1);
+            ps.setDouble(3, autoIncKeySkur);
             ps.setDouble(4, 1);
             ps.setString(5, "EKODATO");
             ps.executeUpdate();

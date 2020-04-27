@@ -51,7 +51,7 @@
                         <p>Længde</p>
                         <select class="form-control" name="længde">
                             <c:forEach var="element" items="${applicationScope.længde}">
-                                <option value="${element}">${element}</option>
+                                <option value="${element}">${element}cm</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -71,7 +71,7 @@
                         <p>Bredde</p>
                         <select class="form-control" name="bredde">
                             <c:forEach var="element" items="${applicationScope.bredde}">
-                                <option value="${element}">${element} cm</option>
+                                <option value="${element}">${element}cm</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -91,7 +91,7 @@
                         <p>Højde</p>
                         <select class="form-control" name="højde">
                             <c:forEach var="element" items="${applicationScope.højde}">
-                                <option value="${element}">${element}</option>
+                                <option value="${element}">${element}cm</option>
                             </c:forEach>
                         </select>
                     </div>
@@ -112,7 +112,7 @@
                             <p>Skur længde</p>
                             <select class="form-control" name="skurlængde">
                                 <c:forEach var="element" items="${applicationScope.skurlængde}">
-                                    <option value="${element}">${element}</option>
+                                    <option value="${element}">${element}cm</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -120,7 +120,7 @@
                         <p>Skur bredde</p>
                         <select class="form-control" name="skurbredde">
                             <c:forEach var="element" items="${applicationScope.skurbredde}">
-                                <option value="${element}">${element}</option>
+                                <option value="${element}">${element}cm</option>
                             </c:forEach>
                         </select>
                     </div>

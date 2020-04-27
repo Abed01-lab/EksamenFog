@@ -14,7 +14,6 @@ import static FunctionLayer.Carport.*;
 
 public class LavCarport extends Command{
 
-
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         double bredde = Double.parseDouble(request.getParameter("bredde"));
@@ -28,7 +27,13 @@ public class LavCarport extends Command{
         double taghældning = Double.parseDouble(request.getParameter("taghældning"));
 
         Carport carportobject = new Carport(højde, bredde, længde);
-        Skur skurobject = new Skur(skurbredde, skurlængde);
+
+        Skur skurobject;
+        if(skurbredde == 0){
+            skurobject = new Skur();
+        } else {
+            skurobject = new Skur(skurbredde, skurlængde);
+        }
         Tag tagobject = new Tag(tag, taghældning,"stål");
 
         createOrdre(carportobject, tagobject, skurobject);

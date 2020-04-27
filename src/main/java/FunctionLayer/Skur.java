@@ -13,6 +13,9 @@ public class Skur {
         this.længde = længde;
     }
 
+    public Skur(){
+    }
+
 
     public void setBredde(double bredde) {
         this.bredde = bredde;
