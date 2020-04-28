@@ -95,14 +95,14 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <!--<div class="col-sm-6">
-                        <p>Redskabsskur</p>
-                        <select class="form-control" name="toolshed">
-                            <c:forEach var="element" items="${applicationScope.taghældning}">
-                                <option value="400">200 cm</option>
+                    <div class="col-sm-6">
+                        <p>Tag materiale</p>
+                        <select class="form-control" name="tagmateriale">
+                            <c:forEach var="element" items="${applicationScope.tagmateriale}">
+                                <option value="${element}">${element}</option>
                             </c:forEach>
                         </select>
-                    </div>-->
+                    </div>
                 </div>
                     <br>
                     <br>
@@ -111,6 +111,7 @@
                         <div class="col-sm-6">
                             <p>Skur længde</p>
                             <select class="form-control" name="skurlængde">
+                                <option value="0">Intet skur</option>
                                 <c:forEach var="element" items="${applicationScope.skurlængde}">
                                     <option value="${element}">${element}cm</option>
                                 </c:forEach>
@@ -119,6 +120,7 @@
                         <div class="col-sm-6">
                         <p>Skur bredde</p>
                         <select class="form-control" name="skurbredde">
+                            <option value="0">Intet skur</option>
                             <c:forEach var="element" items="${applicationScope.skurbredde}">
                                 <option value="${element}">${element}cm</option>
                             </c:forEach>

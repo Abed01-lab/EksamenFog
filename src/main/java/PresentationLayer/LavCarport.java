@@ -27,16 +27,18 @@ public class LavCarport extends Command{
 
         String tag = request.getParameter("tag");
         double taghældning = Double.parseDouble(request.getParameter("taghældning"));
+        String tagmateriale = request.getParameter("tagmateriale");
 
         Carport carportobject = new Carport(højde, bredde, længde);
 
         Skur skurobject = new Skur(skurbredde, skurlængde);
         if(skurbredde == 0){
-            skurobject = new Skur();
+            skurobject = new Skur(0, 0);
         } else {
             skurobject = new Skur(skurbredde, skurlængde);
         }
         Tag tagobject = new Tag(tag, taghældning,"stål");
+
 
         //createSkur(skurobject);
         //createTag(tagobject);
