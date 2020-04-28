@@ -37,7 +37,7 @@ public class LavCarport extends Command{
         } else {
             skurobject = new Skur(skurbredde, skurlængde);
         }
-        Tag tagobject = new Tag(tag, taghældning,"stål");
+        Tag tagobject = new Tag(tag, taghældning, tagmateriale);
 
 
         //createSkur(skurobject);
