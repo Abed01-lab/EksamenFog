@@ -8,10 +8,6 @@ public class Tag {
     double hældning;
     String materiale;
 
-
-
-
-
     /*
     burde kører i program
     HashMap<String,String> tagTyper = new HashMap<>();
