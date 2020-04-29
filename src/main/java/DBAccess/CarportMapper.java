@@ -1,9 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.Carport;
-import FunctionLayer.CarportException;
 import FunctionLayer.Skur;
-import FunctionLayer.Tag;
 
 import java.sql.*;
 
@@ -47,7 +45,7 @@ public class CarportMapper {
             rs.next();
             autoIncKeySkur = rs.getInt(1);
             if(rs.next()){
-                autoIncKeySkur = rs.getInt(1);
+            autoIncKeySkur = rs.getInt(1);
             }
 
         } catch (SQLException | ClassNotFoundException e) {
