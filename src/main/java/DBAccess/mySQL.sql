@@ -1,9 +1,7 @@
+-- MySQL Workbench Forward Engineering
 -- noinspection SqlDialectInspectionForFile
 
 -- noinspection SqlNoDataSourceInspectionForFile
-
--- MySQL Workbench Forward Engineering
-
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -26,10 +24,10 @@ USE `fogprojekt` ;
 -- Table `fogprojekt`.`bruger`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`bruger` (
-  `brugerId` INT(11) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(45) NULL DEFAULT NULL,
-  `kodeord` VARCHAR(45) NULL DEFAULT NULL,
-  `rolle` VARCHAR(45) NULL DEFAULT NULL,
+  `brugerId` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `kodeord` VARCHAR(45) NOT NULL,
+  `rolle` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`brugerId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -41,11 +39,11 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `fogprojekt`.`carport`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`carport` (
-  `carportId` INT(11) NOT NULL AUTO_INCREMENT,
-  `højde` INT(11) NULL DEFAULT NULL,
-  `bredde` INT(11) NULL DEFAULT NULL,
-  `længde` INT(11) NULL DEFAULT NULL,
-  `materiale` VARCHAR(45) NULL DEFAULT NULL,
+  `carportId` INT NOT NULL AUTO_INCREMENT,
+  `højde` INT NOT NULL,
+  `bredde` INT NOT NULL,
+  `længde` INT NOT NULL,
+  `materiale` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`carportId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 20
@@ -57,9 +55,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `fogprojekt`.`skur`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`skur` (
-  `skurId` INT(11) NOT NULL AUTO_INCREMENT,
-  `skurbredde` INT(11) NULL DEFAULT NULL,
-  `skurlængde` VARCHAR(45) NULL DEFAULT NULL,
+  `skurId` INT NOT NULL AUTO_INCREMENT,
+  `skurbredde` INT NOT NULL,
+  `skurlængde` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`skurId`))
 ENGINE = InnoDB
 AUTO_INCREMENT = 2
@@ -71,9 +69,9 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `fogprojekt`.`tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`tag` (
-  `tagId` INT(11) NOT NULL AUTO_INCREMENT,
-  `tagtype` VARCHAR(45) NULL DEFAULT NULL,
-  `taghældning` INT(11) NOT NULL,
+  `tagId` INT NOT NULL AUTO_INCREMENT,
+  `tagtype` VARCHAR(45) NOT NULL,
+  `taghældning` INT NOT NULL,
   `tagmateriale` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`tagId`))
 ENGINE = InnoDB
@@ -86,12 +84,12 @@ COLLATE = utf8mb4_0900_ai_ci;
 -- Table `fogprojekt`.`ordre`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`ordre` (
-  `ordreId` INT(11) NOT NULL AUTO_INCREMENT,
-  `brugerId` INT(11) NOT NULL,
-  `carportId` INT(11) NULL DEFAULT NULL,
-  `skurId` INT(11) NULL DEFAULT NULL,
-  `tagId` INT(11) NULL DEFAULT NULL,
-  `dato` VARCHAR(45) NULL DEFAULT NULL,
+  `ordreId` INT NOT NULL AUTO_INCREMENT,
+  `brugerId` INT NOT NULL,
+  `carportId` INT NOT NULL,
+  `skurId` INT NULL,
+  `tagId` INT NOT NULL,
+  `dato` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`ordreId`),
   INDEX `brugerId` (`brugerId` ASC) VISIBLE,
   INDEX `ordre_ibfk_2` (`carportId` ASC) VISIBLE,

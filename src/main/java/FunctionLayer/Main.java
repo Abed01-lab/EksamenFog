@@ -1,39 +1,28 @@
 package FunctionLayer;
 
-import DBAccess.CarportMapper;
-
-import java.sql.SQLException;
-
 import static DBAccess.CarportMapper.createCarport;
 import static DBAccess.CarportMapper.createOrdre;
 import static FunctionLayer.Carport.længdearray;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException, ClassNotFoundException {
+    public static void main(String[] args) {
         System.out.println(længdearray[1]);
+        Calculator cal = new Calculator();
 
-        Carport carport = new Carport(200, 400, 460);
-        Tag tag = new Tag("hældning", 10, "metal");
+        Carport carport = new Carport(200, 360, 460);
+        Carport carport1 = new Carport(200, 400, 780);
+
         Skur skur = new Skur(320, 360);
 
-      createOrdre(carport, tag, skur);
 
-        Skur skur2 = new Skur();
-        if(skur2.getBredde() == 0){
-            System.out.println("EKONULL");
-        }
-        if(skur2.getTag() == null){
-            System.out.println("NULLTWO");
-        }
+      //createOrdre(carport, tag, skur);
+      //createOrdre(carport, null, skur);//ystem.out.println(cal.fladtTagCarport(carport));
 
 
 
-        System.out.println(carport.getLængde());
-
-
-        System.out.println(CarportMapper.getMaterials());
-
+        System.out.println("antal lægter " + cal.beregnTagLægter(carport));
     }
+
 
 }
