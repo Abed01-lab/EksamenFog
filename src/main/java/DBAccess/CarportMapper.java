@@ -2,6 +2,7 @@ package DBAccess;
 
 import FunctionLayer.Carport;
 import FunctionLayer.Skur;
+import FunctionLayer.Tag;
 
 import java.sql.*;
 
@@ -61,7 +62,7 @@ public class CarportMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString( 1, tag.getTagtype());
             ps.setDouble(2, tag.getHældning());
-            ps.setString(3, tag.getMateriale());
+            ps.setString(3, tag.getTagmateriale());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();

@@ -9,7 +9,6 @@ public class Carport {
     double højde;
     double bredde;
     double længde;
-    double hældning;
     String materiale;
 
     public static int[] breddearray = new int[] {240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750};
@@ -24,19 +23,11 @@ public class Carport {
     public static int[] skurbreddearray = new int[] {180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690};
     public static int[] skurlængdearray = new int[] {180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720};
 
-    int carportId;
 
     public Carport(double højde, double bredde, double længde) {
         this.højde = højde;
         this.bredde = bredde;
         this.længde = længde;
-    }
-
-    public Carport(double højde, double bredde, double længde, double hældning) {
-        this.højde = højde;
-        this.bredde = bredde;
-        this.længde = længde;
-        this.hældning = hældning;
     }
 
     public void setHøjde(double højde) {
@@ -51,10 +42,6 @@ public class Carport {
         this.længde = længde;
     }
 
-    public void setCarportId(int carportId) {
-        this.carportId = carportId;
-    }
-
     public double getHøjde() {
         return højde;
     }
@@ -65,12 +52,6 @@ public class Carport {
 
     public double getLængde() {
         return længde;
-    }
-
-    public double getHældning() { return hældning; }
-
-    public int getCarportId() {
-        return carportId;
     }
 }
 
