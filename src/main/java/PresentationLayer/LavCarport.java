@@ -35,12 +35,12 @@ public class LavCarport extends Command{
         } else {
             skurobject = new Skur(skurbredde, skurlængde);
         }
-        Tag tagobject = new Tag(tag, taghældning, tagmateriale);
+       // Tag tagobject = new Tag(tag, taghældning, tagmateriale);
 
 
         //createSkur(skurobject);
         //createTag(tagobject);
-        createOrdre(carportobject, tagobject, skurobject);
+       // createOrdre(carportobject, tagobject, skurobject);
 
         System.out.println(carportobject.getBredde());
         System.out.println(carportobject.getHøjde());

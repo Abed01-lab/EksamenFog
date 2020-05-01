@@ -1,5 +1,9 @@
 package FunctionLayer;
 
+import DBAccess.CarportMapper;
+
+import java.sql.SQLException;
+
 import static DBAccess.CarportMapper.createCarport;
 import static DBAccess.CarportMapper.createOrdre;
 import static FunctionLayer.Carport.længdearray;
@@ -18,7 +22,7 @@ public class Main {
         return skråTagLængde;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         System.out.println(længdearray[1]);
 
         Carport carport = new Carport(200, 400, 460);
@@ -28,6 +32,7 @@ public class Main {
         System.out.println(beregnTagLægter(carport, tag));
 
         System.out.println(beregnTag(carport, tag));
+        System.out.println(CarportMapper.getMaterials());
 
         //createOrdre(carport, tag, skur);
       //createOrdre(carport, null, skur);
