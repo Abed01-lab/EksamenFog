@@ -1,8 +1,11 @@
 package FunctionLayer;
 
 import DBAccess.CarportMapper;
+import DBAccess.StyklisteMapper;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static DBAccess.CarportMapper.createCarport;
 import static DBAccess.CarportMapper.createOrdre;
@@ -23,19 +26,19 @@ public class Main {
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        System.out.println(længdearray[1]);
 
-        Carport carport = new Carport(200, 400, 460);
-        Skur skur = new Skur(320, 360);
-        Tag tag = new Tag("Tag", 15, "Sten");
 
-        System.out.println(beregnTagLægter(carport, tag));
+        Carport carport = new Carport(240, 300,420);
+        StyklisteMapper stkmp = new StyklisteMapper();
 
-        System.out.println(beregnTag(carport, tag));
-        System.out.println(CarportMapper.getMaterials());
+
+        System.out.println(carport.beregnKvm());
+        for (Materials mat: stkmp.getFladtStyklister(carport.beregnKvm())) {
+            System.out.println(mat.toString());
+        }
 
         //createOrdre(carport, tag, skur);
-      //createOrdre(carport, null, skur);
+        //createOrdre(carport, null, skur);
 
     }
 }

@@ -98,20 +98,5 @@ public class CarportMapper {
             e.printStackTrace();
         }
     }
-        public static List<Materials> getMaterials() throws SQLException, ClassNotFoundException {
-            ArrayList<Materials> materialer = new ArrayList<>();
-            Connection con = Connector.connection();
-            String SQL = "SELECT * FROM fogprojekt.stykliste";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt("materialerId");
-                String beskrivelse = rs.getString("beskrivelse");
-                int længde = rs.getInt("længde");
-                int bredde = rs.getInt("bredde");
-                Materials materialInstance = new Materials(id, beskrivelse, længde, bredde);
-                materialer.add(materialInstance);
 
-        } return materialer;
-    }
 }

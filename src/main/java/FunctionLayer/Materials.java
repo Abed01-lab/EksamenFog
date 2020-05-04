@@ -1,16 +1,51 @@
 package FunctionLayer;
 
 public class Materials {
-    int id;
-    String beskrivelse;
-    int længde;
-    int bredde;
 
-    public Materials(int id, String beskrivelse, int længde, int bredde) {
-        this.id = id;
-        this.beskrivelse = beskrivelse;
+    String deminsion;
+    int længde;
+    int antal;
+    String enhed;
+    String beskrivelse;
+
+    public Materials(String deminsion, int længde, int antal, String enhed, String beskrivelse) {
+        this.deminsion = deminsion;
         this.længde = længde;
-        this.bredde = bredde;
+        this.antal = antal;
+        this.enhed = enhed;
+        this.beskrivelse = beskrivelse;
+    }
+
+    public String getDeminsion() {
+        return deminsion;
+    }
+
+    public void setDeminsion(String deminsion) {
+        this.deminsion = deminsion;
+    }
+
+    public int getLængde() {
+        return længde;
+    }
+
+    public void setLængde(int længde) {
+        this.længde = længde;
+    }
+
+    public int getAntal() {
+        return antal;
+    }
+
+    public void setAntal(int antal) {
+        this.antal = antal;
+    }
+
+    public String getEnhed() {
+        return enhed;
+    }
+
+    public void setEnhed(String enhed) {
+        this.enhed = enhed;
     }
 
     public String getBeskrivelse() {
@@ -21,31 +56,13 @@ public class Materials {
         this.beskrivelse = beskrivelse;
     }
 
-    public int getLængde() {
-        return længde;
-    }
-
-
-
-    public void setLængde(int længde) {
-        this.længde = længde;
-    }
-
-    public int getBredde() {
-        return bredde;
-    }
-
-    public void setBredde(int bredde) {
-        this.bredde = bredde;
-    }
     @Override
     public String toString() {
-        return "Materials{" +
-                "id=" + id +
-                ", beskrivelse='" + beskrivelse + '\'' +
-                ", længde=" + længde +
-                ", bredde=" + bredde +
-                '}';
+        return "Materials " +
+                "deminsion: " + deminsion +
+                ", længde: " + længde +
+                ", antal: " + antal +
+                ", enhed: " + enhed +
+                ", beskrivelse: " + beskrivelse;
     }
-
 }
