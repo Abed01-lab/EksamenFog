@@ -41,7 +41,7 @@
         </ul>
         <div class="col-lg-12 w-100 h-100 p-3 mt-2" style="background-color: white;">
             <form action="FrontController" method="post">
-                <input type="hidden" name="target" value="LavCarport">
+                <input type="hidden" name="target" value="Ordrebekræftelse">
                 <h2 style="color: black">Velkommen! </h2>
                 <h4 style="color: black">Design din egen carport her: </h4>
                 <!--<br>
