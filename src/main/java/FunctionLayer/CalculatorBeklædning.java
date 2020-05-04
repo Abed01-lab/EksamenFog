@@ -16,7 +16,7 @@ public class CalculatorBeklædning {
         System.out.println(stykliste.antalSideBrædt);
     }
 
-
+    // Carport muligvis åben, men ellers bruges til skur
     public CalculatorBeklædning(Carport carport) {
 
         this.carport = carport;
