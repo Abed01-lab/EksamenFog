@@ -75,4 +75,40 @@ public class StyklisteMapper {
         }
         return materialer;
     }
+
+    public static void opdaterMaterialeFladtTag(Materials materiale) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO fogprojekt.fladttagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materiale.getDeminsion());
+            ps.setFloat(2, materiale.getLængde());
+            ps.setFloat(3, materiale.getAntal());
+            ps.setString(4, materiale.getEnhed());
+            ps.setString(5, materiale.getBeskrivelse());
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void opdaterMaterialeSkråTag(Materials materiale) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO fogprojekt.skråtagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materiale.getDeminsion());
+            ps.setFloat(2, materiale.getLængde());
+            ps.setFloat(3, materiale.getAntal());
+            ps.setString(4, materiale.getEnhed());
+            ps.setString(5, materiale.getBeskrivelse());
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
+
