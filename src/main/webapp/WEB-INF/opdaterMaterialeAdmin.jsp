@@ -127,7 +127,10 @@
                     <td>120,-</td>
                     <td>
                         <div class="float-right">
-                            <button type="submit" class="btn btn-danger">Fjern</button>
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="target" value="">
+                                <button type="submit" class="btn btn-danger">Fjern</button>
+                                </form>
                         </div>
                     </td>
 
@@ -139,7 +142,10 @@
                     <td>Lange</td>
                     <td>110,-</td>
                     <td><div class="float-right">
-                        <button type="submit" class="btn btn-danger">Fjern</button>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="target" value="">
+                            <button type="submit" class="btn btn-danger">Fjern</button>
+                        </form>
                     </div></td>
                 </tr>
 
