@@ -108,9 +108,9 @@ public class StyklisteMapper {
         }
 
     }
-}
-    /*
-    public static List<Materials> getSkråStyklister(int kvm) throws SQLException, ClassNotFoundException {
+
+
+    /*public static List<Materials> getSkråStyklister(int kvm) throws SQLException, ClassNotFoundException {
         ArrayList<Materials> materialer = new ArrayList<>();
         String SQL = "SELECT * FROM fogprojekt.skråtagstyklister";
 
@@ -141,41 +141,20 @@ public class StyklisteMapper {
             e.printStackTrace();
         }
         return materialer;
-    }
+    }*/
 
-   /* public static void opdaterMaterialeFladtTag(Materials materiale) {
+    public static void opdaterMateriale(Materials materiale) {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.fladttagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
+            String SQL = "INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, materiale.getDeminsion());
-            ps.setFloat(2, materiale.getLængde());
-            ps.setFloat(3, materiale.getAntal());
-            ps.setString(4, materiale.getEnhed());
-            ps.setString(5, materiale.getBeskrivelse());
+            ps.setString(1, materiale.getBeskrivelse());
+            ps.setString(2, materiale.getEnhed());
+            ps.setInt(3, materiale.getPris());
             ps.executeUpdate();
 
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-
-
-    public static void opdaterMaterialeSkråTag(Materials materiale) {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.skråtagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, materiale.getDeminsion());
-            ps.setFloat(2, materiale.getLængde());
-            ps.setFloat(3, materiale.getAntal());
-            ps.setString(4, materiale.getEnhed());
-            ps.setString(5, materiale.getBeskrivelse());
-            ps.executeUpdate();
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-}*/
-
+}

@@ -49,7 +49,7 @@
 
             <div class="col-6">
                 <select class="form-control" name="length">
-                    <c:forEach var="element" items="${applicationScope.}">
+                    <c:forEach var="element" items="${applicationScope.længde}">
                         <option value="materialenavn">Mahognitræ stolper</option>
                     </c:forEach>
                 </select>
@@ -64,37 +64,29 @@
         </div>
 
         <form action="FrontController" method="post">
-            <input type="hidden" name="target" value="">
+            <input type="hidden" name="target" value="OpdaterMateriale">
 
             <h5 class="mt-5" style="color: black">Tilføj materiale</h5>
 
             <p></p>
 
 
-            <div class="form-row">
-                <div class="col-6">
-                    <input type="text" class="form-control" placeholder="Navn på materiale">
-                </div>
-                <div class="col-4">
-                    <input type="text" class="form-control" placeholder="Serienummer">
-                </div>
-            </div>
 
             <div class="form-row mt-4">
                 <div class="col-6">
-                    <input type="text" class="form-control" placeholder="Dimensioner">
+                    <input type="text" name="enhed" class="form-control" placeholder="Enhed">
                 </div>
                 <div class="col-4">
-                    <input type="text" class="form-control" placeholder="Pris">
+                    <input type="text" name="pris" class="form-control" placeholder="Pris">
                 </div>
             </div>
 
             <div class="form-row mt-4">
                 <div class="col-10">
-                    <input type="text" class="form-control" placeholder="Beskrivelse af materiale">
+                    <input type="text" name="beskrivelse" class="form-control" placeholder="Navn og beskrivelse af materiale">
                 </div>
                 <div class="col-2">
-                    <button type="submit" class="btn btn-success float-right">Tilføj materiale</button>
+                    <button type="submit" class="btn btn-success float-right"> Tilføj materiale</button>
                 </div>
             </div>
 

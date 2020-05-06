@@ -8,20 +8,19 @@ import FunctionLayer.Materials;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class opdaterMateriale extends Command {
+public class OpdaterMateriale extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {
-        String deminsion = request.getParameter("deminsion");
-        int længde = Integer.parseInt(request.getParameter("længde"));
-        int antal = Integer.parseInt(request.getParameter("antal"));
+
+        int pris = Integer.parseInt(request.getParameter("pris"));
         String enhed = request.getParameter("enhed");
         String beskrivelse = request.getParameter("beskrivelse");
 
-        //Materials mat = new Materials(deminsion, længde, antal, enhed, beskrivelse);
+        Materials mat = new Materials(beskrivelse, enhed,pris);
 
-        //StyklisteMapper.opdaterMaterialeFladtTag(mat);
+        StyklisteMapper.opdaterMateriale(mat);
 
-        return "opdaterMateriale";
+        return "ordreBekræftelse";
     }
 }

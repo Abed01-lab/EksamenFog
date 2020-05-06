@@ -8,6 +8,8 @@ import FunctionLayer.Tag;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import java.sql.SQLException;
+
 import static DBAccess.CarportMapper.*;
 
 public class LavCarport extends Command{
@@ -35,16 +37,22 @@ public class LavCarport extends Command{
         } else {
             skurobject = new Skur(skurbredde, skurlængde);
         }
-       // Tag tagobject = new Tag(tag, taghældning, tagmateriale);
+        Tag tagobject = new Tag(tag, taghældning, tagmateriale);
 
 
-        //createSkur(skurobject);
-        //createTag(tagobject);
-       // createOrdre(carportobject, tagobject, skurobject);
+        createSkur(skurobject);
+        createTag(tagobject);
+        try {
+            createOrdre(carportobject, tagobject, skurobject);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         System.out.println(carportobject.getBredde());
         System.out.println(carportobject.getHøjde());
 
-        return "lavcarport";
+        return "opdaterMaterialeAdmin";
     }
 }

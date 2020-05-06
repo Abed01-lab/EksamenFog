@@ -76,6 +76,6 @@
 
 
     <h4 class="mt-5">Total pris </h4>
-
+</div>
 </body>
 </html>
