@@ -4,6 +4,8 @@ import FunctionLayer.Carport;
 import FunctionLayer.Skur;
 import FunctionLayer.Tag;
 import FunctionLayer.*;
+import com.mysql.cj.protocol.Resultset;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,12 +80,11 @@ public class CarportMapper {
         return autoIncKeyTag;
     }
 
-    public static void createOrdre(Carport carport, Tag tag, Skur skur) throws SQLException, ClassNotFoundException {
+    public static int createOrdre(Carport carport, Tag tag, Skur skur) throws SQLException, ClassNotFoundException {
         int autoIncKeySkur = createSkur(skur);
         int autoIncKeyCarport = createCarport(carport);
         int autoIncKeyTag = createTag(tag);
-
-
+        int autoIncKey = -1;
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO fogprojekt.ordre (brugerId, carportId, skurId, tagId, dato) VALUES (?, ?, ?, ?, ?)";
@@ -94,9 +95,15 @@ public class CarportMapper {
             ps.setDouble(4, autoIncKeyTag);
             ps.setString(5, "EKODATO");
             ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            rs.next();
+            autoIncKey = rs.getInt(1);
+
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+        return autoIncKey;
     }
 
 }

@@ -47,22 +47,17 @@ public class CalculatorSecond {
         return areal / 10000;
     }
 
-    public static void udregnSkurStyklister(Carport carport, Tag tag, Skur skur){
+    public static void udregnStyklisterFladt(Carport carport, Tag tag, Skur skur){
         double stolper = beregnAntalStolper(carport, skur);
         double areal = beregnTagAreal(carport, tag);
-        if(tag.getHældning() != 0) {
-            double spær = beregnAntalSpærSkråtLodret(carport);
-            double læger = beregnTagLægter(carport, tag);
-        }
-        else {
-            double spær = beregnAntalSpærFladt(carport);
-        }
+        double spær = beregnAntalSpærFladt(carport);
+
+        //Mapper
+
     }
 
     public static void main(String[] args) {
         Carport carport = new Carport(200, 400, 300);
         Tag tag = new Tag("skråt", 15, "sten");
-        System.out.println(beregnAntalSpærSkråtLodret(carport));
-        System.out.println(beregnTagAreal(carport, tag));
     }
 }

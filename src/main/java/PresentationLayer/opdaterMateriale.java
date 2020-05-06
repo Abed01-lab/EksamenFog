@@ -18,9 +18,9 @@ public class opdaterMateriale extends Command {
         String enhed = request.getParameter("enhed");
         String beskrivelse = request.getParameter("beskrivelse");
 
-        Materials mat = new Materials(deminsion, længde, antal, enhed, beskrivelse);
+        //Materials mat = new Materials(deminsion, længde, antal, enhed, beskrivelse);
 
-        StyklisteMapper.opdaterMaterialeFladtTag(mat);
+        //StyklisteMapper.opdaterMaterialeFladtTag(mat);
 
         return "opdaterMateriale";
     }

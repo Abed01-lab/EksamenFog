@@ -1,10 +1,15 @@
 package DBAccess;
 
+import FunctionLayer.Carport;
 import FunctionLayer.Materials;
+import FunctionLayer.Skur;
+import FunctionLayer.Tag;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static DBAccess.CarportMapper.createOrdre;
 
 public class StyklisteMapper {
 
@@ -33,7 +38,33 @@ public class StyklisteMapper {
                 int længdeInt = (int) længde;
                 int antalInt = (int) antal;
 
-                Materials materialInstance = new Materials(deminsion, længdeInt, antalInt, enhed, beskrivelse);
+                //Materials materialInstance = new Materials(deminsion, længdeInt, antalInt, enhed, beskrivelse);
+                //materialer.add(materialInstance);
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return materialer;
+    }
+
+    public static List<Materials> getStyklister() throws SQLException, ClassNotFoundException {
+        ArrayList<Materials> materialer = new ArrayList<>();
+        String SQL = "SELECT * FROM fogprojekt.styklisteitems";
+
+        try {
+            Connection con = Connector.connection();
+
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                int id = rs.getInt("itemId");
+                String beskrivelse = rs.getString("beskrivelse");
+                String enhed = rs.getString("enhed");
+                int pris = rs.getInt("pris");
+
+                Materials materialInstance = new Materials(id, beskrivelse, enhed, pris);
                 materialer.add(materialInstance);
 
             }
@@ -43,6 +74,42 @@ public class StyklisteMapper {
         return materialer;
     }
 
+
+    public static void lavStyklisterTilCarport(Carport carport, Tag tag, Skur skur, int stolper, int areal, int spær) {
+        try {
+            int ordreId = createOrdre(carport, tag, skur);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            List<Materials> materialer = getStyklister();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        for(int i = 0; i < 4; i++) {
+            try {
+                Connection con = Connector.connection();
+                String SQL = "INSERT INTO fogprojekt.stykliste () VALUES (?, ?, ?)";
+                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+
+                ps.executeUpdate();
+
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+}
+    /*
     public static List<Materials> getSkråStyklister(int kvm) throws SQLException, ClassNotFoundException {
         ArrayList<Materials> materialer = new ArrayList<>();
         String SQL = "SELECT * FROM fogprojekt.skråtagstyklister";
@@ -76,7 +143,7 @@ public class StyklisteMapper {
         return materialer;
     }
 
-    public static void opdaterMaterialeFladtTag(Materials materiale) {
+   /* public static void opdaterMaterialeFladtTag(Materials materiale) {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO fogprojekt.fladttagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
@@ -110,5 +177,5 @@ public class StyklisteMapper {
             e.printStackTrace();
         }
     }
-}
+}*/
 
