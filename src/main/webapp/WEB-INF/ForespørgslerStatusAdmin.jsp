@@ -60,19 +60,29 @@
 
                 <td>
                     <div align="center">
-                        <button type="submit" class="btn btn-primary">Se forespørgsel</button>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="target" value="">
+                            <button type="submit" class="btn btn-primary">Se forespørgsel</button>
+                        </form>
                     </div>
 
                 </td>
                 <td>
                     <div align="center">
-                        <button type="submit" class="btn btn-success">Godkend/Send tilbud</button>
+                        <form action="FrontController" method="post">
+                            <input type="hidden" name="target" value="">
+                            <button type="submit" class="btn btn-danger">Afvis</button>
+                        </form>
                     </div>
                 </td>
 
                 <td>
                     <div align="center">
-                        <button type="submit" class="btn btn-danger">Afvis</button>
+                        <form action="FrontController" method="post">
+                        <input type="hidden" name="target" value="">
+                            <button type="submit" class="btn btn-danger">Afvis</button>
+                    </form>
+
                     </div>
                 </td>
 
