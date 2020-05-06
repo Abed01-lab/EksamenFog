@@ -74,7 +74,11 @@
 
             <div class="form-row mt-4">
                 <div class="col-6">
-                    <input type="text" name="enhed" class="form-control" placeholder="Enhed">
+                    <select class="form-control" name="length">
+                        <c:forEach var="element" items="${applicationScope}">
+                            <option value="enhed"></option>
+                        </c:forEach>
+                    </select>
                 </div>
                 <div class="col-4">
                     <input type="text" name="pris" class="form-control" placeholder="Pris">
