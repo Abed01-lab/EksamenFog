@@ -9,6 +9,7 @@ import java.util.List;
 
 import static DBAccess.CarportMapper.createCarport;
 import static DBAccess.CarportMapper.createOrdre;
+import static DBAccess.StyklisteMapper.getStyklister;
 import static FunctionLayer.Carport.længdearray;
 
 public class Main {
@@ -27,17 +28,12 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-
         Carport carport = new Carport(240, 300,420);
         StyklisteMapper stkmp = new StyklisteMapper();
-        
-        System.out.println(carport.beregnKvm());
-        for (Materials mat: stkmp.getFladtStyklister(carport.beregnKvm())) {
-            System.out.println(mat.toString());
-        }
 
         //createOrdre(carport, tag, skur);
         //createOrdre(carport, null, skur);
+
 
     }
 }
