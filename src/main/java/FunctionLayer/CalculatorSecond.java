@@ -18,15 +18,15 @@ public class CalculatorSecond {
     }
 
     public static double beregnAntalSpærFladt(Carport carport){
-        return Math.ceil(carport.getLængde()/ 55.0);
+        return Math.ceil((carport.getLængde() + 30) / 55.0);
     }
 
     public static double beregnAntalSpærSkråtLodret(Carport carport){
-        return Math.ceil(carport.getLængde()/ 89.0);
+        return Math.ceil((carport.getLængde() + 30) / 89.0);
     }
 
     public static double beregnTagLægter(Carport carport, Tag tag){
-        double skråTagLængde = Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2))));
+        double skråTagLængde = Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2)))) + 30;
         skråTagLængde =- 65;
         return Math.ceil(skråTagLængde / 30.7) + 1;
     }
@@ -48,6 +48,8 @@ public class CalculatorSecond {
     }
 
     public static void udregnStyklisterFladt(Carport carport, Tag tag, Skur skur){
+        double breddestolpe = 2;
+        double længdestolpe = 2;
         double stolper = beregnAntalStolper(carport, skur);
         double areal = beregnTagAreal(carport, tag);
         double spær = beregnAntalSpærFladt(carport);
