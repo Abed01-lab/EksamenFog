@@ -63,10 +63,8 @@ public class StyklisteMapper {
 
                 længde = længde * kvm;
                 antal = antal * kvm;
-                int længdeInt = (int) længde;
-                int antalInt = (int) antal;
 
-                Materials materialInstance = new Materials(deminsion, længdeInt, antalInt, enhed, beskrivelse);
+                Materials materialInstance = new Materials(deminsion, Math.ceil(længde), Math.ceil(antal), enhed, beskrivelse);
                 materialer.add(materialInstance);
 
             }

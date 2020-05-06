@@ -3,12 +3,12 @@ package FunctionLayer;
 public class Materials {
 
     String deminsion;
-    int længde;
-    int antal;
+    double længde;
+    double antal;
     String enhed;
     String beskrivelse;
 
-    public Materials(String deminsion, int længde, int antal, String enhed, String beskrivelse) {
+    public Materials(String deminsion, double længde, double antal, String enhed, String beskrivelse) {
         this.deminsion = deminsion;
         this.længde = længde;
         this.antal = antal;
@@ -24,19 +24,19 @@ public class Materials {
         this.deminsion = deminsion;
     }
 
-    public int getLængde() {
+    public double getLængde() {
         return længde;
     }
 
-    public void setLængde(int længde) {
+    public void setLængde(double længde) {
         this.længde = længde;
     }
 
-    public int getAntal() {
+    public double getAntal() {
         return antal;
     }
 
-    public void setAntal(int antal) {
+    public void setAntal(double antal) {
         this.antal = antal;
     }
 

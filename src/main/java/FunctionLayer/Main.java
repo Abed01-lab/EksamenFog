@@ -30,8 +30,7 @@ public class Main {
 
         Carport carport = new Carport(240, 300,420);
         StyklisteMapper stkmp = new StyklisteMapper();
-
-
+        
         System.out.println(carport.beregnKvm());
         for (Materials mat: stkmp.getFladtStyklister(carport.beregnKvm())) {
             System.out.println(mat.toString());
