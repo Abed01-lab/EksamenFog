@@ -22,7 +22,7 @@ public class Carport {
 
     public static int[] skurbreddearray = new int[] {180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690};
     public static int[] skurlængdearray = new int[] {180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720};
-
+    public static String[] enhedArray = new String[] {"stk", "pk", "tag", "rulle", "sæt"};
 
     public Carport(double højde, double bredde, double længde) {
         this.højde = højde;

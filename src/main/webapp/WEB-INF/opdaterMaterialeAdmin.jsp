@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: cecilie
@@ -74,9 +75,9 @@
 
             <div class="form-row mt-4">
                 <div class="col-6">
-                    <select class="form-control" name="length">
-                        <c:forEach var="element" items="${applicationScope}">
-                            <option value="enhed"></option>
+                    <select class="form-control" name="enhed">
+                        <c:forEach var="element" items="${applicationScope.enhed}">
+                            <option value="${element}">${element}</option>
                         </c:forEach>
                     </select>
                 </div>

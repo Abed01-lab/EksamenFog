@@ -5,19 +5,24 @@ import FunctionLayer.CarportException;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Materials;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import static FunctionLayer.Carport.enhedArray;
+import static FunctionLayer.Carport.tagmateriale;
 
 public class OpdaterMateriale extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {
-
+      //  ServletContext servletContext = request.getServletContext();
         int pris = Integer.parseInt(request.getParameter("pris"));
+       // servletContext.setAttribute("enhed", (String[]) enhedArray);
         String enhed = request.getParameter("enhed");
         String beskrivelse = request.getParameter("beskrivelse");
 
-        Materials mat = new Materials(beskrivelse, enhed,pris);
+        Materials mat = new Materials(beskrivelse, enhed, pris);
 
         StyklisteMapper.opdaterMateriale(mat);
 

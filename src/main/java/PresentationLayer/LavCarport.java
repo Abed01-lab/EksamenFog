@@ -5,18 +5,21 @@ import FunctionLayer.LoginSampleException;
 import FunctionLayer.Skur;
 import FunctionLayer.Tag;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.sql.SQLException;
 
 import static DBAccess.CarportMapper.*;
+import static FunctionLayer.Carport.enhedArray;
 
 public class LavCarport extends Command{
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-
+        ServletContext servletContext = request.getServletContext();
+        servletContext.setAttribute("enhed", enhedArray);
 
         double bredde = Double.parseDouble(request.getParameter("bredde"));
         double længde = Double.parseDouble(request.getParameter("længde"));
