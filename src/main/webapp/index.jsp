@@ -23,23 +23,23 @@
     <div class="row">
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
-        <ul class="nav navbar justify-content-end w-100" style="background-color: #007cdc;">
+        <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
             <li class="nav-item mr-2">
                 <form name="MyProfile" action="FrontController" method="post">
                     <input type="hidden" name="target" value="AdminPage">
                     <input type="submit" class="btn btn-link" style="color: white" value="Admin">
                 </form>
-
             </li>
             <li class="nav-item mr-2">
                 <form name="MyProfile" action="FrontController" method="post">
                     <input type="hidden" name="target" value="GoToLavcarport">
                     <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
                 </form>
-
             </li>
         </ul>
     </div>
+
+    <h1>Velkommen til Fog!</h1>
 </div>
 </body>
 </html>

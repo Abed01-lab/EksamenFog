@@ -21,7 +21,6 @@ public class StyklisteMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-
                 int id = rs.getInt("itemId");
                 String beskrivelse = rs.getString("beskrivelse");
                 String enhed = rs.getString("enhed");

@@ -23,20 +23,25 @@
     <div class="row">
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
-        <ul class="nav navbar justify-content-end w-100" style="background-color: #007cdc;">
+        <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
             <li class="nav-item mr-2">
                 <form name="MyProfile" action="FrontController" method="post">
                     <input type="hidden" name="target" value="AdminPage">
                     <input type="submit" class="btn btn-link" style="color: white" value="Admin">
                 </form>
-
+            </li>
+            <li class="nav-item mr-2">
+                <form name="MyProfile" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="GoToLavcarport">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
+                </form>
             </li>
         </ul>
+    </div>
         <div class="col-lg-12 w-100 h-100 p-3 mt-2" style="background-color: white;">
             <form action="FrontController" method="post">
                 <input type="hidden" name="target" value="LavCarport">
-                <h2 style="color: black">Velkommen! </h2>
-                <h4 style="color: black">Design din egen carport her: </h4>
+                <h4 style="color: black">Design din egen carport her </h4>
                 <!--<br>
                 <p style= "font-style: italic">${requestScope.besked}</p>-->
                 <div class="row mt-4">
@@ -99,10 +104,10 @@
                 </div>
                     <br>
                     <br>
-                    <h4 style="color: black">Tilvælg skur: </h4>
+                    <h4 style="color: black">Tilvælg skur </h4>
                     <div class="row mt-4">
                         <div class="col-sm-6">
-                            <p>Skur længde</p>
+                            <p>Længde</p>
                             <select class="form-control" name="skurlængde">
                                 <option value="0">Intet skur</option>
                                 <c:forEach var="element" items="${applicationScope.skurlængde}">
@@ -111,7 +116,7 @@
                             </select>
                         </div>
                         <div class="col-sm-6">
-                        <p>Skur bredde</p>
+                        <p>Bredde</p>
                         <select class="form-control" name="skurbredde">
                             <option value="0">Intet skur</option>
                             <c:forEach var="element" items="${applicationScope.skurbredde}">
@@ -134,6 +139,5 @@
         </div>
         <div class="col-lg"></div>
     </div>
-</div>
 </body>
 </html>

@@ -35,4 +35,8 @@ public class LogicFacade {
         StyklisteMapper.deleteMaterial(serienummer);
         return StyklisteMapper.getStyklister();
     }
+
+    public static List<Materials> getMaterials() throws SQLException, ClassNotFoundException {
+        return StyklisteMapper.getStyklister();
+    }
 }

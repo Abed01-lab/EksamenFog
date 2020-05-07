@@ -23,13 +23,18 @@
     <div class="row">
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
-        <ul class="nav navbar justify-content-end w-100" style="background-color: #007cdc;">
+        <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
             <li class="nav-item mr-2">
                 <form name="MyProfile" action="FrontController" method="post">
                     <input type="hidden" name="target" value="AdminPage">
                     <input type="submit" class="btn btn-link" style="color: white" value="Admin">
                 </form>
-
+            </li>
+            <li class="nav-item mr-2">
+                <form name="MyProfile" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="GoToLavcarport">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
+                </form>
             </li>
         </ul>
     </div>
@@ -39,16 +44,14 @@
     <div class="col-lg-12 w-100 h-100 p-3 mt-2" style="background-color: white;">
         <form action="FrontController" method="post">
             <input type="hidden" name="target" value="OpdaterPris">
-        <h2>Materialeopdatering</h2>
-        <h4>- Her kan du tilføje materialer, opdaterer materialepriser og fjerne materialer!</h4>
-        ${requestScope.besked}
-        <h5 class="mt-5">Opdater pris</h5>
+        <h4>Materialeopdatering</h4>
+        <h6 class="mt-4">Opdater pris</h6>
         <div class="form-row mt-4">
 
             <div class="col-6">
                 <select class="form-control" name="materialeId">
-                    <c:forEach var="element" items="${applicationScope.materialeId}">
-                        <option value="${element}">${element}</option>
+                    <c:forEach var="element" items="${applicationScope.materials}">
+                        <option value="${element.itemId}">Serienummer ${element.itemId} : ${element.beskrivelse}</option>
                     </c:forEach>
                 </select>
             </div>
@@ -61,14 +64,14 @@
                 <button type="submit" class="btn btn-primary float-right ">Opdater pris</button>
             </div>
         </div>
-
+            ${requestScope.besked}
     </form>
 
 
         <form action="FrontController" method="post">
             <input type="hidden" name="target" value="OpdaterMateriale">
 
-            <h5 class="mt-5" style="color: black">Tilføj materiale</h5>
+            <h6 class="mt-5" style="color: black">Tilføj materiale</h6>
 
             <p></p>
 
@@ -96,7 +99,7 @@
                 </div>
             </div>
 
-
+        ${requestScope.tilføjetMaterialeBesked}
         </form>
 
 
@@ -104,11 +107,11 @@
 
 
         <div class="mt-5">
-            <h5 class="mb-3">Se og fjern materiale</h5>
+            <h6 class="mb-3">Se og fjern materiale</h6>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                    <th scope="col">ID serienummer</th>
+                    <th scope="col">Serienummer</th>
                     <th scope="col">Enhed</th>
                     <th scope="col">Beskrivelse</th>
                     <th scope="col">Pris</th>
@@ -116,13 +119,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="element" items="${sessionScope.materials}" varStatus="loop">
+                <c:forEach var="element" items="${applicationScope.materials}">
                 <tr>
-                    <th scope="row">1234567</th>
                     <td>${element.itemId}</td>
                     <td>${element.enhed}</td>
                     <td>${element.beskrivelse}</td>
-                    <td>${element.pris} ,-</td>
+                    <td>${element.pris},-</td>
                     <td>
                         <div class="float-right">
                             <form action="FrontController" method="post">
