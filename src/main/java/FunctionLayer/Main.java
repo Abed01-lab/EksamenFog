@@ -21,14 +21,14 @@ public class Main {
 
     }
 
-    public static double beregnTag(Carport carport, Tag tag){
+    public static double beregnTag(Carport carport, Tag tag) {
         double skråTagLængde = Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2))));
         return skråTagLængde;
     }
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
 
-        Carport carport = new Carport(240, 300,420);
+        Carport carport = new Carport(240, 300, 420);
         StyklisteMapper stkmp = new StyklisteMapper();
 
         //createOrdre(carport, tag, skur);

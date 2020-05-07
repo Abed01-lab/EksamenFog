@@ -25,7 +25,6 @@ public class OpdaterPris extends Command {
         // String enhed = request.getParameter("enhed");
 
 
-
         try {
             StyklisteMapper.opdaterPris(pris, materialeId);
             servletContext.setAttribute("materials", LogicFacade.getMaterials());

@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import static DBAccess.CarportMapper.*;
 import static FunctionLayer.Carport.enhedArray;
 
-public class LavCarport extends Command{
+public class LavCarport extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
@@ -37,7 +37,7 @@ public class LavCarport extends Command{
         Carport carportobject = new Carport(højde, bredde, længde);
 
         Skur skurobject = new Skur(skurbredde, skurlængde);
-        if(skurbredde == 0){
+        if (skurbredde == 0) {
             skurobject = new Skur(0, 0);
         } else {
             skurobject = new Skur(skurbredde, skurlængde);

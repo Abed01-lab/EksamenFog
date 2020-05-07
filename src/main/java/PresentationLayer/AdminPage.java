@@ -12,7 +12,7 @@ import java.util.List;
 
 import static FunctionLayer.Carport.enhedArray;
 
-public class AdminPage extends Command{
+public class AdminPage extends Command {
 
 
     @Override

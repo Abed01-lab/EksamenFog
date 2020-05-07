@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
 
-public class DeleteMaterial extends Command{
+public class DeleteMaterial extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {

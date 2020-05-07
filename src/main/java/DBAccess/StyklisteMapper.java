@@ -90,10 +90,10 @@ public class StyklisteMapper {
         }
         ArrayList<CalculatedItems> liste = udregnStyklisterFladt(carport, tag, skur);
 
-        for(int i = 0; i < liste.size(); i++) {
+        for (int i = 0; i < liste.size(); i++) {
             String item = liste.get(i).getItemNavn();
 
-            switch(item){
+            switch (item) {
                 case "breddestolper":
                     serienummer = 1;
                     break;
@@ -142,7 +142,8 @@ public class StyklisteMapper {
         }
 
 
-        }
+    }
+
     public static void opdaterPris(int pris, int materialeId) throws SQLException, ClassNotFoundException {
         Connection con = Connector.connection();
         String SQL = "UPDATE fogprojekt.styklisteitems" + " SET pris = ?" + " WHERE itemId = ?";
@@ -167,7 +168,6 @@ public class StyklisteMapper {
 
                 int id = rs.getInt("itemId");
                 materialerId.add(id);
-
 
 
             }

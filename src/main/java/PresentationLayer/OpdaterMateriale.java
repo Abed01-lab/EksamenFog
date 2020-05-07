@@ -36,7 +36,7 @@ public class OpdaterMateriale extends Command {
             e.printStackTrace();
         }
 
-        request.setAttribute("tilføjetMaterialeBesked", "   Materialet " + beskrivelse  + " er nu tilføjet");
+        request.setAttribute("tilføjetMaterialeBesked", "   Materialet " + beskrivelse + " er nu tilføjet");
 
         return "opdaterMaterialeAdmin";
     }

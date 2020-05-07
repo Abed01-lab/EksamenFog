@@ -77,9 +77,9 @@
                 <td>
                     <div align="center">
                         <form action="FrontController" method="post">
-                        <input type="hidden" name="target" value="">
+                            <input type="hidden" name="target" value="">
                             <button type="submit" class="btn btn-danger">Afvis</button>
-                    </form>
+                        </form>
 
                     </div>
                 </td>
