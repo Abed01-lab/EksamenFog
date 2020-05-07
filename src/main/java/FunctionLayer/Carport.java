@@ -12,7 +12,7 @@ public class Carport {
     public static int[] højdearray = new int[]{200, 215, 230, 245, 260, 275, 290};
     public static String[] materialearray = new String[]{"Træ"};
 
-    public static String[] tagarray = new String[]{"Flat tag", "Skråt tag", "Skråt tag til én side"};
+    public static String[] tagarray = new String[]{"Fladt tag", "Skråt tag", "Skråt tag til én side"};
     public static String[] tagmateriale = new String[]{"Træ", "Sten"};
     public static int[] taghældning = new int[]{10, 15, 20, 25, 30, 35, 40, 45};
 

@@ -22,6 +22,9 @@ abstract class Command {
         commands.put("DeleteMaterial", new DeleteMaterial());
         commands.put("AdminPage", new AdminPage());
         commands.put("OpdaterPris", new OpdaterPris());
+        commands.put("AdminForespørgsler", new AdminForespørgsler());
+        commands.put("AdminSeForespørgsel", new AdminSeForespørgsel());
+
 
     }
 

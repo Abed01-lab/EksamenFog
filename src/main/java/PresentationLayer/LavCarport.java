@@ -18,10 +18,6 @@ public class LavCarport extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        ServletContext servletContext = request.getServletContext();
-        servletContext.setAttribute("enhed", enhedArray);
-        servletContext.setAttribute("materialeId", StyklisteMapper.getStyklisterId());
-
         double bredde = Double.parseDouble(request.getParameter("bredde"));
         double længde = Double.parseDouble(request.getParameter("længde"));
         double højde = Double.parseDouble(request.getParameter("højde"));
@@ -57,6 +53,6 @@ public class LavCarport extends Command {
         System.out.println(carportobject.getBredde());
         System.out.println(carportobject.getHøjde());
 
-        return "designCarport"; // TODO
+        return "seTegningKunde"; //
     }
 }

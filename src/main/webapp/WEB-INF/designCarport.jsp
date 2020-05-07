@@ -25,13 +25,19 @@
 
         <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
             <li class="nav-item mr-2">
-                <form name="MyProfile" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="AdminPage">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Admin">
+                <form name="Forespørgsler" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminForespørgsler">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Forespørgsler">
                 </form>
             </li>
             <li class="nav-item mr-2">
-                <form name="MyProfile" action="FrontController" method="post">
+                <form name="OpdaterMaterialer" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminPage">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Opdater materialer">
+                </form>
+            </li>
+            <li class="nav-item mr-2">
+                <form name="DesignCarport" action="FrontController" method="post">
                     <input type="hidden" name="target" value="GoToLavcarport">
                     <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
                 </form>
@@ -74,10 +80,10 @@
                     </select>
                 </div>
                 <div class="col-sm-6">
-                    <p>Tag hældning</p>
+                    <p>Hældning på tag i grader</p>
                     <select class="form-control" name="taghældning">
                         <c:forEach var="element" items="${applicationScope.taghældning}">
-                            <option value="${element}">${element}%</option>
+                            <option value="${element}">${element}°</option>
                         </c:forEach>
                     </select>
                 </div>
