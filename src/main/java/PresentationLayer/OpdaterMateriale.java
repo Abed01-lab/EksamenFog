@@ -9,11 +9,7 @@ import FunctionLayer.Materials;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import java.sql.SQLException;
-
-import static FunctionLayer.Carport.enhedArray;
-import static FunctionLayer.Carport.tagmateriale;
 
 public class OpdaterMateriale extends Command {
 

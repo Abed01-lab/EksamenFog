@@ -1,11 +1,9 @@
 package FunctionLayer;
 
-import DBAccess.CarportMapper;
 import DBAccess.StyklisteMapper;
 import DBAccess.UserMapper;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

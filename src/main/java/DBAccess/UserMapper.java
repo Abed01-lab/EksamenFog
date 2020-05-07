@@ -3,11 +3,7 @@ package DBAccess;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 /**
  * The purpose of UserMapper is to...

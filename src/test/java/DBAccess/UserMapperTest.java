@@ -2,17 +2,15 @@ package DBAccess;
 
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.User;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.junit.Test;
-
 import static org.junit.Assert.*;
-
-import org.junit.Before;
 
 public class UserMapperTest {
 //    Test date in the UsersTest table

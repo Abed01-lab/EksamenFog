@@ -1,9 +1,5 @@
 package FunctionLayer;
 
-import java.sql.Array;
-import java.util.ArrayList;
-
-
 public class Carport {
 
     double højde;

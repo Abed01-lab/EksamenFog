@@ -1,16 +1,8 @@
 package FunctionLayer;
 
-import DBAccess.CarportMapper;
 import DBAccess.StyklisteMapper;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static DBAccess.CarportMapper.createCarport;
-import static DBAccess.CarportMapper.createOrdre;
-import static DBAccess.StyklisteMapper.getStyklister;
-import static FunctionLayer.Carport.længdearray;
 
 public class Main {
 
