@@ -47,7 +47,7 @@ public class FrontController extends HttpServlet {
             }
         } catch (UnsupportedEncodingException | LoginSampleException | CarportException ex) {
             request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("index2.jsp").forward(request, response);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
