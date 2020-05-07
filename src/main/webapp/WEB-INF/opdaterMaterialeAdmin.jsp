@@ -24,17 +24,10 @@
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
         <ul class="nav navbar justify-content-end w-100" style="background-color: #007cdc;">
-            <li class="nav-item mr-auto">
-                <form name="logout" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="logout">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Log ud">
-
-                </form>
-            </li>
             <li class="nav-item mr-2">
                 <form name="MyProfile" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="MyProfile">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Min profil">
+                    <input type="hidden" name="target" value="AdminPage">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Admin">
                 </form>
 
             </li>
@@ -108,44 +101,32 @@
                 <thead>
                 <tr>
                     <th scope="col">ID serienummer</th>
-                    <th scope="col">Materiale</th>
-                    <th scope="col">Dimensioner</th>
+                    <th scope="col">Enhed</th>
                     <th scope="col">Beskrivelse</th>
                     <th scope="col">Pris</th>
                     <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="element" items="${sessionScope.materials}" varStatus="loop">
                 <tr>
                     <th scope="row">1234567</th>
-                    <td>Stolpe</td>
-                    <td>29x29</td>
-                    <td>Mahognitræ</td>
-                    <td>120,-</td>
+                    <td>${element.itemId}</td>
+                    <td>${element.enhed}</td>
+                    <td>${element.beskrivelse}</td>
+                    <td>${element.pris} ,-</td>
                     <td>
                         <div class="float-right">
                             <form action="FrontController" method="post">
-                                <input type="hidden" name="target" value="">
+                                <input type="hidden" name="target" value="DeleteMaterial">
+                                <input type="hidden" name="serienummer" value="${element.itemId}">
                                 <button type="submit" class="btn btn-danger">Fjern</button>
                                 </form>
                         </div>
                     </td>
 
                 </tr>
-                <tr>
-                    <th scope="row">1234568</th>
-                    <td>Spær</td>
-                    <td>12x12</td>
-                    <td>Lange</td>
-                    <td>110,-</td>
-                    <td><div class="float-right">
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="target" value="">
-                            <button type="submit" class="btn btn-danger">Fjern</button>
-                        </form>
-                    </div></td>
-                </tr>
-
+                </c:forEach>
                 </tbody>
             </table>
         </div>

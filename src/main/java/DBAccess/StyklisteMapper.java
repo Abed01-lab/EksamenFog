@@ -37,6 +37,23 @@ public class StyklisteMapper {
         return materialer;
     }
 
+    public static List<Materials> deleteMaterial(int serienummer) throws SQLException, ClassNotFoundException {
+        ArrayList<Materials> materialer = new ArrayList<>();
+        String SQL = "DELETE FROM fogprojekt.styklisteitems WHERE itemId = ?";
+
+        try {
+            Connection con = Connector.connection();
+
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, serienummer);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return materialer;
+    }
+
     public static void opdaterMateriale(Materials materiale) {
         try {
             Connection con = Connector.connection();

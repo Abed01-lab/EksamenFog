@@ -26,6 +26,6 @@ public class OpdaterMateriale extends Command {
 
         StyklisteMapper.opdaterMateriale(mat);
 
-        return "ordreBekræftelse";
+        return "materialeIndsatBekræftelse";
     }
 }

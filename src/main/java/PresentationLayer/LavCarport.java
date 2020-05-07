@@ -56,6 +56,6 @@ public class LavCarport extends Command{
         System.out.println(carportobject.getBredde());
         System.out.println(carportobject.getHøjde());
 
-        return "opdaterMaterialeAdmin";
+        return "designCarport"; // TODO
     }
 }

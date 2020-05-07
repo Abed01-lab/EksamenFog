@@ -1,7 +1,12 @@
 package FunctionLayer;
 
 import DBAccess.CarportMapper;
+import DBAccess.StyklisteMapper;
 import DBAccess.UserMapper;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The purpose of LogicFacade is to...
@@ -26,4 +31,8 @@ public class LogicFacade {
     }
 
 
+    public static List<Materials> deleteMaterial(int serienummer) throws SQLException, ClassNotFoundException {
+        StyklisteMapper.deleteMaterial(serienummer);
+        return StyklisteMapper.getStyklister();
+    }
 }
