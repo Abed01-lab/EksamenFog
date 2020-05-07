@@ -16,9 +16,7 @@ public class OpdaterMateriale extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {
-      //  ServletContext servletContext = request.getServletContext();
         int pris = Integer.parseInt(request.getParameter("pris"));
-       // servletContext.setAttribute("enhed", (String[]) enhedArray);
         String enhed = request.getParameter("enhed");
         String beskrivelse = request.getParameter("beskrivelse");
 

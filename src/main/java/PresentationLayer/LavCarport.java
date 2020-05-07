@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import DBAccess.StyklisteMapper;
 import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Skur;
@@ -20,6 +21,7 @@ public class LavCarport extends Command{
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         ServletContext servletContext = request.getServletContext();
         servletContext.setAttribute("enhed", enhedArray);
+        servletContext.setAttribute("materialeId", StyklisteMapper.getStyklisterId());
 
         double bredde = Double.parseDouble(request.getParameter("bredde"));
         double længde = Double.parseDouble(request.getParameter("længde"));

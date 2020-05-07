@@ -19,7 +19,6 @@ public class Materials {
         this.enhed = enhed;
         this.beskrivelse = beskrivelse;
     }
-
     public String getEnhed() {
         return enhed;
     }

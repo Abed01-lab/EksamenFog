@@ -18,6 +18,7 @@ abstract class Command {
         commands.put( "LavCarport", new LavCarport() );
         commands.put("Ordrebekræftelse", new OrdreBekræftelse());
         commands.put("OpdaterMateriale", new OpdaterMateriale());
+        commands.put("OpdaterPris", new OpdaterPris());
     }
 
     static Command from( HttpServletRequest request ) {
