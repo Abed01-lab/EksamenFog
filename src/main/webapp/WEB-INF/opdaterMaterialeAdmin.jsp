@@ -48,7 +48,7 @@
             <input type="hidden" name="target" value="OpdaterPris">
         <h2>Materialeopdatering</h2>
         <h4>- Her kan du tilføje materialer, opdaterer materialepriser og fjerne materialer!</h4>
-
+        ${requestScope.besked}
         <h5 class="mt-5">Opdater pris</h5>
         <div class="form-row mt-4">
 

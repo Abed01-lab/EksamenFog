@@ -15,6 +15,7 @@ public class OpdaterPris extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) {
         int pris = Integer.parseInt(request.getParameter("pris"));
         int materialeId = Integer.parseInt(request.getParameter("materialeId"));
+        request.setAttribute("besked", "   Prisen på varen med serienummer  " + materialeId + ", er opdateret til " + pris + " kr.");
        // String beskrivelse = request.getParameter("beskrivelse");
        // String enhed = request.getParameter("enhed");
 
@@ -28,6 +29,6 @@ public class OpdaterPris extends Command {
             e.printStackTrace();
         }
 
-        return "ordreBekræftelse";
+        return "opdaterMaterialeAdmin";
     }
 }
