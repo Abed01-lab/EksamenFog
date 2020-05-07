@@ -34,28 +34,36 @@
         </ul>
     </div>
 
+
+
     <div class="col-lg-12 w-100 h-100 p-3 mt-2" style="background-color: white;">
+        <form action="FrontController" method="post">
+            <input type="hidden" name="target" value="OpdaterPris">
         <h2>Materialeopdatering</h2>
         <h4>- Her kan du tilføje materialer, opdaterer materialepriser og fjerne materialer!</h4>
-
+        ${requestScope.besked}
         <h5 class="mt-5">Opdater pris</h5>
         <div class="form-row mt-4">
 
             <div class="col-6">
-                <select class="form-control" name="length">
-                    <c:forEach var="element" items="${applicationScope.længde}">
-                        <option value="materialenavn">Mahognitræ stolper</option>
+                <select class="form-control" name="materialeId">
+                    <c:forEach var="element" items="${applicationScope.materialeId}">
+                        <option value="${element}">${element}</option>
                     </c:forEach>
                 </select>
             </div>
             <div class="col-4">
-                <input type="text" class="form-control" placeholder="Skriv ny pris her">
+                <input type="text" name="pris" class="form-control" placeholder="Skriv ny pris her">
             </div>
+
 
             <div class="col-2">
                 <button type="submit" class="btn btn-primary float-right ">Opdater pris</button>
             </div>
         </div>
+
+    </form>
+
 
         <form action="FrontController" method="post">
             <input type="hidden" name="target" value="OpdaterMateriale">
