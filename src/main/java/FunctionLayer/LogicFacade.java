@@ -31,22 +31,21 @@ public class LogicFacade {
     }
 
 
-    public static List<Materials> deleteMaterial(int serienummer) throws SQLException, ClassNotFoundException {
+    public static List<Materials> deleteMaterial(int serienummer) {
         StyklisteMapper.deleteMaterial(serienummer);
-        return StyklisteMapper.getStyklister();
+        return getMaterials();
     }
 
-    public static List<Materials> getMaterials() throws SQLException, ClassNotFoundException {
+    public static List<Materials> getMaterials() {
         return StyklisteMapper.getStyklister();
     }
-    public static Materials opdaterMateriale(String beskrivelse, String enhed, int pris) {
+    public static List<Materials> opdaterMateriale(String beskrivelse, String enhed, int pris) {
         Materials mat = new Materials(beskrivelse, enhed, pris);
         StyklisteMapper.opdaterMateriale(mat);
-        return mat;
+        return getMaterials();
     }
-    public static Materials opdaterPris(int serienummer, int pris) throws SQLException, ClassNotFoundException {
-        Materials mat = new Materials(serienummer, "", "", pris);
+    public static List<Materials> opdaterPris(int serienummer, int pris){
         StyklisteMapper.opdaterPris(serienummer, pris);
-        return mat;
+        return getMaterials();
     }
 }

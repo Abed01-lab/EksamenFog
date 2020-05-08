@@ -20,18 +20,7 @@ public class OpdaterMateriale extends Command {
         String enhed = request.getParameter("enhed");
         String beskrivelse = request.getParameter("beskrivelse");
 
-
-
-        LogicFacade.opdaterMateriale(beskrivelse, enhed, pris);
-
-        try {
-            servletContext.setAttribute("materials", LogicFacade.getMaterials());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        servletContext.setAttribute("materials", LogicFacade.opdaterMateriale(beskrivelse, enhed, pris));
         request.setAttribute("tilføjetMaterialeBesked", "   Materialet " + beskrivelse + " er nu tilføjet");
 
         return "opdaterMaterialeAdmin";

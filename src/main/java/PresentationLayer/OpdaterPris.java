@@ -19,15 +19,7 @@ public class OpdaterPris extends Command {
         // String beskrivelse = request.getParameter("beskrivelse");
         // String enhed = request.getParameter("enhed");
 
-
-        try {
-            LogicFacade.opdaterPris(pris, materialeId);
-            servletContext.setAttribute("materials", LogicFacade.getMaterials());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        servletContext.setAttribute("materials", LogicFacade.opdaterPris(pris, materialeId));
 
         return "opdaterMaterialeAdmin";
     }

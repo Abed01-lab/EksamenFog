@@ -15,13 +15,8 @@ public class DeleteMaterial extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {
         ServletContext servletContext = request.getServletContext();
         int serienummer = Integer.parseInt(request.getParameter("serienummer"));
-        try {
-            servletContext.setAttribute("materials", LogicFacade.deleteMaterial(serienummer));
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        servletContext.setAttribute("materials", LogicFacade.deleteMaterial(serienummer));
+
         return "opdaterMaterialeAdmin";
     }
 }
