@@ -39,4 +39,14 @@ public class LogicFacade {
     public static List<Materials> getMaterials() throws SQLException, ClassNotFoundException {
         return StyklisteMapper.getStyklister();
     }
+    public static Materials opdaterMateriale(String beskrivelse, String enhed, int pris) {
+        Materials mat = new Materials(beskrivelse, enhed, pris);
+        StyklisteMapper.opdaterMateriale(mat);
+        return mat;
+    }
+    public static Materials opdaterPris(int serienummer, int pris) throws SQLException, ClassNotFoundException {
+        Materials mat = new Materials(serienummer, "", "", pris);
+        StyklisteMapper.opdaterPris(serienummer, pris);
+        return mat;
+    }
 }

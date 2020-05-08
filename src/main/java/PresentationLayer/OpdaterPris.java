@@ -21,7 +21,7 @@ public class OpdaterPris extends Command {
 
 
         try {
-            StyklisteMapper.opdaterPris(pris, materialeId);
+            LogicFacade.opdaterPris(pris, materialeId);
             servletContext.setAttribute("materials", LogicFacade.getMaterials());
         } catch (SQLException e) {
             e.printStackTrace();

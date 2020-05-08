@@ -146,31 +146,10 @@ public class StyklisteMapper {
         ps.setInt(1, pris);
         ps.setInt(2, materialeId);
         ps.executeUpdate();
-        System.out.println("Database opdateret");
+
     }
 
 
-    public static List<Integer> getStyklisterId() {
-        ArrayList<Integer> materialerId = new ArrayList<>();
-        String SQL = "SELECT * FROM fogprojekt.styklisteitems WHERE itemId";
-
-        try {
-            Connection con = Connector.connection();
-
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-
-                int id = rs.getInt("itemId");
-                materialerId.add(id);
-
-
-            }
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return materialerId;
-    }
 }
 
 

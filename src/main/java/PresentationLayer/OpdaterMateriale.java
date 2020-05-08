@@ -20,9 +20,9 @@ public class OpdaterMateriale extends Command {
         String enhed = request.getParameter("enhed");
         String beskrivelse = request.getParameter("beskrivelse");
 
-        Materials mat = new Materials(beskrivelse, enhed, pris);
 
-        StyklisteMapper.opdaterMateriale(mat);
+
+        LogicFacade.opdaterMateriale(beskrivelse, enhed, pris);
 
         try {
             servletContext.setAttribute("materials", LogicFacade.getMaterials());

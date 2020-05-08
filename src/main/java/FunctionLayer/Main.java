@@ -25,7 +25,7 @@ public class Main {
 
         //createOrdre(carport, tag, skur);
         //createOrdre(carport, null, skur);
-        System.out.println(StyklisteMapper.getStyklisterId());
+
 
     }
 }
