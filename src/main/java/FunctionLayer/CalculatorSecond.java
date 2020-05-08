@@ -59,7 +59,10 @@ public class CalculatorSecond {
         CalculatedItems længdestolpe = new CalculatedItems("længdestolpe", 2, carport.getLængde());
         CalculatedItems stolper = new CalculatedItems("stolper", stolperAntal, carport.højde);
         CalculatedItems spær = new CalculatedItems("spær", spærAntal, carport.bredde);
-        //Mapper
+        list.add(breddestolpe);
+        list.add(længdestolpe);
+        list.add(stolper);
+        list.add(spær);
         return list;
     }
 

@@ -21,6 +21,7 @@ public class StyklisteMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+
                 int id = rs.getInt("itemId");
                 String beskrivelse = rs.getString("beskrivelse");
                 String enhed = rs.getString("enhed");
@@ -34,18 +35,6 @@ public class StyklisteMapper {
             e.printStackTrace();
         }
         return materialer;
-    }
-
-    public static void deleteMaterial(int serienummer) throws SQLException, ClassNotFoundException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "DELETE FROM fogprojekt.styklisteitems WHERE itemId = ?";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, serienummer);
-            ps.executeUpdate();
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
     }
 
     public static void opdaterMateriale(Materials materiale) {
@@ -63,8 +52,50 @@ public class StyklisteMapper {
         }
     }
 
+    public static void deleteMaterial(int serienummer) throws SQLException, ClassNotFoundException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "DELETE FROM fogprojekt.styklisteitems WHERE itemId = ?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, serienummer);
+            ps.executeUpdate();
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
-    public static void lavStyklisterTilCarport(Carport carport, Tag tag, Skur skur, int stolper, int areal, int spær) {
+    public static void getStykliste(){
+        ArrayList<Stykliste> overlist = new ArrayList<Stykliste>();
+
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.stykliste";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ArrayList<StyklisteDetaljer> list = new ArrayList<StyklisteDetaljer>();
+                int id = rs.getInt("ordreId");
+                    while(id == rs.getInt("ordreId") && rs.next()){
+                        int serienummer = rs.getInt("serienummer");
+                        int antal = rs.getInt("antal");
+                        int længde = rs.getInt("længde");
+                        StyklisteDetaljer styk = new StyklisteDetaljer(serienummer, antal, længde);
+                        list.add(styk);
+                    }
+                Stykliste stykliste = new Stykliste(id, list);
+                    overlist.add(stykliste);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+    public static void lavStyklisterTilCarport(Carport carport, Tag tag, Skur skur) {
         int ordreId = 0;
         int serienummer = 0;
 
@@ -83,12 +114,14 @@ public class StyklisteMapper {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+
         ArrayList<CalculatedItems> liste = udregnStyklisterFladt(carport, tag, skur);
 
-        for (int i = 0; i < liste.size(); i++) {
+
+        for(int i = 1; i < 4; i++) {
             String item = liste.get(i).getItemNavn();
 
-            switch (item) {
+            switch(item){
                 case "breddestolper":
                     serienummer = 1;
                     break;
@@ -102,10 +135,10 @@ public class StyklisteMapper {
 
             try {
                 Connection con = Connector.connection();
-                String SQL = "INSERT INTO fogprojekt.stykliste (ordreId, serienummer, antal, længde) VALUES (?, ?, ?, ?";
+                String SQL = "INSERT INTO fogprojekt.stykliste (ordreId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
                 PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, ordreId);
-                ps.setInt(2, serienummer);
+                ps.setInt(2, 2);
                 ps.setDouble(3, liste.get(i).getItemAntal());
                 ps.setDouble(4, liste.get(i).getItemLængde());
                 ps.executeUpdate();
@@ -119,14 +152,14 @@ public class StyklisteMapper {
 
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.stykliste (ordreId, serienummer, antal, længde) VALUES (?, ?, ?, ?";
+            String SQL = "INSERT INTO fogprojekt.stykliste (ordreId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 
             //serienummer = tag.getTagmateriale();
 
             ps.setInt(1, ordreId);
-            ps.setInt(2, serienummer);
-            ps.setDouble(3, areal);
+            ps.setInt(2, 2);
+            ps.setDouble(3, 5);
             ps.setDouble(4, 0);
             ps.executeUpdate();
 
@@ -135,21 +168,123 @@ public class StyklisteMapper {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
 
-    public static void opdaterPris(int pris, int materialeId) throws SQLException, ClassNotFoundException {
-        Connection con = Connector.connection();
-        String SQL = "UPDATE fogprojekt.styklisteitems" + " SET pris = ?" + " WHERE itemId = ?";
-        PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-        ps.setInt(1, pris);
-        ps.setInt(2, materialeId);
-        ps.executeUpdate();
+    public static void main(String[] args) {
+        Carport carport = new Carport(240, 400,720);
+        Tag tag = new Tag("Fladt", 0, "Sten");
+        Skur skur = new Skur(300, 420);
+        lavStyklisterTilCarport(carport, tag, skur);
 
+        ArrayList<CalculatedItems> liste = udregnStyklisterFladt(carport, tag, skur);
+        for(int i = 0; i < liste.size(); i++)
+            System.out.println(liste.get(i).getItemAntal());
     }
-
-
 }
+/*public static List<Materials> getFladtStyklister(int kvm) throws SQLException, ClassNotFoundException {
+        ArrayList<Materials> materialer = new ArrayList<>();
+        String SQL = "SELECT * FROM fogprojekt.fladttagstyklister";
 
+        try {
+            Connection con = Connector.connection();
+
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                int id = rs.getInt("idFladtTagStyklister");
+                String deminsion = rs.getString("deminsion");
+                double længde = rs.getDouble("længde");
+                System.out.println(længde);
+                double antal = rs.getDouble("antal");
+                String enhed = rs.getString("enhed");
+                String beskrivelse = rs.getString("beskrivelse");
+
+
+                længde = længde * kvm;
+                antal = antal * kvm;
+                int længdeInt = (int) længde;
+                int antalInt = (int) antal;
+
+                //Materials materialInstance = new Materials(deminsion, længdeInt, antalInt, enhed, beskrivelse);
+                //materialer.add(materialInstance);
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return materialer;
+    }*/
+
+
+
+    /*
+    public static List<Materials> getSkråStyklister(int kvm) throws SQLException, ClassNotFoundException {
+        ArrayList<Materials> materialer = new ArrayList<>();
+        String SQL = "SELECT * FROM fogprojekt.skråtagstyklister";
+
+        try {
+            Connection con = Connector.connection();
+
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+
+                int id = rs.getInt("idSkråTagStyklister");
+                String deminsion = rs.getString("deminsion");
+                double længde = rs.getDouble("længde");
+                double antal = rs.getDouble("antal");
+                String enhed = rs.getString("enhed");
+                String beskrivelse = rs.getString("beskrivelse");
+
+                længde = længde * kvm;
+                antal = antal * kvm;
+                int længdeInt = (int) længde;
+                int antalInt = (int) antal;
+
+                Materials materialInstance = new Materials(deminsion, længdeInt, antalInt, enhed, beskrivelse);
+                materialer.add(materialInstance);
+
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return materialer;
+    }
+
+   /* public static void opdaterMaterialeFladtTag(Materials materiale) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO fogprojekt.fladttagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materiale.getDeminsion());
+            ps.setFloat(2, materiale.getLængde());
+            ps.setFloat(3, materiale.getAntal());
+            ps.setString(4, materiale.getEnhed());
+            ps.setString(5, materiale.getBeskrivelse());
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public static void opdaterMaterialeSkråTag(Materials materiale) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO fogprojekt.skråtagstyklister (deminsion, længde, antal, enhed, beskrivelse) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, materiale.getDeminsion());
+            ps.setFloat(2, materiale.getLængde());
+            ps.setFloat(3, materiale.getAntal());
+            ps.setString(4, materiale.getEnhed());
+            ps.setString(5, materiale.getBeskrivelse());
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+}*/
 
