@@ -69,3 +69,26 @@ INSERT INTO `fogprojekt`.`fladttagstyklister` (`deminsion`, `længde`, `antal`, 
 INSERT INTO `fogprojekt`.`fladttagstyklister` (`deminsion`, `længde`, `antal`, `enhed`, `beskrivelse`) VALUES ('stalddørsgreb 50x75', '0', '1', 'Sæt', 'Til lås på dør i skur');
 INSERT INTO `fogprojekt`.`fladttagstyklister` (`deminsion`, `længde`, `antal`, `enhed`, `beskrivelse`) VALUES ('t hængsel 390 mm', '0', '2', 'Stk', 'Til skurdør');
 INSERT INTO `fogprojekt`.`fladttagstyklister` (`deminsion`, `længde`, `antal`, `enhed`, `beskrivelse`) VALUES ('vinkelbeslag 35', '0', '32', 'Stk', 'Til montering af løsholter i skur');
+
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("25x200mm. trykimp. Brædt", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("25x125mm. trykimp. Brædt", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("37x73mm. Lægte ubh.", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("45x95mm. Reglar ub.", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("45x195mm. spærtræ ubh.", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("97x97mm. trykimp. Stolpe", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("19x100mm. trykimp. Brædt", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Plastmo Ecolite blåtonet", "Stk");
+
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Plastmo bundskruer 200 stk.", "Pakke");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Hulbånd 1x20mm. 10mtr.", "Rulle");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Universal 190mm. højre", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Universal 190mm. venstre", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("4,5x60mm. skruer 200 stk", "Pakke");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("4,0x50mm. beslagskruer 250 stk.", "Pakke");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Bræddebolt 10x120mm.", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Firkantskiver 40x40x11mm.", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("4,5x70mm. Skruer 400 stk.", "Pakke");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("4,5x50mm. Skruer 300 stk.", "Pakke");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Stalddørsgreb 50x75", "Sæt");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("T hængsel 390mm.", "Stk");
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed) VALUES ("Vinkelbeslag 35", "Stk");
