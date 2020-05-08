@@ -83,6 +83,13 @@
 
 
             <div class="form-row mt-4">
+                <div class="col-10">
+                    <input type="text" name="beskrivelse" class="form-control"
+                           placeholder="Beskrivelse af materiale">
+                </div>
+            </div>
+
+            <div class="form-row mt-4">
                 <div class="col-6">
                     <select class="form-control" name="enhed">
                         <c:forEach var="element" items="${applicationScope.enhed}">
@@ -92,13 +99,6 @@
                 </div>
                 <div class="col-4">
                     <input type="text" name="pris" class="form-control" placeholder="Pris">
-                </div>
-            </div>
-
-            <div class="form-row mt-4">
-                <div class="col-10">
-                    <input type="text" name="beskrivelse" class="form-control"
-                           placeholder="Navn og beskrivelse af materiale">
                 </div>
                 <div class="col-2">
                     <button type="submit" class="btn btn-success float-right"> Tilføj materiale</button>
