@@ -1,16 +1,9 @@
 package FunctionLayer;
 
-import DBAccess.Connector;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertNotNull;
 
 public class CalculatorTest {
 
