@@ -16,8 +16,7 @@ public class OpdaterPris extends Command {
         int pris = Integer.parseInt(request.getParameter("pris"));
         int materialeId = Integer.parseInt(request.getParameter("materialeId"));
         request.setAttribute("besked", "   Prisen på varen med serienummer  " + materialeId + " er opdateret til " + pris + ",-");
-        // String beskrivelse = request.getParameter("beskrivelse");
-        // String enhed = request.getParameter("enhed");
+
 
         servletContext.setAttribute("materials", LogicFacade.opdaterPris(pris, materialeId));
 
