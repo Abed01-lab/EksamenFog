@@ -2,7 +2,7 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
-public class CalculatorSecond {
+public class Calculator {
 
 
     public static double beregnAntalStolper(Carport carport, Skur skur) {
@@ -28,7 +28,7 @@ public class CalculatorSecond {
 
     public static double beregnTagLægter(Carport carport, Tag tag) {
         double skråTagLængde = Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2)))) + 30;
-        skråTagLængde = -65;
+        skråTagLængde = 65;
         return (Math.ceil(skråTagLængde / 30.7) + 1) * 2;
         // måske * 2
     }
@@ -66,8 +66,4 @@ public class CalculatorSecond {
         return list;
     }
 
-    public static void main(String[] args) {
-        Carport carport = new Carport(200, 400, 300);
-        Tag tag = new Tag("skråt", 15, "sten");
-    }
 }

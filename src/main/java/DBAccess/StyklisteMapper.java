@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static DBAccess.CarportMapper.createOrdre;
-import static FunctionLayer.CalculatorSecond.udregnStyklisterFladt;
+import static FunctionLayer.Calculator.udregnStyklisterFladt;
 
 public class StyklisteMapper {
 
