@@ -3,12 +3,8 @@ package DBAccess;
 import FunctionLayer.Carport;
 import FunctionLayer.Skur;
 import FunctionLayer.Tag;
-import FunctionLayer.*;
-import com.mysql.cj.protocol.Resultset;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class CarportMapper {

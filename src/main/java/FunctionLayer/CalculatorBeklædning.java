@@ -1,7 +1,6 @@
 package FunctionLayer;
 
 
-
 public class CalculatorBeklædning {
     //Materials bagbrædt = new Materials(1, "bagbrædt", 360,20);
     //Materials sidebrædt = new Materials(2, "sidebrædt", 540,20);
@@ -10,7 +9,7 @@ public class CalculatorBeklædning {
     Carport carport;
 
     public static void main(String[] args) {
-        Carport carport = new Carport(300,350,400);
+        Carport carport = new Carport(300, 350, 400);
         CalculatorBeklædning stykliste = new CalculatorBeklædning(carport);
         System.out.println(stykliste.antalBagBrædt);
         System.out.println(stykliste.antalSideBrædt);
@@ -30,8 +29,6 @@ public class CalculatorBeklædning {
 
 
     }
-
-
 
 
 }

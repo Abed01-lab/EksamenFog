@@ -23,17 +23,10 @@
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
         <ul class="nav navbar justify-content-end w-100" style="background-color: #007cdc;">
-            <li class="nav-item mr-auto">
-                <form name="logout" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="logout">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Log ud">
-
-                </form>
-            </li>
             <li class="nav-item mr-2">
                 <form name="MyProfile" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="MyProfile">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Min profil">
+                    <input type="hidden" name="target" value="Admin">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Admin">
                 </form>
 
             </li>
@@ -42,7 +35,6 @@
     <h2> Ordre godkendt!</h2>
     <h4> Din ordre er godkendt, og bliver leveret til din adresse inden 5 hverdage</h4>
 </div>
-
 
 
 </body>

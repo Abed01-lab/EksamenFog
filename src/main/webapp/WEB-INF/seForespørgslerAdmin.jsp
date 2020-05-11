@@ -20,22 +20,26 @@
 
 <div class="container">
     <div class="row">
-        <img src="Fog-Header-7.png" class="img-fluid">
+        <img src="images/Fog-Header-7.png" class="img-fluid">
 
-        <ul class="nav navbar justify-content-end w-100" style="background-color: #007cdc;">
-            <li class="nav-item mr-auto">
-                <form name="logout" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="logout">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Log ud">
-
+        <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
+            <li class="nav-item mr-2">
+                <form name="Forespørgsler" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminForespørgsler">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Forespørgsler">
                 </form>
             </li>
             <li class="nav-item mr-2">
-                <form name="MyProfile" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="MyProfile">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Min profil">
+                <form name="OpdaterMaterialer" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminPage">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Opdater materialer">
                 </form>
-
+            </li>
+            <li class="nav-item mr-2">
+                <form name="DesignCarport" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="GoToLavcarport">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
+                </form>
             </li>
         </ul>
     </div>
@@ -76,6 +80,6 @@
 
 
     <h4 class="mt-5">Total pris </h4>
-
+</div>
 </body>
 </html>

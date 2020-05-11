@@ -14,6 +14,12 @@ public class Materials {
         this.beskrivelse = beskrivelse;
     }
 
+    public Materials(String beskrivelse, String enhed, int pris) {
+
+        this.pris = pris;
+        this.enhed = enhed;
+        this.beskrivelse = beskrivelse;
+    }
 
     public String getEnhed() {
         return enhed;
