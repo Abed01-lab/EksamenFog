@@ -41,7 +41,7 @@ public class Connector {
             // Localhost
             URL = "jdbc:mysql://localhost:3306/fogprojekt?serverTimezone=CET&useSSL=false";
             USERNAME = "root";
-            PASSWORD = "";
+            PASSWORD = "rku95jkr";
         }
     }
 

@@ -24,6 +24,7 @@ abstract class Command {
         commands.put("OpdaterPris", new OpdaterPris());
         commands.put("AdminForespørgsler", new AdminForespørgsler());
         commands.put("AdminSeForespørgsel", new AdminSeForespørgsel());
+        commands.put("drawing", new Drawing());
 
 
     }
