@@ -3,6 +3,7 @@ package FunctionLayer;
 public class StyklisteDetaljer {
 
     int serienummer;
+    String beskrivelse;
     int antal;
     int længde;
 
@@ -34,5 +35,15 @@ public class StyklisteDetaljer {
 
     public void setLængde(int længde) {
         this.længde = længde;
+    }
+
+    @Override
+    public String toString() {
+        return "Stykliste: " +
+                "serienummer = " + serienummer +
+                ", beskrivelse = '" + beskrivelse + '\'' +
+                ", antal = " + antal +
+                ", længde = " + længde
+                ;
     }
 }
