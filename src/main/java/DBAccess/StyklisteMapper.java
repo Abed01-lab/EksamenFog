@@ -129,7 +129,7 @@ public class StyklisteMapper {
 
     public static void lavStyklisterTilCarport(Carport carport, Tag tag, Skur skur) {
         int ordreId = 0;
-        int serienummer = 3;
+        int serienummer = 0;
 
         try {
             ordreId = createOrdre(carport, tag, skur);
@@ -160,7 +160,7 @@ public class StyklisteMapper {
                     serienummer = 2;
                     break;
                 case "længdestolper":
-                    serienummer = 3;
+                    serienummer = 4;
                     break;
                 case "stolper":
                     serienummer = 6;
@@ -212,7 +212,7 @@ public class StyklisteMapper {
 
     public static void main(String[] args) {
         Carport carport = new Carport(220, 400,720);
-        Tag tag = new Tag("Fladt", 0, "Sten");
+        Tag tag = new Tag("Fladt", 15, "Sten");
         Skur skur = new Skur(300, 420);
         lavStyklisterTilCarport(carport, tag, skur);
 
