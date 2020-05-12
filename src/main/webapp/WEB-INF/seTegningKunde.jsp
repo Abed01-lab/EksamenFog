@@ -49,6 +49,7 @@
         <h4>Tegning af carport</h4>
 
         <div>
+            ${requestScope.svgtegning}
             <p>TEGNING AF CARPORT</p>
         </div>
 
