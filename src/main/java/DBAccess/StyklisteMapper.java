@@ -11,7 +11,7 @@ import static FunctionLayer.Calculator.*;
 
 public class StyklisteMapper {
 
-    public static List<Materials> getStyklister() {
+    public static ArrayList<Materials> getStyklister() {
         ArrayList<Materials> materialer = new ArrayList<>();
         String SQL = "SELECT * FROM fogprojekt.styklisteitems";
 
