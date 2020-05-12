@@ -21,30 +21,21 @@ public class UserMapperTest {
 //    (4,'someone@nowhere.com','sesam','customer');
 
     private static Connection testConnection;
-    private static String USER = "testinguser";
-    private static String USERPW = "try1try2tryAgain";
-    private static String DBNAME = "useradminTest";
-    private static String HOST = "46.101.253.149";
+    private static String USER = "root";
+    private static String USERPW = "Fokken9797";
 
     @Before
     public void setUp() {
         try {
             // awoid making a new connection for each test
             if (testConnection == null) {
-                String url = String.format("jdbc:mysql://%s:3306/%s", HOST, DBNAME);
+                String url = String.format("jdbc:mysql://localhost:3306/fogprojekt?serverTimezone=CET&useSSL=false");
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
                 testConnection = DriverManager.getConnection(url, USER, USERPW);
                 // Make mappers use test 
                 Connector.setConnection(testConnection);
             }
-            // reset test database
-            try (Statement stmt = testConnection.createStatement()) {
-                stmt.execute("drop table if exists Users");
-                stmt.execute("create table Users like UsersTest");
-                stmt.execute("insert into Users select * from UsersTest");
-            }
-
         } catch (ClassNotFoundException | SQLException ex) {
             testConnection = null;
             System.out.println("Could not open connection to database: " + ex.getMessage());
