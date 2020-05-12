@@ -82,9 +82,9 @@ public class CalculatorTest {
 
         // Arrange
         Carport carport = new Carport(200, 240, 240);
-
+        Tag tag = new Tag("Fladt tag", 10, "Træ");
         // Act
-        double result = Calculator.beregnAntalSpærSkråtLodret(carport);
+        double result = Calculator.beregnAntalSpærSkråtLodret(carport, tag);
 
         // Assert
         Assert.assertEquals(4.0 ,result,0.005);

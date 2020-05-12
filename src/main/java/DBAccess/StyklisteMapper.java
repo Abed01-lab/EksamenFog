@@ -93,8 +93,6 @@ public class StyklisteMapper {
                 for(int i = 0; i < overlist.size(); i++) {
                     if (overlist.get(i).getOrdreId() == id){
                         repeat = false;
-                        count = count + 1;
-                        System.out.println(count);
                     }
                 }
 
@@ -102,19 +100,18 @@ public class StyklisteMapper {
 
                     ArrayList<StyklisteDetaljer> list = new ArrayList<StyklisteDetaljer>();
 
-                    int serienummer = rs.getInt("serienummer");
-                    int antal = rs.getInt("antal");
-                    int længde = rs.getInt("længde");
-                    StyklisteDetaljer styk = new StyklisteDetaljer(serienummer, antal, længde);
-                    list.add(styk);
+                    String SQL2 = "SELECT * FROM fogprojekt.stykliste WHERE ordreId = '" + id + "'";
+                    PreparedStatement ps2 = con.prepareStatement(SQL2, Statement.RETURN_GENERATED_KEYS);
+                    ResultSet rs2 = ps2.executeQuery();
 
-                    while (id == rs.getInt("ordreId") && rs.next()) {
-                        serienummer = rs.getInt("serienummer");
-                        antal = rs.getInt("antal");
-                        længde = rs.getInt("længde");
-                        StyklisteDetaljer styk2 = new StyklisteDetaljer(serienummer, antal, længde);
-                        list.add(styk2);
+                    while (rs2.next()) {
+                        int serienummer = rs2.getInt("serienummer");
+                        int antal = rs2.getInt("antal");
+                        int længde = rs2.getInt("længde");
+                        StyklisteDetaljer styk = new StyklisteDetaljer(serienummer, antal, længde);
+                        list.add(styk);
                     }
+
                     Stykliste stykliste = new Stykliste(id, list);
                     overlist.add(stykliste);
                 }
@@ -237,6 +234,7 @@ public class StyklisteMapper {
             for(int h = 0; h < styklist.get(i).getListe().size(); h++){
                 System.out.println(styklist.get(i).getListe().get(h));
             }
+            System.out.println(styklist.get(i).getListe().size());
         }
         System.out.println("HER:" + styklist.size());
 
