@@ -26,9 +26,11 @@ public class Carport {
         this.længde = længde;
     }
 
-    public int beregnKvm() {
+    /* public int beregnKvm() {
         return (int) (længde * bredde) / 10000;
     }
+    Bruger ikke? */
+
 
     public void setHøjde(double højde) {
         this.højde = højde;

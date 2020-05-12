@@ -2,7 +2,7 @@ package FunctionLayer;
 
 import java.util.ArrayList;
 
-public class CalculatorSecond {
+public class Calculator {
 
 
     public static double beregnAntalStolper(Carport carport, Skur skur) {
@@ -28,14 +28,10 @@ public class CalculatorSecond {
 
     public static double beregnTagLægter(Carport carport, Tag tag) {
         double skråTagLængde = Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2)))) + 30;
-        skråTagLængde = -65;
+        skråTagLængde = skråTagLængde - 65;
         return (Math.ceil(skråTagLængde / 30.7) + 1) * 2;
         // måske * 2
     }
-
-    //public static double beregnAntalSpærSkråtVandret(Carport carport){
-    //    return Math.ceil(carport.getBredde()/40.0);
-    //}
 
     public static double beregnTagAreal(Carport carport, Tag tag) {
         double skråTagLængde = 0;
@@ -55,9 +51,9 @@ public class CalculatorSecond {
         double areal = beregnTagAreal(carport, tag);
 
         ArrayList<CalculatedItems> list = new ArrayList<CalculatedItems>();
-        CalculatedItems breddestolpe = new CalculatedItems("breddestolpe", 2, carport.getBredde());
-        CalculatedItems længdestolpe = new CalculatedItems("længdestolpe", 2, carport.getLængde());
-        CalculatedItems stolper = new CalculatedItems("stolper", stolperAntal, carport.højde);
+        CalculatedItems breddestolpe = new CalculatedItems("breddestolper", 2, carport.getBredde());
+        CalculatedItems længdestolpe = new CalculatedItems("længdestolper", 2, carport.getLængde());
+        CalculatedItems stolper = new CalculatedItems("stolper", stolperAntal, carport.højde + 90);
         CalculatedItems spær = new CalculatedItems("spær", spærAntal, carport.bredde);
         list.add(breddestolpe);
         list.add(længdestolpe);
@@ -66,8 +62,24 @@ public class CalculatorSecond {
         return list;
     }
 
-    public static void main(String[] args) {
-        Carport carport = new Carport(200, 400, 300);
-        Tag tag = new Tag("skråt", 15, "sten");
+    public static ArrayList<CalculatedItems> udregnStyklisterSkråt(Carport carport, Tag tag, Skur skur) {
+        double stolperAntal = beregnAntalStolper(carport, skur);
+        double spærAntal = beregnAntalSpærFladt(carport);
+        double lægterAntal = beregnTagLægter(carport, tag);
+        double areal = beregnTagAreal(carport, tag);
+
+        ArrayList<CalculatedItems> list = new ArrayList<CalculatedItems>();
+        CalculatedItems breddestolpe = new CalculatedItems("breddestolper", 2, carport.getBredde());
+        CalculatedItems længdestolpe = new CalculatedItems("længdestolper", 2, carport.getLængde());
+        CalculatedItems stolper = new CalculatedItems("stolper", stolperAntal, carport.højde + 90);
+        CalculatedItems spær = new CalculatedItems("spær", spærAntal, carport.bredde);
+        CalculatedItems lægter = new CalculatedItems("lægter", lægterAntal, Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2)))));
+        list.add(breddestolpe);
+        list.add(længdestolpe);
+        list.add(stolper);
+        list.add(spær);
+        list.add(lægter);
+        return list;
     }
+
 }
