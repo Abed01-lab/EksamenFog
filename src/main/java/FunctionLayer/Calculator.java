@@ -22,8 +22,9 @@ public class Calculator {
         return Math.ceil((carport.getLængde() + 30) / 55.0);
     }
 
-    public static double beregnAntalSpærSkråtLodret(Carport carport) {
-        return Math.ceil((carport.getLængde() + 30) / 89.0);
+    public static double beregnAntalSpærSkråtLodret(Carport carport, Tag tag) {
+        double skråTagLængde = Math.sqrt(((Math.pow(((carport.getBredde() / 2)) * Math.tan(Math.toRadians(tag.getHældning())), 2)) + (Math.pow((carport.getBredde() / 2), 2)))) + 30;
+        return Math.ceil((skråTagLængde + 15) / 89.0) * 2;
     }
 
     public static double beregnTagLægter(Carport carport, Tag tag) {
