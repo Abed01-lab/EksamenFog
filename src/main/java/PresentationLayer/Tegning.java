@@ -11,7 +11,7 @@ public class Tegning extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {
         Carport carport = new Carport(400,300,200);
-        StyklisteDetaljer styk = new StyklisteDetaljer(1, 1, 1);
+        StyklisteDetaljer styk = new StyklisteDetaljer(1, "",1, 1);
         Svg svg = new Svg(800, 600, "0,0,800,600", 75, 10);
         svg.addRect(0,0, (int) carport.getLængde(), 450);
 
