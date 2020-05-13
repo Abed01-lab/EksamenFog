@@ -28,7 +28,9 @@ public class ForespørgselMapper {
             rs.next();
             return rs.getInt(1);
         } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
             throw new CarportException("Fejl ved oprettelse af forespørgelse");
+
         }
     }
 

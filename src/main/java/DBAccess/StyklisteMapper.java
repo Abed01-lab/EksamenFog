@@ -122,18 +122,13 @@ public class StyklisteMapper {
                         int antal = rs2.getInt("antal");
                         int længde = rs2.getInt("længde");
 
-                        /*
-                        String SQL3 = "SELECT * FROM fogprojekt.styklisteitems WHERE itemid = ?";
-                        PreparedStatement ps3 = con.prepareStatement(SQL3, Statement.RETURN_GENERATED_KEYS);
-                        ps3.setInt(1, serienummer);
+                        String SQL3 = "SELECT * FROM fogprojekt.styklisteitems WHERE itemId = '" + serienummer + "'";
+                        PreparedStatement ps3 =  con.prepareStatement(SQL3, Statement.RETURN_GENERATED_KEYS);
                         ResultSet rs3 = ps3.executeQuery();
-                        */
-                        String beskrivelse = "Kunne ikke indlæses";
-                        /*
-                        if (rs.next()) {
+                        String beskrivelse = "temp";
+                        while(rs3.next()) {
                             beskrivelse = rs3.getString("beskrivelse");
                         }
-                         */
 
                         StyklisteDetaljer styk = new StyklisteDetaljer(serienummer, beskrivelse, antal, længde);
                         list.add(styk);
