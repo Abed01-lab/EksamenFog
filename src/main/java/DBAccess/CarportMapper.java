@@ -6,6 +6,7 @@ import FunctionLayer.Skur;
 import FunctionLayer.Tag;
 
 import java.sql.*;
+import java.util.Calendar;
 
 
 public class CarportMapper {
@@ -78,6 +79,9 @@ public class CarportMapper {
     }
 
     public static int createOrdre(Carport carport, Tag tag, Skur skur) throws SQLException, ClassNotFoundException {
+        Calendar calendar = Calendar.getInstance();
+        java.sql.Date datoObjekt = new java.sql.Date(calendar.getTime().getTime());
+
         int autoIncKeySkur = createSkur(skur);
         int autoIncKeyCarport = createCarport(carport);
         int autoIncKeyTag = createTag(tag);
@@ -90,7 +94,7 @@ public class CarportMapper {
             ps.setDouble(2, autoIncKeyCarport);
             ps.setDouble(3, autoIncKeySkur);
             ps.setDouble(4, autoIncKeyTag);
-            ps.setString(5, "EKODATO");
+            ps.setDate(5, datoObjekt);
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
