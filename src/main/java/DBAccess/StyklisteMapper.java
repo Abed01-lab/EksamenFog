@@ -74,7 +74,7 @@ public class StyklisteMapper {
         }
     }
 
-    public static ArrayList<Stykliste> getStykliste(){
+    public static ArrayList<Stykliste> getStykliste() {
         ArrayList<Stykliste> overlist = new ArrayList<Stykliste>();
         // liste, ordreid
         int count = 0;
@@ -90,15 +90,15 @@ public class StyklisteMapper {
                 int id = rs.getInt("ordreId");
                 boolean repeat = true;
 
-                for(int i = 0; i < overlist.size(); i++) {
-                    if (overlist.get(i).getOrdreId() == id){
+                for (int i = 0; i < overlist.size(); i++) {
+                    if (overlist.get(i).getOrdreId() == id) {
                         repeat = false;
                         count = count + 1;
                         System.out.println(count);
                     }
                 }
 
-                if(repeat) {
+                if (repeat) {
 
                     ArrayList<StyklisteDetaljer> list = new ArrayList<StyklisteDetaljer>();
 
@@ -141,21 +141,20 @@ public class StyklisteMapper {
 
         List<Materials> materialer = getStyklister();
         ArrayList<CalculatedItems> liste;
-        if(tag.getHældning() != 0){
+        if (tag.getHældning() != 0) {
             liste = udregnStyklisterSkråt(carport, tag, skur);
-        }
-        else {
+        } else {
             liste = udregnStyklisterFladt(carport, tag, skur);
         }
 
-        for(int h = 0; h < liste.size(); h++){
+        for (int h = 0; h < liste.size(); h++) {
             System.out.println(liste.get(h).getItemNavn());
         }
 
-        for(int i = 0; i < liste.size(); i++) {
+        for (int i = 0; i < liste.size(); i++) {
             String itemName = liste.get(i).getItemNavn();
 
-            switch(itemName){
+            switch (itemName) {
                 case "breddestolper":
                     serienummer = 2;
                     break;
@@ -211,7 +210,7 @@ public class StyklisteMapper {
     }
 
     public static void main(String[] args) {
-        Carport carport = new Carport(220, 400,720);
+        Carport carport = new Carport(220, 400, 720);
         Tag tag = new Tag("Fladt", 15, "Sten");
         Skur skur = new Skur(300, 420);
         lavStyklisterTilCarport(carport, tag, skur);
@@ -222,9 +221,9 @@ public class StyklisteMapper {
 
         ArrayList<Stykliste> styklist = getStykliste();
 
-        for(int i = 0; i < styklist.size(); i++){
+        for (int i = 0; i < styklist.size(); i++) {
             System.out.println("Ordre : " + styklist.get(i).getOrdreId());
-            for(int h = 0; h < styklist.get(i).getListe().size(); h++){
+            for (int h = 0; h < styklist.get(i).getListe().size(); h++) {
                 System.out.println(styklist.get(i).getListe().get(h).getLængde());
             }
         }
@@ -232,9 +231,9 @@ public class StyklisteMapper {
         //lavStyklisterTilCarport(carport, tag, skur);
         //kør først denne hvis ikke virker
 
-        for(int i = 0; i < styklist.size(); i++){
+        for (int i = 0; i < styklist.size(); i++) {
             System.out.println("Ordre : " + styklist.get(i).getOrdreId());
-            for(int h = 0; h < styklist.get(i).getListe().size(); h++){
+            for (int h = 0; h < styklist.get(i).getListe().size(); h++) {
                 System.out.println(styklist.get(i).getListe().get(h));
             }
         }

@@ -50,42 +50,38 @@
 
         <div>
             ${requestScope.svgtegning}
-            <p>TEGNING AF CARPORT</p>
         </div>
 
         <div class="form-group mt-4 my-1">
-            <h4>Udfyld dine kontaktoplysninger her for at sende en forespørgsel på et tilbud!</h4>
-            <div class="row">
-                <div class="col">
-                    <div class="row mt-4">
-                        <input type="text" class="form-control" placeholder="Fornavn">
-                    </div>
-                    <div class="row mt-4">
-                        <input type="text" class="form-control" placeholder="Efternavn">
-                    </div>
-                    <div class="row mt-4">
-                        <input type="text" class="form-control" placeholder="Adresse">
-                    </div>
-                    <div class="row mt-4">
-                        <input type="text" class="form-control" placeholder="Email">
-                    </div>
-                    <div class="row mt-4 mb-5">
-                        <input type="text" class="form-control" placeholder="Telefonnummer">
+            <form name="Forespørgsler" action="FrontController" method="post">
+                <input type="hidden" name="target" value="SendForespørgsel">
+
+                <h4>Udfyld dine kontaktoplysninger her for at sende en forespørgsel på et tilbud!</h4>
+                <div class="row">
+                    <div class="col">
+                        <div class="row mt-4">
+                            <input type="text" class="form-control" placeholder="Fornavn" name="Fornavn">
+                        </div>
+                        <div class="row mt-4">
+                            <input type="text" class="form-control" placeholder="Efternavn" name="Efternavn">
+                        </div>
+                        <div class="row mt-4">
+                            <input type="text" class="form-control" placeholder="Adresse" name="Adresse">
+                        </div>
+                        <div class="row mt-4">
+                            <input type="text" class="form-control" placeholder="Email" name="Email">
+                        </div>
+                        <div class="row mt-4 mb-5">
+                            <input type="text" class="form-control" placeholder="Telefonnummer" name="Telefonnummer">
+                        </div>
+                        <div class="row mt-4 ">
+                            <button type="submit" class="btn btn-primary float-right ">Send forespørgsel</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-
-        <div class="col-2">
-            <button type="submit" class="btn btn-primary float-right ">Send forespørgsel</button>
+            </form>
         </div>
     </div>
-
-    </form>
-
-
-</div>
 </div>
 </body>
 </html>

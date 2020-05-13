@@ -2,7 +2,6 @@ package DBAccess;
 
 import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.User;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -69,14 +68,13 @@ public class CarportMapperTest {
             if (rs.next()) id = rs.getInt(1);
 
 
-
             SQL = "SELECT * FROM fogprojekt.carport Where carportId = " + id;
             ps = testConnection.prepareStatement(SQL);
             rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 højde = rs.getDouble("højde");
-                bredde = rs.getDouble("bredde");;
-                længde = rs.getDouble("længde");;
+                bredde = rs.getDouble("bredde");
+                længde = rs.getDouble("længde");
                 mat = rs.getString("materiale");
 
             }

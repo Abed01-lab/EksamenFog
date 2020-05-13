@@ -2,6 +2,7 @@ package FunctionLayer;
 
 import org.junit.Assert;
 import org.junit.Test;
+
 import java.util.ArrayList;
 
 
@@ -18,7 +19,7 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalStolper(carport, skur);
 
         // Assert
-        Assert.assertEquals(4.0 ,result,0.005);
+        Assert.assertEquals(4.0, result, 0.005);
     }
 
     @Test
@@ -32,7 +33,7 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalStolper(carport, skur);
 
         // Assert
-        Assert.assertEquals(4.0 ,result,0.005);
+        Assert.assertEquals(4.0, result, 0.005);
     }
 
 
@@ -47,7 +48,7 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalStolper(carport, skur);
 
         // Assert
-        Assert.assertEquals(6.0 ,result,0.005);
+        Assert.assertEquals(6.0, result, 0.005);
     }
 
     @Test
@@ -61,7 +62,7 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalStolper(carport, skur);
 
         // Assert
-        Assert.assertEquals(4.0 ,result,0.005);
+        Assert.assertEquals(4.0, result, 0.005);
     }
 
     @Test
@@ -74,7 +75,7 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalSpærFladt(carport);
 
         // Assert
-        Assert.assertEquals(5.0 ,result,0.005);
+        Assert.assertEquals(5.0, result, 0.005);
     }
 
     @Test
@@ -87,9 +88,8 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalSpærSkråtLodret(carport);
 
         // Assert
-        Assert.assertEquals(4.0 ,result,0.005);
+        Assert.assertEquals(4.0, result, 0.005);
     }
-
 
 
     @Test
@@ -103,7 +103,7 @@ public class CalculatorTest {
         double result = Calculator.beregnTagAreal(carport, tag);
 
         // Assert
-        Assert.assertEquals(5.85 ,result,0.005);
+        Assert.assertEquals(5.85, result, 0.005);
     }
 
     @Test
@@ -117,7 +117,7 @@ public class CalculatorTest {
         double result = Calculator.beregnTagAreal(carport, tag);
 
         // Assert
-        Assert.assertEquals(5.76 ,result,0.005);
+        Assert.assertEquals(5.76, result, 0.005);
     }
 
     @Test
@@ -132,7 +132,7 @@ public class CalculatorTest {
         ArrayList<CalculatedItems> result = Calculator.udregnStyklisterFladt(carport, tag, skur);
 
         // Assert
-        Assert.assertEquals(4 ,result.size());
+        Assert.assertEquals(4, result.size());
     }
 
     @Test
@@ -147,7 +147,7 @@ public class CalculatorTest {
         ArrayList<CalculatedItems> result = Calculator.udregnStyklisterFladt(carport, tag, skur);
 
         // Assert
-        Assert.assertEquals(4 ,result.size());
+        Assert.assertEquals(4, result.size());
     }
 
     @Test
@@ -162,7 +162,7 @@ public class CalculatorTest {
         ArrayList<CalculatedItems> result = Calculator.udregnStyklisterFladt(carport, tag, skur);
 
         // Assert
-        Assert.assertEquals(4 ,result.size());
+        Assert.assertEquals(4, result.size());
     }
 
     @Test
@@ -177,7 +177,7 @@ public class CalculatorTest {
         ArrayList<CalculatedItems> result = Calculator.udregnStyklisterFladt(carport, tag, skur);
 
         // Assert
-        Assert.assertEquals(4 ,result.size());
+        Assert.assertEquals(4, result.size());
     }
 
     @Test
@@ -191,7 +191,7 @@ public class CalculatorTest {
         double result = Calculator.beregnTagLægter(carport, tag);
 
         // Assert
-        Assert.assertEquals(8.0 ,result,0.005);
+        Assert.assertEquals(8.0, result, 0.005);
     }
 
 }

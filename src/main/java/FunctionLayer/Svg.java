@@ -19,6 +19,7 @@ public class Svg {
         this.y = y;
         svg.append(String.format(headerTemplate, height, width, viewbox));
     }
+
     public void addRect(int x, int y, int height, int width) {
         svg.append(String.format(rectTemplate, x, y, height, width));
     }
@@ -62,6 +63,7 @@ public class Svg {
     public void setY(int y) {
         this.y = y;
     }
+
     @Override
     public String toString() {
         return svg.toString() + "</svg>";

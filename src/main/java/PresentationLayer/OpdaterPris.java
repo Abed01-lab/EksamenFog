@@ -1,12 +1,10 @@
 package PresentationLayer;
 
-import DBAccess.StyklisteMapper;
 import FunctionLayer.LogicFacade;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 public class OpdaterPris extends Command {
 
