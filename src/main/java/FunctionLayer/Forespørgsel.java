@@ -2,7 +2,7 @@ package FunctionLayer;
 
 public class Forespørgsel {
 
-    private int id;
+    private int forespørgselsId;
     private String fornavn;
     private String efternavn;
     private String adresse;
@@ -13,8 +13,8 @@ public class Forespørgsel {
     private int skurId;
     private int status;
 
-    public Forespørgsel(int id, String fornavn, String efternavn, String adresse, String email, String telefonnummer, int carportId, int tagId, int skurId, int status) {
-        this.id = id;
+    public Forespørgsel(int forespørgselsId, String fornavn, String efternavn, String adresse, String email, String telefonnummer, int carportId, int tagId, int skurId, int status) {
+        this.forespørgselsId = forespørgselsId;
         this.fornavn = fornavn;
         this.efternavn = efternavn;
         this.adresse = adresse;
@@ -26,8 +26,16 @@ public class Forespørgsel {
         this.status = status;
     }
 
-    public int getId() {
-        return id;
+    public Forespørgsel(String fornavn, String efternavn, String adresse, String email, String telefonnummer) {
+        this.fornavn = fornavn;
+        this.efternavn = efternavn;
+        this.adresse = adresse;
+        this.email = email;
+        this.telefonnummer = telefonnummer;
+    }
+
+    public int getForespørgselsId() {
+        return forespørgselsId;
     }
 
     public String getFornavn() {
@@ -66,10 +74,22 @@ public class Forespørgsel {
         return status;
     }
 
+    public void setCarportId(int carportId) {
+        this.carportId = carportId;
+    }
+
+    public void setTagId(int tagId) {
+        this.tagId = tagId;
+    }
+
+    public void setSkurId(int skurId) {
+        this.skurId = skurId;
+    }
+
     @Override
     public String toString() {
         return "Forespørgsel{" +
-                "id=" + id +
+                "id=" + forespørgselsId +
                 ", fornavn='" + fornavn + '\'' +
                 ", efternavn='" + efternavn + '\'' +
                 ", adresse='" + adresse + '\'' +

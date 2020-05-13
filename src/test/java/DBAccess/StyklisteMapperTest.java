@@ -1,6 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.Carport;
+import FunctionLayer.CarportException;
 import FunctionLayer.Materials;
 import org.junit.Before;
 import org.junit.Test;
@@ -15,7 +16,7 @@ import static org.junit.Assert.assertTrue;
 public class StyklisteMapperTest {
     private static Connection testConnection;
     private static String USER = "root";
-    private static String USERPW = "Fokken9797";
+    private static String USERPW = "MichaelDue20!";
     Carport carport = new Carport(240, 300, 420);
 
     @Before
@@ -38,7 +39,7 @@ public class StyklisteMapperTest {
     }
 
     @Test
-    public void testGetStyklister() {
+    public void testGetStyklister() throws CarportException {
         ArrayList<Materials> materialer = StyklisteMapper.getStyklister();
         assertTrue(materialer != null);
     }

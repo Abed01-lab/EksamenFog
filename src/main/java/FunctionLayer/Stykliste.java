@@ -5,10 +5,10 @@ import java.util.ArrayList;
 public class Stykliste {
 
     ArrayList<StyklisteDetaljer> liste = new ArrayList<StyklisteDetaljer>();
-    int ordreId;
+    int forespørgselsId;
 
-    public Stykliste(int ordreId, ArrayList<StyklisteDetaljer> liste) {
-        this.ordreId = ordreId;
+    public Stykliste(int forespørgselsId, ArrayList<StyklisteDetaljer> liste) {
+        this.forespørgselsId = forespørgselsId;
         this.liste = liste;
     }
 
@@ -16,16 +16,16 @@ public class Stykliste {
         return liste;
     }
 
-    public void setListe(ArrayList<StyklisteDetaljer> liste) {
-        this.liste = liste;
+    public int getForespørgselsId() {
+        return forespørgselsId;
     }
 
-    public int getOrdreId() {
-        return ordreId;
-    }
-
-    public void setOrdreId(int ordreId) {
-        this.ordreId = ordreId;
+    @Override
+    public String toString() {
+        return "Stykliste{" +
+                "liste=" + liste +
+                ", forespørgselsId=" + forespørgselsId +
+                '}';
     }
 }
 

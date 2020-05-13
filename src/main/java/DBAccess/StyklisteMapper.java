@@ -4,14 +4,12 @@ import FunctionLayer.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
-import static DBAccess.CarportMapper.createOrdre;
 import static FunctionLayer.Calculator.*;
 
 public class StyklisteMapper {
 
-    public static ArrayList<Materials> getStyklister() {
+    public static ArrayList<Materials> getStyklister() throws CarportException {
         ArrayList<Materials> materialer = new ArrayList<>();
         String SQL = "SELECT * FROM fogprojekt.styklisteitems";
 
@@ -31,25 +29,27 @@ public class StyklisteMapper {
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            throw new CarportException("Fejl ved indhentning af styklister");
         }
         return materialer;
     }
 
-    public static void opdaterMateriale(Materials materiale) {
+    public static void opdaterMateriale(Materials materiale) throws CarportException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, materiale.getBeskrivelse());
             ps.setString(2, materiale.getEnhed());
-            ps.setInt(3, materiale.getPris());
+            ps.setDouble(3, materiale.getPris());
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            throw new CarportException("Fejl ved opdatering af materiale");
         }
     }
 
-    public static void opdaterPris(int pris, int materialeId) {
+    public static void opdaterPris(int pris, int materialeId) throws CarportException {
         try {
             Connection con = Connector.connection();
             String SQL = "UPDATE fogprojekt.styklisteitems SET pris = ? WHERE itemId = ?";
@@ -59,10 +59,11 @@ public class StyklisteMapper {
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            throw new CarportException("Fejl ved opdatering af pris");
         }
     }
 
-    public static void deleteMaterial(int serienummer) {
+    public static void deleteMaterial(int serienummer) throws CarportException {
         try {
             Connection con = Connector.connection();
             String SQL = "DELETE FROM fogprojekt.styklisteitems WHERE itemId = ?";
@@ -71,11 +72,23 @@ public class StyklisteMapper {
             ps.executeUpdate();
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            throw new CarportException("Fejl ved fjernelse af materiale");
         }
     }
 
-    public static ArrayList<Stykliste> getStykliste() {
-        ArrayList<Stykliste> overlist = new ArrayList<Stykliste>();
+    public static Stykliste getStykliste(int forespørgselsId) throws CarportException {
+        ArrayList<Stykliste> styklister = getAllStyklister();
+        for (int i = 0; i < styklister.size(); i++) {
+            Stykliste stykliste = styklister.get(i);
+            if (stykliste.getForespørgselsId() == forespørgselsId) {
+                return stykliste;
+            }
+        }
+        throw new CarportException("Fejl ved indhentning af stykliste");
+    }
+
+    public static ArrayList<Stykliste> getAllStyklister() throws CarportException {
+        ArrayList<Stykliste> overlist = new ArrayList();
         // liste, ordreid
         int count = 0;
 
@@ -87,11 +100,11 @@ public class StyklisteMapper {
 
             while (rs.next()) {
 
-                int id = rs.getInt("ordreId");
+                int id = rs.getInt("forespørgselsId");
                 boolean repeat = true;
 
                 for (int i = 0; i < overlist.size(); i++) {
-                    if (overlist.get(i).getOrdreId() == id) {
+                    if (overlist.get(i).getForespørgselsId() == id) {
                         repeat = false;
                     }
                 }
@@ -100,7 +113,7 @@ public class StyklisteMapper {
 
                     ArrayList<StyklisteDetaljer> list = new ArrayList<StyklisteDetaljer>();
 
-                    String SQL2 = "SELECT * FROM fogprojekt.stykliste WHERE ordreId = '" + id + "'";
+                    String SQL2 = "SELECT * FROM fogprojekt.stykliste WHERE forespørgselsId = '" + id + "'";
                     PreparedStatement ps2 = con.prepareStatement(SQL2, Statement.RETURN_GENERATED_KEYS);
                     ResultSet rs2 = ps2.executeQuery();
 
@@ -108,7 +121,21 @@ public class StyklisteMapper {
                         int serienummer = rs2.getInt("serienummer");
                         int antal = rs2.getInt("antal");
                         int længde = rs2.getInt("længde");
-                        StyklisteDetaljer styk = new StyklisteDetaljer(serienummer, antal, længde);
+
+                        /*
+                        String SQL3 = "SELECT * FROM fogprojekt.styklisteitems WHERE itemid = ?";
+                        PreparedStatement ps3 = con.prepareStatement(SQL3, Statement.RETURN_GENERATED_KEYS);
+                        ps3.setInt(1, serienummer);
+                        ResultSet rs3 = ps3.executeQuery();
+                        */
+                        String beskrivelse = "Kunne ikke indlæses";
+                        /*
+                        if (rs.next()) {
+                            beskrivelse = rs3.getString("beskrivelse");
+                        }
+                         */
+
+                        StyklisteDetaljer styk = new StyklisteDetaljer(serienummer, beskrivelse, antal, længde);
                         list.add(styk);
                     }
 
@@ -116,27 +143,16 @@ public class StyklisteMapper {
                     overlist.add(stykliste);
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            throw new CarportException("Fejl ved indhentning af stykliste");
         }
         return overlist;
     }
 
-    public static void lavStyklisterTilCarport(Carport carport, Tag tag, Skur skur) {
-        int ordreId = 0;
+    public static void lavStyklisterTilCarport(int forespørgselsId, Carport carport, Tag tag, Skur skur) throws CarportException {
         int serienummer = 0;
 
-        try {
-            ordreId = createOrdre(carport, tag, skur);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        List<Materials> materialer = getStyklister();
         ArrayList<CalculatedItems> liste;
         if (tag.getHældning() != 0) {
             liste = udregnStyklisterSkråt(carport, tag, skur);
@@ -171,65 +187,57 @@ public class StyklisteMapper {
 
             try {
                 Connection con = Connector.connection();
-                String SQL = "INSERT INTO fogprojekt.stykliste (ordreId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
+                String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
                 PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, ordreId);
+                ps.setInt(1, forespørgselsId);
                 ps.setInt(2, serienummer);
                 ps.setDouble(3, liste.get(i).getItemAntal());
                 ps.setDouble(4, liste.get(i).getItemLængde());
                 ps.executeUpdate();
 
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (SQLException | ClassNotFoundException e) {
                 e.printStackTrace();
+                throw new CarportException("Fejl ved oprettelse af styklister");
             }
         }
 
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.stykliste (ordreId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 
             //serienummer = tag.getTagmateriale();
             double areal = beregnTagAreal(carport, tag);
-            ps.setInt(1, ordreId);
+            ps.setInt(1, forespørgselsId);
             ps.setInt(2, 2);
             ps.setDouble(3, areal);
             ps.setDouble(4, 0);
             ps.executeUpdate();
 
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
+            throw new CarportException("Fejl ved oprettelse af styklister");
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CarportException {
         Carport carport = new Carport(220, 400, 720);
         Tag tag = new Tag("Fladt", 15, "Sten");
         Skur skur = new Skur(300, 420);
-        lavStyklisterTilCarport(carport, tag, skur);
+        int forespørgselsId = ForespørgselMapper.createForespørgsel(new Forespørgsel("John", "Doe", "Somewhere", "John@something.com", "54325425"));
+        lavStyklisterTilCarport(forespørgselsId, carport, tag, skur);
 
-       /* ArrayList<CalculatedItems> liste = udregnStyklisterSkråt(carport, tag, skur);
-        for(int i = 0; i < liste.size(); i++)
-            System.out.println(liste.get(i).getItemAntal()); */
-
-        ArrayList<Stykliste> styklist = getStykliste();
+        ArrayList<Stykliste> styklist = getAllStyklister();
 
         for (int i = 0; i < styklist.size(); i++) {
-            System.out.println("Ordre : " + styklist.get(i).getOrdreId());
+            System.out.println("Ordre : " + styklist.get(i).getForespørgselsId());
             for (int h = 0; h < styklist.get(i).getListe().size(); h++) {
                 System.out.println(styklist.get(i).getListe().get(h).getLængde());
             }
         }
 
-        //lavStyklisterTilCarport(carport, tag, skur);
-        //kør først denne hvis ikke virker
-
         for (int i = 0; i < styklist.size(); i++) {
-            System.out.println("Ordre : " + styklist.get(i).getOrdreId());
+            System.out.println("Ordre : " + styklist.get(i).getForespørgselsId());
             for (int h = 0; h < styklist.get(i).getListe().size(); h++) {
                 System.out.println(styklist.get(i).getListe().get(h));
             }

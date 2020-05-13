@@ -2,28 +2,19 @@ package FunctionLayer;
 
 public class Skur {
 
-    double bredde;
-    double længde;
+    int bredde;
+    int længde;
 
-    public Skur(double bredde, double længde) {
+    public Skur(int bredde, int længde) {
         this.bredde = bredde;
         this.længde = længde;
     }
 
-    public void setBredde(double bredde) {
-        this.bredde = bredde;
-    }
-
-    public void setLængde(double længde) {
-        this.længde = længde;
-    }
-
-    public double getBredde() {
+    public int getBredde() {
         return bredde;
     }
 
-    public double getLængde() {
+    public int getLængde() {
         return længde;
     }
-
 }

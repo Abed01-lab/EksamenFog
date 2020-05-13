@@ -20,7 +20,8 @@ public class SendForespørgsel extends Command {
         Tag tag = (Tag) servletContext.getAttribute("tagObject");
         Skur skur = (Skur) servletContext.getAttribute("skurObject");
 
-        int forespørgelseId = LogicFacade.sendForespørgsel(fornavn, efternavn, adresse, email, telefonnummer, carport, tag, skur);
+        Forespørgsel forespørgsel = new Forespørgsel(fornavn, efternavn, adresse, email, telefonnummer);
+        int forespørgelseId = LogicFacade.sendForespørgsel(forespørgsel, carport, tag, skur);
         request.getSession().setAttribute("forespørgelseId", forespørgelseId);
 
         return "index";

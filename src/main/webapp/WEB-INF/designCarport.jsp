@@ -87,9 +87,8 @@
                         </c:forEach>
                     </select>
                 </div>
-
-
             </div>
+
             <div class="row mt-4">
                 <div class="col-sm-6">
                     <p>Højde</p>
