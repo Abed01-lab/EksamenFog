@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`tag`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`forespørgsel`
 (
-    `forepørgselsId` INT         NOT NULL AUTO_INCREMENT,
+    `forespørgselsId` INT         NOT NULL AUTO_INCREMENT,
     `fornavn`        VARCHAR(45) NOT NULL,
     `efternavn`      VARCHAR(45) NOT NULL,
     `adresse`        VARCHAR(45) NOT NULL,
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`forespørgsel`
     `tagId`          INT         NOT NULL,
     `skurId`         INT         NULL     DEFAULT NULL,
     `status`         INT         NOT NULL DEFAULT '0',
-    PRIMARY KEY (`forepørgselsId`),
+    PRIMARY KEY (`forespørgselsId`),
     INDEX `forespørgsel_carport_FK_idx` (`carportId` ASC) VISIBLE,
     INDEX `forespørgsel_tag_FK_idx` (`tagId` ASC) VISIBLE,
     INDEX `forespørgsel_skur_FK_idx` (`skurId` ASC) VISIBLE,
@@ -116,7 +116,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`ordre`
     INDEX `Forespørgsel_Ordre_FK_idx` (`forespørgselsId` ASC) VISIBLE,
     CONSTRAINT `Forespørgsel_Ordre_FK`
         FOREIGN KEY (`forespørgselsId`)
-            REFERENCES `fogprojekt`.`forespørgsel` (`forepørgselsId`)
+            REFERENCES `fogprojekt`.`forespørgsel` (`forespørgselsId`)
             ON DELETE NO ACTION
             ON UPDATE NO ACTION
 )
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`stykliste`
     INDEX `stykliste_Forespørgsel_FK_idx` (`forespørgselsId` ASC) VISIBLE,
     CONSTRAINT `stykliste_Forespørgsel_FK`
         FOREIGN KEY (`forespørgselsId`)
-            REFERENCES `fogprojekt`.`forespørgsel` (`forepørgselsId`),
+            REFERENCES `fogprojekt`.`forespørgsel` (`forespørgselsId`),
     CONSTRAINT `stykliste_ibfk_2`
         FOREIGN KEY (`serienummer`)
             REFERENCES `fogprojekt`.`styklisteitems` (`itemId`)
