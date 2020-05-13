@@ -25,7 +25,7 @@ abstract class Command {
         commands.put("AdminForespørgsler", new AdminForespørgsler());
         commands.put("AdminSeForespørgsel", new AdminSeForespørgsel());
         commands.put("Tegning", new Tegning()); // skal muligvis ikke bruges
-
+        commands.put("SendForespørgsel", new SendForespørgsel());
 
     }
 

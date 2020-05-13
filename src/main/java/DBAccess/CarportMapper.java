@@ -1,6 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.Carport;
+import FunctionLayer.CarportException;
 import FunctionLayer.Skur;
 import FunctionLayer.Tag;
 
@@ -102,4 +103,68 @@ public class CarportMapper {
         return autoIncKey;
     }
 
+    public static Carport getCarport(int carportId) throws CarportException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.carport WHERE carportId = ?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, carportId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int højde = rs.getInt("højde");
+                int længde = rs.getInt("længde");
+                int bredde = rs.getInt("bredde");
+                String materiale = rs.getString("materiale");
+                return new Carport(højde, bredde, længde, materiale);
+            } else {
+                throw new CarportException("Der findes ingen carport med id: " + carportId);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl ved indhentning af carport: " + carportId);
+        }
+    }
+
+    public static Tag getTag(int tagId) throws CarportException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.tag WHERE tagId = ?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, tagId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String type = rs.getString("tagtype");
+                int hældning = rs.getInt("taghældning");
+                String materiale = rs.getString("tagmateriale");
+
+                return new Tag(type, hældning, materiale);
+            } else {
+                throw new CarportException("Der findes ingen tag med id: " + tagId);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl ved indhentning af tag: " + tagId);
+        }
+    }
+
+
+    public static Skur getSkur(int skurId) throws CarportException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.skur WHERE skurId = ?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, skurId);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int længde = rs.getInt("skurlængde");
+                int bredde = rs.getInt("skurbredde");
+                return new Skur(bredde, længde);
+            } else {
+                throw new CarportException("Der findes ingen skur med id: " + skurId);
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl ved indhentning af skur: " + skurId);
+        }
+    }
 }

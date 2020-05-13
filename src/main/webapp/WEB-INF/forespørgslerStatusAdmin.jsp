@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -50,47 +51,50 @@
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
-                <th scope="col">Tilbud nr.</th>
-                <th scope="col">Kunde (email)</th>
+                <th scope="col">Forespørgsel nr.</th>
+                <th scope="col">Kundenavn</th>
                 <th scope="col"></th>
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1234567</th>
-                <td>test@test.com</td>
+            <c:forEach var="element" items="${applicationScope.kundeForepørgsler}">
+                <tr>
+                    <td>${element.id}</td>
+                    <td>${element.fornavn} ${element.efternavn}</td>
 
-                <td>
-                    <div align="center">
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="target" value="AdminSeForespørgsel">
-                            <button type="submit" class="btn btn-primary">Se forespørgsel</button>
-                        </form>
-                    </div>
+                    <td>
+                        <div align="center">
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="target" value="AdminSeForespørgsel">
+                                <input type="hidden" name="forespørgselsId" value="${element.id}">
+                                <button type="submit" class="btn btn-primary">Se forespørgsel</button>
+                            </form>
+                        </div>
 
-                </td>
-                <td>
-                    <div align="center">
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="target" value="">
-                            <button type="submit" class="btn btn-success">Godkend/Send tilbud</button>
-                        </form>
-                    </div>
-                </td>
+                    </td>
+                    <td>
+                        <div align="center">
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="target" value="">
+                                <button type="submit" class="btn btn-success">Godkend</button>
+                            </form>
+                        </div>
+                    </td>
 
-                <td>
-                    <div align="center">
-                        <form action="FrontController" method="post">
-                            <input type="hidden" name="target" value="">
-                            <button type="submit" class="btn btn-danger">Afvis</button>
-                        </form>
+                    <td>
+                        <div align="center">
+                            <form action="FrontController" method="post">
+                                <input type="hidden" name="target" value="">
+                                <button type="submit" class="btn btn-danger">Annuller</button>
+                            </form>
 
-                    </div>
-                </td>
+                        </div>
+                    </td>
 
-            </tr>
+                </tr>
+            </c:forEach>
             </tbody>
         </table>
     </div>

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -44,9 +45,40 @@
         </ul>
     </div>
 
+
     <div class="mt-5">
-        <h5 class="mb-5">Forespørgsel #1242134</h5>
-        <h4>Stykliste</h4>
+        <h4 class="mb-4">Forespørgsel ${applicationScope.forespørgsel.id}</h4>
+
+        <h5>Kontatkinformationer</h5>
+        <p>Navn: ${applicationScope.forespørgsel.fornavn} ${applicationScope.forespørgsel.efternavn}</p>
+        <p>Adresse: ${applicationScope.forespørgsel.adresse}</p>
+        <p>Email: ${applicationScope.forespørgsel.email}</p>
+        <p>Telefonnummer: ${applicationScope.forespørgsel.telefonnummer}</p>
+
+
+        <h5 class="mt-5">Specifikationer på carport</h5>
+        <p>Højde: ${applicationScope.forespørgselCarport.højde} cm</p>
+        <p>Længde: ${applicationScope.forespørgselCarport.længde} cm</p>
+        <p>Bredde: ${applicationScope.forespørgselCarport.bredde} cm</p>
+        <p>Type af tag: ${applicationScope.forespørgselTag.tagtype}</p>
+        <p>Hældning på tag: ${applicationScope.forespørgselTag.hældning}°</p>
+
+        <h5 class="mt-5">Specifikationer på skur</h5>
+        <c:if test="${applicationScope.forespørgselSkur.længde != 0.0}">
+            <p>Bredde: ${applicationScope.forespørgselSkur.bredde} cm</p>
+            <p>Længde: ${applicationScope.forespørgselSkur.længde} cm</p>
+        </c:if>
+        <c:if test="${applicationScope.forespørgselSkur.længde == 0.0}">
+            <p>Fravalgt</p>
+        </c:if>
+
+
+        <h5 class="mt-5">Tegning af carport</h5>
+        <div>
+            ${applicationScope.svg}
+        </div>
+
+        <h5 class="mt-5">Stykliste</h5>
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
@@ -76,10 +108,9 @@
 
             </tbody>
         </table>
+
+        <h5 class="mt-5">Total pris </h5>
     </div>
-
-
-    <h4 class="mt-5">Total pris </h4>
 </div>
 </body>
 </html>

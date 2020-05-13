@@ -46,7 +46,6 @@
     </div>
     <div class="col-lg-12 w-100 h-100 p-3 mt-2" style="background-color: white;">
         <form action="FrontController" method="post">
-            <input type="hidden" name="target" value="Tegning">
             <input type="hidden" name="target" value="LavCarport">
             <h4 style="color: black">Design din egen carport her </h4>
             <!--<br>

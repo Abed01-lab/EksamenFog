@@ -1,15 +1,12 @@
 package PresentationLayer;
 
-import DBAccess.StyklisteMapper;
 import FunctionLayer.CarportException;
 import FunctionLayer.LogicFacade;
 import FunctionLayer.LoginSampleException;
-import FunctionLayer.Materials;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 
 public class OpdaterMateriale extends Command {
 

@@ -1,6 +1,5 @@
 package PresentationLayer;
 
-import DBAccess.StyklisteMapper;
 import FunctionLayer.Carport;
 import FunctionLayer.LoginSampleException;
 import FunctionLayer.Skur;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
 
 import static DBAccess.CarportMapper.*;
-import static FunctionLayer.Carport.enhedArray;
 
 public class LavCarport extends Command {
 
@@ -37,6 +35,9 @@ public class LavCarport extends Command {
         } else {
             skurobject = new Skur(skurbredde, skurlængde);
         }
+        if ("Fladt tag".equals(tag)) {
+            taghældning = 0;
+        }
         Tag tagobject = new Tag(tag, taghældning, tagmateriale);
 
 
@@ -50,9 +51,14 @@ public class LavCarport extends Command {
             e.printStackTrace();
         }
 
+        ServletContext servletContext = request.getServletContext();
+        servletContext.setAttribute("carportObject", carportobject);
+        servletContext.setAttribute("tagObject", tagobject);
+        servletContext.setAttribute("skurObject", skurobject);
+
         System.out.println(carportobject.getBredde());
         System.out.println(carportobject.getHøjde());
 
-        return "seTegningKunde"; //
+        return "seTegningKunde";
     }
 }
