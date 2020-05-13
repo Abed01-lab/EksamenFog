@@ -13,7 +13,7 @@ public class Tegning extends Command {
         Carport carport = new Carport(400,300,200);
         StyklisteDetaljer styk = new StyklisteDetaljer(1, 1, 1);
         Svg svg = new Svg(800, 600, "0,0,800,600", 75, 10);
-        svg.addRect(0,0, (int) carport.getLængde(), (int) carport.getBredde());
+        svg.addRect(0,0, (int) carport.getLængde(), 450);
 
         //hent antal stolper
         svg.addRect(10, 5, (int) 9.7, (int) 9.7);
@@ -28,10 +28,10 @@ public class Tegning extends Command {
         outerDrawing.addRect(50, 10, 300, 5);
         outerDrawing.insertDrawing(svg);
         // Tegn pile osv
+        outerDrawing.addArrow(3, 0, 3, 70);
+
 
         request.setAttribute("svgtegning", outerDrawing.toString());
-        return "seTegningKunde";
+        return "seForespørgslerAdmin";
     }
 }
-
-// itemlængde (375) / 30 = 12 rest 15          -->          rund op... 13
