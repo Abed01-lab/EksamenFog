@@ -45,8 +45,10 @@
         </ul>
     </div>
 
+
     <h1>Velkommen til Fog!</h1>
     <p>${requestScope.error}</p>
+
 </div>
 </body>
 </html>
