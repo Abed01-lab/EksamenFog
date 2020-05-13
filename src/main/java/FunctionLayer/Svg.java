@@ -8,7 +8,7 @@ public class Svg {
     private int x;
     private int y;
     private StringBuilder svg = new StringBuilder();
-    private final String headerTemplate = "<svg  version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\" height=\"%s\" width=\"%s\" viewBox=\"%s\" preserveAspectRatio=\"xMinYMin\">";
+    private final String headerTemplate = "<svg  version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\" height=\"%d\" width=\"%d\" viewBox=\"%s\" x=\"%d\" y=\"%d\" preserveAspectRatio=\"xMinYMin\">";
     private final String rectTemplate = "<rect x=\"%d\" y=\"%d\" height=\"%d\" width=\"%d\" style=\"stroke:#000000; fill: #ffffff\" />";
 
     public Svg(int width, int height, String viewbox, int x, int y) {
@@ -17,8 +17,13 @@ public class Svg {
         this.viewbox = viewbox;
         this.x = x;
         this.y = y;
-        svg.append(String.format(headerTemplate, height, width, viewbox));
+        svg.append(String.format(headerTemplate, height, width, viewbox, x, y));
     }
+
+    public void insertDrawing(Svg svgDrawing){
+        svg.append(svgDrawing.toString());
+    }
+
     public void addRect(int x, int y, int height, int width) {
         svg.append(String.format(rectTemplate, x, y, height, width));
     }

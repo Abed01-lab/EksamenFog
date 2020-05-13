@@ -44,9 +44,6 @@
             </li>
         </ul>
     </div>
-
-    <h1>Velkommen til Fog!</h1>
-    <a href="FrontController?target=drawing">See drawing</a>
 </div>
 </body>
 </html>
