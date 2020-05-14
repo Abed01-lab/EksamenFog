@@ -89,4 +89,31 @@ public class ForespørgselMapper {
             throw new CarportException("Fejl ved indhentning af forespørgslen: " + forespørgselsId);
         }
     }
-}
+
+    public static void accepterForespørgsel(int forespørgselsId) throws CarportException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE fogprojekt.forespørgsel SET status = 1 WHERE forespørgselsId = ?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, forespørgselsId);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl ved ændring af godkendelsesstatus - Godkendt");
+        }
+    }
+
+    public static void afvisForespørgsel(int forespørgselsId) throws CarportException {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE fogprojekt.forespørgsel SET status = -1 WHERE forespørgselsId = ?";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, forespørgselsId);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl ved ændring af godkendelsesstatus - Afvist");
+        }
+    }
+    }
+

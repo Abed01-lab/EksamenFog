@@ -74,24 +74,52 @@
                         </div>
 
                     </td>
-                    <td>
-                        <div align="center">
-                            <form action="FrontController" method="post">
-                                <input type="hidden" name="target" value="">
-                                <button type="submit" class="btn btn-success">Godkend</button>
-                            </form>
-                        </div>
-                    </td>
+                    <display:column>
+                        <c:choose>
+                            <c:when test="${element.status == 1}">
+                                <td>
+                                <p>Godkendt - Se under ordrer</p>
+                                </td>
 
-                    <td>
-                        <div align="center">
-                            <form action="FrontController" method="post">
-                                <input type="hidden" name="target" value="">
-                                <button type="submit" class="btn btn-danger">Annuller</button>
-                            </form>
+                                <td>
 
-                        </div>
-                    </td>
+                                </td>
+                            </c:when>
+                            <c:when test="${element.status == -1}">
+                                <td>
+
+                                </td>
+
+                                <td>
+                                    <p>Forespørgsel er afvist</p>
+                                </td>
+                            </c:when>
+
+                            <c:otherwise>
+                                <td>
+                                    <div align="center">
+                                        <form action="FrontController" method="post">
+                                            <input type="hidden" name="target" value="AdminAccepterForespørgsel">
+                                            <input type="hidden" name="forespørgselsId" value="${element.forespørgselsId}">
+                                            <button type="submit" class="btn btn-success">Godkend</button>
+                                        </form>
+                                    </div>
+                                </td>
+
+                                <td>
+                                    <div align="center">
+                                        <form action="FrontController" method="post">
+                                            <input type="hidden" name="target" value="AdminAfvisForespørgsel">
+                                            <input type="hidden" name="forespørgselsId" value="${element.forespørgselsId}">
+                                            <button type="submit" class="btn btn-danger">Afvis</button>
+                                        </form>
+
+                                    </div>
+                                </td>
+                            </c:otherwise>
+                        </c:choose>
+                    </display:column>
+
 
                 </tr>
             </c:forEach>

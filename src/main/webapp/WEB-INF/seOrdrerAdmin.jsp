@@ -63,9 +63,9 @@
             <thead>
             <tr>
                 <th scope="col">Ordrenummer</th>
-                <th scope="col">Kunde</th>
+                <th scope="col">Kundenavn</th>
                 <th scope="col">Ordretidspunkt</th>
-                <th scope="col">Se ordre?</th>
+                <th scope="col">Se ordre</th>
 
             </tr>
             </thead>
