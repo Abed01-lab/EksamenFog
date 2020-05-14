@@ -2,14 +2,15 @@ package FunctionLayer;
 
 public class Ordre {
 
-    private int id;
+    private int ordreId;
     private String dato;
     private int forespørgselsId;
+    private String navn;
 
-    public Ordre(int id, String dato, int forespørgselsId) {
-        this.id = id;
+    public Ordre(int ordreId, String dato, String fornavn, String efternavn) {
+        this.ordreId = ordreId;
         this.dato = dato;
-        this.forespørgselsId = forespørgselsId;
+        this.navn = fornavn + " " + efternavn;
     }
 
     public Ordre(String dato, int forespørgselsId) {
@@ -17,8 +18,8 @@ public class Ordre {
         this.forespørgselsId = forespørgselsId;
     }
 
-    public int getId() {
-        return id;
+    public int getOrdreId() {
+        return ordreId;
     }
 
     public String getDato() {
@@ -29,12 +30,17 @@ public class Ordre {
         return forespørgselsId;
     }
 
+    public String getNavn() {
+        return navn;
+    }
+
     @Override
     public String toString() {
         return "Ordre{" +
-                "id=" + id +
+                "ordreId=" + ordreId +
                 ", dato='" + dato + '\'' +
                 ", forespørgselsId=" + forespørgselsId +
+                ", navn='" + navn + '\'' +
                 '}';
     }
 }

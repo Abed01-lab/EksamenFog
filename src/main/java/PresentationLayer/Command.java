@@ -26,6 +26,7 @@ abstract class Command {
         commands.put("SendForespørgsel", new SendForespørgsel());
         commands.put("AdminAccepterForespørgsel", new AdminAccepterForespørgsel());
         commands.put("AdminAfvisForespørgsel", new AdminAfvisForespørgsel());
+        commands.put("AdminOrdrer", new AdminOrdrer());
 
     }
 

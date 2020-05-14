@@ -7,8 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import = "java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -18,10 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-    <%
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        String date = sdf.format(new Date());
-    %>
+
     <title>Ordrer</title>
 </head>
 <body>
@@ -31,10 +27,10 @@
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
         <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
-            <li class="nav-item mr-2">
-                <form name="Forespørgsler" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="AdminForespørgsler">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Forespørgsler">
+            <li class="nav-item mr-auto">
+                <form name="DesignCarport" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="GoToLavcarport">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
                 </form>
             </li>
             <li class="nav-item mr-2">
@@ -44,14 +40,14 @@
                 </form>
             </li>
             <li class="nav-item mr-2">
-                <form name="DesignCarport" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="GoToLavcarport">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
+                <form name="Forespørgsler" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminForespørgsler">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Forespørgsler">
                 </form>
             </li>
             <li class="nav-item mr-2">
-                <form name="DesignCarport" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="GoToLavcarport">
+                <form name="Ordrer" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminOrdrer">
                     <input type="submit" class="btn btn-link" style="color: white" value="Ordrer">
                 </form>
             </li>
@@ -65,17 +61,15 @@
                 <th scope="col">Ordrenummer</th>
                 <th scope="col">Kundenavn</th>
                 <th scope="col">Ordretidspunkt</th>
-                <th scope="col">Se ordre</th>
 
             </tr>
             </thead>
             <tbody>
-            <c:forEach var="element" items="${applicationScope.}">
+            <c:forEach var="element" items="${applicationScope.kundeOrdrer}">
                 <tr>
-                    <th scope="row">${element.}</th>
-                    <td>${element.}</td>
-                    <td><%=date%></td>
-                    <td>${element.}</td>
+                    <th scope="row">${element.ordreId}</th>
+                    <td>${element.navn}</td>
+                    <td>${element.dato}</td>
                 </tr>
             </c:forEach>
             </tbody>

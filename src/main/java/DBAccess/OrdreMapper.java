@@ -29,16 +29,18 @@ public class OrdreMapper {
     public static ArrayList<Ordre> getAllOrdrer() throws CarportException {
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT * FROM fogprojekt.ordre";
+            String SQL = "SELECT * FROM ordre INNER JOIN forespørgsel ON ordre.forespørgselsId = forespørgsel.forespørgselsId;";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             ArrayList<Ordre> kundeOrdrer = new ArrayList();
             while (rs.next()) {
-                int id = rs.getInt("id");
+                int ordreId = rs.getInt("ordreId");
                 String dato = rs.getString("dato");
-                int forespørgselsId = rs.getInt("forespørgselsId");
+                String fornavn = rs.getString("fornavn");
+                String efternavn = rs.getString("efternavn");
 
-                Ordre ordre = new Ordre(id, dato, forespørgselsId);
+
+                Ordre ordre = new Ordre(ordreId, dato, fornavn, efternavn);
                 kundeOrdrer.add(ordre);
             }
             return kundeOrdrer;

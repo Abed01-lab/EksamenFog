@@ -99,4 +99,8 @@ public class LogicFacade {
         ForespørgselMapper.afvisForespørgsel(forespørgselsId);
         return ForespørgselMapper.getAllForespørgsel();
     }
+
+    public static double getStyklistePris(int forespørgselsId) throws CarportException {
+        return StyklisteMapper.getStyklistePris(forespørgselsId);
+    }
 }
