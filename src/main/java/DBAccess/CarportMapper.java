@@ -6,12 +6,12 @@ import FunctionLayer.Skur;
 import FunctionLayer.Tag;
 
 import java.sql.*;
+import java.util.Calendar;
 
 
 public class CarportMapper {
 
-    public static int createCarport(Carport carport) {
-        int autoIncKeyCarport = -1;
+    public static int createCarport(Carport carport) throws CarportException {
         try {
             Connection con = Connector.connection();
             String SQL = "INSERT INTO fogprojekt.carport (højde, bredde, længde, materiale) VALUES (?, ?, ?, ?)";
@@ -19,88 +19,47 @@ public class CarportMapper {
             ps.setDouble(1, carport.getHøjde());
             ps.setDouble(2, carport.getBredde());
             ps.setDouble(3, carport.getLængde());
-            ps.setString(4, "sten");
+            ps.setString(4, "træ");
             ps.executeUpdate();
-
             ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                autoIncKeyCarport = rs.getInt(1);
-            }
-
+            rs.next();
+            return rs.getInt(1);
         } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
+            throw new CarportException("Fejl i oprettelse af carport");
         }
-        return autoIncKeyCarport;
     }
 
-    public static int createSkur(Skur skur) {
-        int autoIncKeySkur = -1;
+    public static int createSkur(Skur skur) throws CarportException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.skur (skurbredde, skurlængde) VALUES (?, ?)";
+            String SQL = "INSERT INTO fogprojekt.skur (bredde, længde) VALUES (?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, skur.getBredde());
             ps.setDouble(2, skur.getLængde());
             ps.executeUpdate();
-
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            autoIncKeySkur = rs.getInt(1);
-            if (rs.next()) {
-                autoIncKeySkur = rs.getInt(1);
-            }
-
+            return rs.getInt(1);
         } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl i oprettelse af skur");
         }
-        return autoIncKeySkur;
     }
 
-    public static int createTag(Tag tag) {
-        int autoIncKeyTag = -1;
+    public static int createTag(Tag tag) throws CarportException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.tag (tagtype, taghældning, tagmateriale) VALUES (?, ?, ?)";
+            String SQL = "INSERT INTO fogprojekt.tag (tag.type, hældning, materiale) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, tag.getTagtype());
+            ps.setString(1, tag.getType());
             ps.setDouble(2, tag.getHældning());
-            ps.setString(3, tag.getTagmateriale());
+            ps.setString(3, tag.getMateriale());
             ps.executeUpdate();
-
             ResultSet rs = ps.getGeneratedKeys();
             rs.next();
-            autoIncKeyTag = rs.getInt(1);
-            if (rs.next()) {
-                autoIncKeyTag = rs.getInt(1);
-            }
+            return rs.getInt(1);
         } catch (SQLException | ClassNotFoundException e) {
+            throw new CarportException("Fejl i oprettelse af tag");
         }
-        return autoIncKeyTag;
-    }
-
-    public static int createOrdre(Carport carport, Tag tag, Skur skur) throws SQLException, ClassNotFoundException {
-        int autoIncKeySkur = createSkur(skur);
-        int autoIncKeyCarport = createCarport(carport);
-        int autoIncKeyTag = createTag(tag);
-        int autoIncKey = -1;
-        try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.ordre (brugerId, carportId, skurId, tagId, dato) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, 1);
-            ps.setDouble(2, autoIncKeyCarport);
-            ps.setDouble(3, autoIncKeySkur);
-            ps.setDouble(4, autoIncKeyTag);
-            ps.setString(5, "EKODATO");
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            rs.next();
-            autoIncKey = rs.getInt(1);
-
-        } catch (SQLException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return autoIncKey;
     }
 
     public static Carport getCarport(int carportId) throws CarportException {
@@ -110,7 +69,6 @@ public class CarportMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, carportId);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
                 int højde = rs.getInt("højde");
                 int længde = rs.getInt("længde");
@@ -132,12 +90,10 @@ public class CarportMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, tagId);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                String type = rs.getString("tagtype");
-                int hældning = rs.getInt("taghældning");
-                String materiale = rs.getString("tagmateriale");
-
+                String type = rs.getString("type");
+                int hældning = rs.getInt("hældning");
+                String materiale = rs.getString("materiale");
                 return new Tag(type, hældning, materiale);
             } else {
                 throw new CarportException("Der findes ingen tag med id: " + tagId);
@@ -147,7 +103,6 @@ public class CarportMapper {
         }
     }
 
-
     public static Skur getSkur(int skurId) throws CarportException {
         try {
             Connection con = Connector.connection();
@@ -155,10 +110,9 @@ public class CarportMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, skurId);
             ResultSet rs = ps.executeQuery();
-
             if (rs.next()) {
-                int længde = rs.getInt("skurlængde");
-                int bredde = rs.getInt("skurbredde");
+                int længde = rs.getInt("længde");
+                int bredde = rs.getInt("bredde");
                 return new Skur(bredde, længde);
             } else {
                 throw new CarportException("Der findes ingen skur med id: " + skurId);

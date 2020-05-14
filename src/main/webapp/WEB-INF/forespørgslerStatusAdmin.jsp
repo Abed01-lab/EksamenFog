@@ -61,14 +61,14 @@
             <tbody>
             <c:forEach var="element" items="${applicationScope.kundeForepørgsler}">
                 <tr>
-                    <td>${element.id}</td>
+                    <td>${element.forespørgselsId}</td>
                     <td>${element.fornavn} ${element.efternavn}</td>
 
                     <td>
                         <div align="center">
                             <form action="FrontController" method="post">
                                 <input type="hidden" name="target" value="AdminSeForespørgsel">
-                                <input type="hidden" name="forespørgselsId" value="${element.id}">
+                                <input type="hidden" name="forespørgselsId" value="${element.forespørgselsId}">
                                 <button type="submit" class="btn btn-primary">Se forespørgsel</button>
                             </form>
                         </div>

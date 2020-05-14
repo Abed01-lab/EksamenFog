@@ -15,11 +15,14 @@ public class AdminSeForespørgsel extends Command {
         Carport carport = LogicFacade.getCarport(forespørgsel.getCarportId());
         Tag tag = LogicFacade.getTag(forespørgsel.getTagId());
         Skur skur = LogicFacade.getSkur(forespørgsel.getSkurId());
+        Stykliste stykliste = LogicFacade.getStykliste(forespørgselsId);
+        System.out.println(stykliste);
         ServletContext servletContext = request.getServletContext();
         servletContext.setAttribute("forespørgsel", forespørgsel);
         servletContext.setAttribute("forespørgselCarport", carport);
         servletContext.setAttribute("forespørgselTag", tag);
         servletContext.setAttribute("forespørgselSkur", skur);
+        servletContext.setAttribute("forespørgselStykliste", stykliste.getListe());
         servletContext.setAttribute("svg", LogicFacade.tegnSVG(carport, tag, skur));
         return "seForespørgslerAdmin";
     }

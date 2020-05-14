@@ -5,16 +5,16 @@ public class Materials {
     int itemId;
     String beskrivelse;
     String enhed;
-    int pris;
+    double pris;
 
-    public Materials(int itemId, String beskrivelse, String enhed, int pris) {
+    public Materials(int itemId, String beskrivelse, String enhed, double pris) {
         this.itemId = itemId;
         this.pris = pris;
         this.enhed = enhed;
         this.beskrivelse = beskrivelse;
     }
 
-    public Materials(String beskrivelse, String enhed, int pris) {
+    public Materials(String beskrivelse, String enhed, double pris) {
 
         this.pris = pris;
         this.enhed = enhed;
@@ -25,38 +25,26 @@ public class Materials {
         return enhed;
     }
 
-    public void setEnhed(String enhed) {
-        this.enhed = enhed;
-    }
-
     public String getBeskrivelse() {
         return beskrivelse;
-    }
-
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
     }
 
     public int getItemId() {
         return itemId;
     }
 
-    public void setItemId(int itemId) {
-        this.itemId = itemId;
-    }
-
-    public int getPris() {
+    public double getPris() {
         return pris;
     }
 
-    public void setPris(int pris) {
-        this.pris = pris;
-    }
 
     @Override
     public String toString() {
-        return "Materials " +
-                ", enhed: " + enhed +
-                ", beskrivelse: " + beskrivelse;
+        return "Materials{" +
+                "itemId=" + itemId +
+                ", beskrivelse='" + beskrivelse + '\'' +
+                ", enhed='" + enhed + '\'' +
+                ", pris=" + pris +
+                '}';
     }
 }

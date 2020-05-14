@@ -47,7 +47,7 @@
 
 
     <div class="mt-5">
-        <h4 class="mb-4">Forespørgsel ${applicationScope.forespørgsel.id}</h4>
+        <h4 class="mb-4">Forespørgsel ${applicationScope.forespørgsel.forespørgselsId}</h4>
 
         <h5>Kontatkinformationer</h5>
         <p>Navn: ${applicationScope.forespørgsel.fornavn} ${applicationScope.forespørgsel.efternavn}</p>
@@ -60,7 +60,7 @@
         <p>Højde: ${applicationScope.forespørgselCarport.højde} cm</p>
         <p>Længde: ${applicationScope.forespørgselCarport.længde} cm</p>
         <p>Bredde: ${applicationScope.forespørgselCarport.bredde} cm</p>
-        <p>Type af tag: ${applicationScope.forespørgselTag.tagtype}</p>
+        <p>Type af tag: ${applicationScope.forespørgselTag.type}</p>
         <p>Hældning på tag: ${applicationScope.forespørgselTag.hældning}°</p>
 
         <h5 class="mt-5">Specifikationer på skur</h5>
@@ -75,7 +75,7 @@
 
         <h5 class="mt-5">Tegning af carport</h5>
         <div>
-            ${applicationScope.svg}
+            ${requestScope.svgtegning}
         </div>
 
         <h5 class="mt-5">Stykliste</h5>
@@ -83,29 +83,21 @@
             <thead>
             <tr>
                 <th scope="col">ID serienummer</th>
-                <th scope="col">Materiale</th>
+                <th scope="col">Beskrivelse af materiale</th>
                 <th scope="col">Længde</th>
                 <th scope="col">Antal</th>
-                <th scope="col">Beskrivelse</th>
+
             </tr>
             </thead>
             <tbody>
+            <c:forEach var="element" items="${applicationScope.forespørgselStykliste}">
             <tr>
-                <th scope="row">1234567</th>
-                <td>Stolpe</td>
-                <td>120 cm</td>
-                <td>2 stk</td>
-                <td>Mahognitræ</td>
-
+                <th scope="row">${element.serienummer}</th>
+                <td>${element.beskrivelse}</td>
+                <td>${element.længde}</td>
+                <td>${element.antal}</td>
             </tr>
-            <tr>
-                <th scope="row">1234567</th>
-                <td>Stolpe</td>
-                <td>100 cm</td>
-                <td>4 stk</td>
-                <td>Mahognitræ</td>
-            </tr>
-
+            </c:forEach>
             </tbody>
         </table>
 

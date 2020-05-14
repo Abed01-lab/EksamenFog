@@ -1,5 +1,6 @@
 package PresentationLayer;
 
+import FunctionLayer.CarportException;
 import FunctionLayer.LogicFacade;
 
 import javax.servlet.ServletContext;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 public class OpdaterPris extends Command {
 
     @Override
-    String execute(HttpServletRequest request, HttpServletResponse response) {
+    String execute(HttpServletRequest request, HttpServletResponse response) throws CarportException {
         ServletContext servletContext = request.getServletContext();
         int pris = Integer.parseInt(request.getParameter("pris"));
         int materialeId = Integer.parseInt(request.getParameter("materialeId"));

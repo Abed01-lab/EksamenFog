@@ -7,8 +7,9 @@ public class StyklisteDetaljer {
     int antal;
     int længde;
 
-    public StyklisteDetaljer(int serienummer, int antal, int længde) {
+    public StyklisteDetaljer(int serienummer, String beskrivelse, int antal, int længde) {
         this.serienummer = serienummer;
+        this.beskrivelse = beskrivelse;
         this.antal = antal;
         this.længde = længde;
     }
@@ -17,16 +18,12 @@ public class StyklisteDetaljer {
         return serienummer;
     }
 
-    public void setSerienummer(int serienummer) {
-        this.serienummer = serienummer;
+    public String getBeskrivelse() {
+        return beskrivelse;
     }
 
     public int getAntal() {
         return antal;
-    }
-
-    public void setAntal(int antal) {
-        this.antal = antal;
     }
 
     public int getLængde() {

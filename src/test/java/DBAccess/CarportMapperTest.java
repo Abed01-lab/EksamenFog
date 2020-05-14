@@ -1,6 +1,7 @@
 package DBAccess;
 
 import FunctionLayer.Carport;
+import FunctionLayer.CarportException;
 import FunctionLayer.LoginSampleException;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,7 @@ import static org.junit.Assert.*;
 public class CarportMapperTest {
     private static Connection testConnection;
     private static String USER = "root";
-    private static String USERPW = "Fokken9797";
+    private static String USERPW = "MichaelDue20!";
     Carport carport = new Carport(240, 300, 420);
 
     @Before
@@ -40,7 +41,7 @@ public class CarportMapperTest {
     }
 
     @Test
-    public void testCarportCreate() throws LoginSampleException {
+    public void testCarportCreate() throws CarportException {
         // Can we map to database
         int expected = CarportMapper.createCarport(carport);
         assertTrue(expected != 0);
@@ -50,9 +51,9 @@ public class CarportMapperTest {
     public void testCreateCarport() {
         String SQL = "INSERT INTO fogprojekt.carport (højde, bredde, længde, materiale) VALUES (?, ?, ?, ?)";
         int id = 0;
-        double højde = 0;
-        double bredde = 0;
-        double længde = 0;
+        int højde = 0;
+        int bredde = 0;
+        int længde = 0;
         String mat = "";
         Carport carportTest = null;
 
@@ -72,9 +73,9 @@ public class CarportMapperTest {
             ps = testConnection.prepareStatement(SQL);
             rs = ps.executeQuery();
             if (rs.next()) {
-                højde = rs.getDouble("højde");
-                bredde = rs.getDouble("bredde");
-                længde = rs.getDouble("længde");
+                højde = rs.getInt("højde");
+                bredde = rs.getInt("bredde");
+                længde = rs.getInt("længde");
                 mat = rs.getString("materiale");
 
             }

@@ -8,28 +8,25 @@ import FunctionLayer.Tag;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-
-import static DBAccess.CarportMapper.*;
 
 public class LavCarport extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        double bredde = Double.parseDouble(request.getParameter("bredde"));
-        double længde = Double.parseDouble(request.getParameter("længde"));
-        double højde = Double.parseDouble(request.getParameter("højde"));
+        int bredde = Integer.parseInt(request.getParameter("bredde"));
+        int længde = Integer.parseInt(request.getParameter("længde"));
+        int højde = Integer.parseInt(request.getParameter("højde"));
 
-        double skurbredde = Double.parseDouble(request.getParameter("skurbredde"));
-        double skurlængde = Double.parseDouble(request.getParameter("skurlængde"));
+        int skurbredde = Integer.parseInt(request.getParameter("skurbredde"));
+        int skurlængde = Integer.parseInt(request.getParameter("skurlængde"));
 
         String tag = request.getParameter("tag");
-        double taghældning = Double.parseDouble(request.getParameter("taghældning"));
+        int taghældning = Integer.parseInt(request.getParameter("taghældning"));
         String tagmateriale = request.getParameter("tagmateriale");
 
         Carport carportobject = new Carport(højde, bredde, længde);
 
-        Skur skurobject = new Skur(skurbredde, skurlængde);
+        Skur skurobject;
         if (skurbredde == 0) {
             skurobject = new Skur(0, 0);
         } else {
@@ -41,23 +38,10 @@ public class LavCarport extends Command {
         Tag tagobject = new Tag(tag, taghældning, tagmateriale);
 
 
-        createSkur(skurobject);
-        createTag(tagobject);
-        try {
-            createOrdre(carportobject, tagobject, skurobject);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
         ServletContext servletContext = request.getServletContext();
         servletContext.setAttribute("carportObject", carportobject);
         servletContext.setAttribute("tagObject", tagobject);
         servletContext.setAttribute("skurObject", skurobject);
-
-        System.out.println(carportobject.getBredde());
-        System.out.println(carportobject.getHøjde());
 
         return "seTegningKunde";
     }

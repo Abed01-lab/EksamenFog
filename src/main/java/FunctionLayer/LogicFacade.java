@@ -3,7 +3,6 @@ package FunctionLayer;
 import DBAccess.CarportMapper;
 import DBAccess.ForespørgselMapper;
 import DBAccess.StyklisteMapper;
-import DBAccess.UserMapper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,16 +14,6 @@ import java.util.List;
  */
 public class LogicFacade {
 
-    public static User login(String email, String password) throws LoginSampleException {
-        return UserMapper.login(email, password);
-    }
-
-    public static User createUser(String email, String password) throws LoginSampleException {
-        User user = new User(email, password, "customer");
-        UserMapper.createUser(user);
-        return user;
-    }
-
     public static Carport createCarport(double højde, double bredde, double længde) {
         //Carport carport = new Carport(højde, bredde, længde);
         //CarportMapper.createCarport(carport);
@@ -33,38 +22,40 @@ public class LogicFacade {
     }
 
 
-    public static List<Materials> deleteMaterial(int serienummer) {
+    public static List<Materials> deleteMaterial(int serienummer) throws CarportException {
         StyklisteMapper.deleteMaterial(serienummer);
         return getMaterials();
     }
 
-    public static List<Materials> getMaterials() {
+    public static List<Materials> getMaterials() throws CarportException {
         return StyklisteMapper.getStyklister();
     }
 
-    public static List<Materials> opdaterMateriale(String beskrivelse, String enhed, int pris) {
+    public static List<Materials> opdaterMateriale(String beskrivelse, String enhed, int pris) throws CarportException {
         Materials mat = new Materials(beskrivelse, enhed, pris);
         StyklisteMapper.opdaterMateriale(mat);
         return getMaterials();
     }
 
-    public static List<Materials> opdaterPris(int serienummer, int pris) {
+    public static List<Materials> opdaterPris(int serienummer, int pris) throws CarportException {
         StyklisteMapper.opdaterPris(serienummer, pris);
         return getMaterials();
     }
 
-    public static ArrayList<Stykliste> getStykliste() {
-        return StyklisteMapper.getStykliste();
+    public static Stykliste getStykliste(int forespørgselsId) throws CarportException {
+        return StyklisteMapper.getStykliste(forespørgselsId);
     }
 
-    public static int sendForespørgsel(String fornavn, String efternavn, String adresse, String email, String telefonnummer, Carport carport, Tag tag, Skur skur) throws CarportException {
+    public static int sendForespørgsel(Forespørgsel forespørgsel, Carport carport, Tag tag, Skur skur) throws CarportException {
         int carportId = CarportMapper.createCarport(carport);
+        forespørgsel.setCarportId(carportId);
         int tagId = CarportMapper.createTag(tag);
-        int skurId = 0;
-        if (skur != null) {
-            skurId = CarportMapper.createSkur(skur);
-        }
-        return ForespørgselMapper.createForespørgsel(fornavn, efternavn, adresse, email, telefonnummer, carportId, tagId, skurId);
+        forespørgsel.setTagId(tagId);
+        int skurId = CarportMapper.createSkur(skur);
+        forespørgsel.setSkurId(skurId);
+        int forespørgselsId = ForespørgselMapper.createForespørgsel(forespørgsel);
+        StyklisteMapper.lavStyklisterTilCarport(forespørgselsId, carport, tag, skur);
+        return forespørgselsId;
     }
 
     public static ArrayList<Forespørgsel> getAllForespørgsel() throws CarportException {

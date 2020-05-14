@@ -2,37 +2,26 @@ package FunctionLayer;
 
 public class Tag {
 
-    double hældning;
-    String tagtype;
-    String tagmateriale;
+    int hældning;
+    String type;
+    String materiale;
 
-    public Tag(String tagtype, double hældning, String tagmateriale) {
+    public Tag(String type, int hældning, String materiale) {
         this.hældning = hældning;
-        this.tagtype = tagtype;
-        this.tagmateriale = tagmateriale;
+        this.type = type;
+        this.materiale = materiale;
     }
 
-    public double getHældning() {
+    public int getHældning() {
         return hældning;
     }
 
-    public void setHældning(double hældning) {
-        this.hældning = hældning;
+    public String getType() {
+        return type;
     }
 
-    public String getTagtype() {
-        return tagtype;
+    public String getMateriale() {
+        return materiale;
     }
 
-    public void setTagtype(String tagtype) {
-        this.tagtype = tagtype;
-    }
-
-    public String getTagmateriale() {
-        return tagmateriale;
-    }
-
-    public void setTagmateriale(String tagmateriale) {
-        this.tagmateriale = tagmateriale;
-    }
 }

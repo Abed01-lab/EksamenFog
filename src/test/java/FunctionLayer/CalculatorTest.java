@@ -33,7 +33,7 @@ public class CalculatorTest {
         double result = Calculator.beregnAntalStolper(carport, skur);
 
         // Assert
-        Assert.assertEquals(4.0, result, 0.005);
+        Assert.assertEquals(2.0, result, 0.005);
     }
 
 

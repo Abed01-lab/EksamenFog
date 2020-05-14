@@ -2,9 +2,9 @@ package FunctionLayer;
 
 public class Carport {
 
-    double højde; // TODO ændrer til int?
-    double bredde; // TODO ændrer til int?
-    double længde; // TODO ændrer til int?
+    int højde;
+    int bredde;
+    int længde;
     String materiale;
 
     public static int[] breddearray = new int[]{240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750};
@@ -20,42 +20,36 @@ public class Carport {
     public static int[] skurlængdearray = new int[]{180, 210, 240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720};
     public static String[] enhedArray = new String[]{"Stk", "Pk", "Tag", "Rulle", "Sæt"};
 
-    public Carport(double højde, double bredde, double længde) {
+
+    public Carport(int højde, int bredde, int længde) {
         this.højde = højde;
         this.bredde = bredde;
         this.længde = længde;
     }
 
-    public Carport(double højde, double bredde, double længde, String materiale) {
+    public Carport(int højde, int bredde, int længde, String materiale) {
         this.højde = højde;
         this.bredde = bredde;
         this.længde = længde;
         this.materiale = materiale;
     }
 
-    public void setHøjde(double højde) {
-        this.højde = højde;
-    }
-
-    public void setBredde(double bredde) {
-        this.bredde = bredde;
-    }
-
-    public void setLængde(double længde) {
-        this.længde = længde;
-    }
-
-    public double getHøjde() {
+    public int getHøjde() {
         return højde;
     }
 
-    public double getBredde() {
+    public int getBredde() {
         return bredde;
     }
 
-    public double getLængde() {
+    public int getLængde() {
         return længde;
     }
+
+    public String getMateriale() {
+        return materiale;
+    }
+
 
     @Override
     public String toString() {
