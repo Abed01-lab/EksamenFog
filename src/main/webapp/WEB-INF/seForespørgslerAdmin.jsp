@@ -75,7 +75,7 @@
 
         <h5 class="mt-5">Tegning af carport</h5>
         <div>
-            ${requestScope.svgtegning}
+            ${applicationScope.svg}
         </div>
 
         <h5 class="mt-5">Stykliste</h5>

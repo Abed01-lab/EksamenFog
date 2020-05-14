@@ -18,8 +18,7 @@ public class Calculator {
         return antalStolper * 2;
     }
 
-    public static double beregnAntalSpærFladt(Carport carport) {
-        return Math.ceil((carport.getLængde() + 30) / 55.0);
+    public static double beregnAntalSpærFladt(Carport carport) { return Math.ceil((carport.getLængde() + 30) / 55.0);
     }
 
     public static double beregnAntalSpærSkråtLodret(Carport carport, Tag tag) {

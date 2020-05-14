@@ -37,9 +37,9 @@ public class Svg {
         svg.append(String.format(arrowTemplate, x, y, x2, y2));
     }
 
-    public void addLabel(int x, int y, String afstand){
-        svg.append(String.format(labelTemplate, x, y, afstand));
-    }
+    /*public void addLabel(int x, int y){
+        svg.append(String.format(labelTemplate, x, y));
+    }*/
 
     public int getWidth() {
         return width;
