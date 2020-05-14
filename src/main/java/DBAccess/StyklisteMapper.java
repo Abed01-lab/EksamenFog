@@ -87,6 +87,34 @@ public class StyklisteMapper {
         throw new CarportException("Fejl ved indhentning af stykliste");
     }
 
+    public static double getStyklistePris(int id) throws CarportException {
+        double total = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT stykliste.forespørgselsId, stykliste.antal, stykliste.længde, styklisteitems.pris " +
+                    "FROM stykliste " +
+                    "INNER JOIN styklisteitems ON stykliste.serienummer = styklisteitems.itemId " +
+                    "WHERE stykliste.forespørgselsId = '" + id + "'";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                int antal = rs.getInt("antal");
+                int længde = rs.getInt("længde");
+                int pris = rs.getInt("pris");
+
+                if(længde != 0){
+                    double sum = (((double)længde / 100) * pris) * antal;
+                    total = total + sum;
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new CarportException("Fejl ved indhentning af stykliste priser");
+        }
+        return total;
+    }
+
     public static ArrayList<Stykliste> getAllStyklister() throws CarportException {
         ArrayList<Stykliste> overlist = new ArrayList();
         // liste, ordreid
