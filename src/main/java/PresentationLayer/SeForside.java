@@ -6,11 +6,9 @@ import FunctionLayer.LoginSampleException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class OrdreBekræftelse extends Command {
+public class SeForside extends Command {
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException, CarportException {
-
-
-        return "ordreBekræftelse";
+        return "index";
     }
 }
