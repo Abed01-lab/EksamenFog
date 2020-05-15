@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import static DBAccess.StyklisteMapper.getTagMaterialer;
 import static FunctionLayer.Carport.*;
 
 public class GoToLavcarport extends Command {
@@ -19,7 +20,7 @@ public class GoToLavcarport extends Command {
         servletContext.setAttribute("taghældning", taghældning);
         servletContext.setAttribute("skurbredde", skurbreddearray);
         servletContext.setAttribute("skurlængde", skurlængdearray);
-        servletContext.setAttribute("tagmateriale", tagmateriale);
+        servletContext.setAttribute("tagmateriale", getTagMaterialer());
         return "designCarport";
     }
 }

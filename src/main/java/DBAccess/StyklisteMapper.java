@@ -15,7 +15,6 @@ public class StyklisteMapper {
 
         try {
             Connection con = Connector.connection();
-
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -87,6 +86,26 @@ public class StyklisteMapper {
         throw new CarportException("Fejl ved indhentning af stykliste");
     }
 
+    public static ArrayList<String> getTagMaterialer(){
+        ArrayList<String> liste = new ArrayList<>();
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.styklisteitems";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String tag = rs.getString("beskrivelse");
+                String type = rs.getString("enhed");
+                if(type.equals("Tag")){
+                    liste.add(tag);
+                }
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return liste;
+    }
+
     public static double getStyklistePris(int id) throws CarportException {
         double total = 0;
         try {
@@ -105,6 +124,10 @@ public class StyklisteMapper {
 
                 if(længde != 0){
                     double sum = (((double)længde / 100) * pris) * antal;
+                    total = total + sum;
+                }
+                else {
+                    double sum = pris * antal;
                     total = total + sum;
                 }
             }
@@ -247,8 +270,8 @@ public class StyklisteMapper {
         Carport carport = new Carport(220, 400, 720);
         Tag tag = new Tag("Fladt", 15, "Sten");
         Skur skur = new Skur(300, 420);
-        int forespørgselsId = ForespørgselMapper.createForespørgsel(new Forespørgsel("John", "Doe", "Somewhere", "John@something.com", "54325425"));
-        lavStyklisterTilCarport(forespørgselsId, carport, tag, skur);
+       // int forespørgselsId = ForespørgselMapper.createForespørgsel(new Forespørgsel("John", "Doe", "Somewhere", "John@something.com", "54325425"));
+        //lavStyklisterTilCarport(forespørgselsId, carport, tag, skur);
 
         ArrayList<Stykliste> styklist = getAllStyklister();
 
@@ -267,6 +290,11 @@ public class StyklisteMapper {
             System.out.println(styklist.get(i).getListe().size());
         }
         System.out.println("HER:" + styklist.size());
+
+        ArrayList<String> tagma = getTagMaterialer();
+        for(int i = 0; i < tagma.size(); i++){
+            System.out.println(tagma.get(i));
+        }
 
     }
 }
