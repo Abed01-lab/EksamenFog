@@ -24,6 +24,12 @@
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
         <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
+            <li class="nav-item ml-2">
+                <form name="Forside" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="SeForside">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Forside">
+                </form>
+            </li>
             <li class="nav-item mr-auto">
                 <form name="DesignCarport" action="FrontController" method="post">
                     <input type="hidden" name="target" value="GoToLavcarport">
@@ -49,6 +55,7 @@
                 </form>
             </li>
         </ul>
+
     </div>
 
 

@@ -22,6 +22,12 @@
     <div class="row">
         <img src="images/Fog-Header-7.png" class="img-fluid">
         <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
+            <li class="nav-item ml-2">
+                <form name="Forside" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="SeForside">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Forside">
+                </form>
+            </li>
             <li class="nav-item mr-auto">
                 <form name="DesignCarport" action="FrontController" method="post">
                     <input type="hidden" name="target" value="GoToLavcarport">
@@ -48,8 +54,7 @@
             </li>
         </ul>
     </div>
-    <h2> Ordre godkendt!</h2>
-    <h4> Din ordre er godkendt, og bliver leveret til din adresse inden 5 hverdage</h4>
+    <h4 class="mt-5"> Din forespørgsel er nu sendt, og vi vender tilbage hurtigst muligt med et tilbud via. post/email!</h4>
 </div>
 
 

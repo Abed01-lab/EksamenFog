@@ -24,6 +24,6 @@ public class SendForespørgsel extends Command {
         int forespørgelseId = LogicFacade.sendForespørgsel(forespørgsel, carport, tag, skur);
         request.getSession().setAttribute("forespørgelseId", forespørgelseId);
 
-        return "index";
+        return "forespørgselBekræftelse";
     }
 }

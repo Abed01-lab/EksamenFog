@@ -15,7 +15,6 @@ abstract class Command {
         commands = new HashMap<>();
         commands.put("GoToLavcarport", new GoToLavcarport());
         commands.put("LavCarport", new LavCarport());
-        commands.put("Ordrebekræftelse", new OrdreBekræftelse());
         commands.put("OpdaterMateriale", new OpdaterMateriale());
         commands.put("DeleteMaterial", new DeleteMaterial());
         commands.put("AdminPage", new AdminPage());
@@ -27,6 +26,7 @@ abstract class Command {
         commands.put("AdminAccepterForespørgsel", new AdminAccepterForespørgsel());
         commands.put("AdminAfvisForespørgsel", new AdminAfvisForespørgsel());
         commands.put("AdminOrdrer", new AdminOrdrer());
+        commands.put("SeForside", new SeForside());
 
     }
 
