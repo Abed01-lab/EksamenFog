@@ -6,7 +6,7 @@ public class SVGTegner {
 
     public static String tegnSVG(Carport carport, Tag tag, Skur skur) {
         Svg outerDrawing = new Svg(carport.getLængde()+30 + 100, carport.getBredde() + 100, "0,0, 900+30, 800", 0, 0);
-        Svg svg = new Svg(800 + 30, 700, "0,0,800+30,700", 75, 30);
+        Svg svg = new Svg(carport.getLængde() + 30, carport.getBredde(), "0,0,800+30,700", 75, 30);
         svg.addRect(0, 0, (int) carport.getBredde(), (int) carport.getLængde());
 
 
@@ -27,25 +27,32 @@ public class SVGTegner {
 
 
         //hent remme længder
-        svg.addRect(0, 23, (int) 4.5, (int) carport.getLængde());
-        svg.addRect(0, (int) ((int) carport.getBredde()-27.5), (int) 4.5, (int) carport.getLængde());
+        svg.addRect(0, 23, (int) 4.5, carport.getLængde());
+        svg.addRect(0, (int) (carport.getBredde()-27.5), (int) 4.5, (int) carport.getLængde());
 
         //hent antal spær
         double spær = (Calculator.beregnAntalSpærFladt(carport));
         int spaces = 0;
         int spærAfstand = 55;
-        outerDrawing.addArrow( spaces + 75, 15, spærAfstand + 75, 15);
+        int pile = 55;
+        for (int i=0;i<spær-1;i++) {
+            outerDrawing.addArrow(spaces + 77, 15, pile + 75, 15);
+            spaces += spærAfstand;
+            pile = pile + spærAfstand;
+        }
+        spaces = 0;
         for (int i = 0; i < spær; i++){
             svg.addRect(spaces, 0, carport.getBredde(), (int) 4.5);
+            outerDrawing.addRect(spaces + 77, 5,  20, 1);
             spaces += spærAfstand;
-
         }
 
         //Kryds
-        int kryds = carport.getLængde()/6;
         int kryds1 = (carport.getLængde()/6)*5;
-        svg.addKryds(kryds, 0, kryds1, carport.getBredde());
-        svg.addKryds(kryds1, 0, kryds, carport.getBredde());
+        svg.addArrow(0, 23, kryds1, carport.getBredde()-23);
+        svg.addArrow(kryds1, 23, 0, carport.getBredde()-23);
+        //svg.addKryds(0, 23, kryds1, carport.getBredde()-23);
+        //svg.addKryds(kryds1, 23, 0, carport.getBredde()-23);
 
         // Outer Drawing
         //Svg outerDrawing = new Svg(carport.getLængde()+30 + 100, carport.getBredde() + 100, "0,0, 900+30, 800", 0, 0);
@@ -53,8 +60,8 @@ public class SVGTegner {
         //outerDrawing.addLabel(carport.getLængde()/2, carport.getBredde()+15);
 
         // Tegn pile osv
-        outerDrawing.addArrow(30, 30, 30 , (int) carport.getBredde()+30);
-        outerDrawing.addArrow(75, (int) carport.getBredde()+50, (int) carport.getLængde()+75,(int) carport.getBredde()+50);
+        outerDrawing.addArrow(30, 30, 30 , carport.getBredde()+30);
+        outerDrawing.addArrow(75,carport.getBredde()+50, carport.getLængde()+75,carport.getBredde()+50);
 
 
         return outerDrawing.toString();
