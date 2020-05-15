@@ -2,6 +2,7 @@ package FunctionLayer;
 
 import DBAccess.CarportMapper;
 import DBAccess.ForespørgselMapper;
+import DBAccess.OrdreMapper;
 import DBAccess.StyklisteMapper;
 
 import java.util.ArrayList;
@@ -80,5 +81,26 @@ public class LogicFacade {
 
     public static String tegnSVG(Carport carport, Tag tag, Skur skur) {
         return SVGTegner.tegnSVG(carport, tag, skur);
+    }
+
+
+    public static ArrayList<Ordre> getAllOrdrer() throws CarportException {
+        return OrdreMapper.getAllOrdrer();
+    }
+
+    public static ArrayList<Forespørgsel> accepterForespørgsel(Ordre ordre) throws CarportException {
+        OrdreMapper.createOrdre(ordre);
+        ForespørgselMapper.accepterForespørgsel(ordre.getForespørgselsId());
+        return ForespørgselMapper.getAllForespørgsel();
+    }
+
+
+    public static ArrayList<Forespørgsel> afvisForespørgsel(int forespørgselsId) throws CarportException {
+        ForespørgselMapper.afvisForespørgsel(forespørgselsId);
+        return ForespørgselMapper.getAllForespørgsel();
+    }
+
+    public static double getStyklistePris(int forespørgselsId) throws CarportException {
+        return StyklisteMapper.getStyklistePris(forespørgselsId);
     }
 }

@@ -1,12 +1,13 @@
 <%--
   Created by IntelliJ IDEA.
   User: cecilie
-  Date: 21/04/2020
-  Time: 15.10
+  Date: 06/05/2020
+  Time: 15.05
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -15,7 +16,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <title>Tegning af carport - send din forespørgsel her</title>
+
+
+    <title>Ordrer</title>
 </head>
 <body>
 
@@ -51,42 +54,27 @@
         </ul>
     </div>
 
-    <div class="col-lg-12 w-100 h-100 p-3 mt-2" style="background-color: white;">
-        <h4>Tegning af carport</h4>
+        <h5 class="mt-5">Kundeordrer</h5>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">Ordrenummer</th>
+                <th scope="col">Kundenavn</th>
+                <th scope="col">Ordretidspunkt</th>
 
-        <div>
-            ${requestScope.svgtegning}
-        </div>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach var="element" items="${applicationScope.kundeOrdrer}">
+                <tr>
+                    <th scope="row">${element.ordreId}</th>
+                    <td>${element.navn}</td>
+                    <td>${element.dato}</td>
+                </tr>
+            </c:forEach>
+            </tbody>
+        </table>
 
-        <div class="form-group mt-4 my-1">
-            <form name="Forespørgsler" action="FrontController" method="post">
-                <input type="hidden" name="target" value="SendForespørgsel">
-
-                <h4>Udfyld dine kontaktoplysninger her for at sende en forespørgsel på et tilbud!</h4>
-                <div class="row">
-                    <div class="col">
-                        <div class="row mt-4">
-                            <input type="text" class="form-control" placeholder="Fornavn" name="Fornavn">
-                        </div>
-                        <div class="row mt-4">
-                            <input type="text" class="form-control" placeholder="Efternavn" name="Efternavn">
-                        </div>
-                        <div class="row mt-4">
-                            <input type="text" class="form-control" placeholder="Adresse" name="Adresse">
-                        </div>
-                        <div class="row mt-4">
-                            <input type="text" class="form-control" placeholder="Email" name="Email">
-                        </div>
-                        <div class="row mt-4 mb-5">
-                            <input type="text" class="form-control" placeholder="Telefonnummer" name="Telefonnummer">
-                        </div>
-                        <div class="row mt-4 ">
-                            <button type="submit" class="btn btn-primary float-right ">Send forespørgsel</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
-        </div>
     </div>
 </div>
 </body>

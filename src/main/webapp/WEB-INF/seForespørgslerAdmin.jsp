@@ -24,10 +24,10 @@
         <img src="images/Fog-Header-7.png" class="img-fluid">
 
         <ul class="nav navbar justify-content-end w-100 py-0" style="background-color: #007cdc;">
-            <li class="nav-item mr-2">
-                <form name="Forespørgsler" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="AdminForespørgsler">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Forespørgsler">
+            <li class="nav-item mr-auto">
+                <form name="DesignCarport" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="GoToLavcarport">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
                 </form>
             </li>
             <li class="nav-item mr-2">
@@ -37,9 +37,15 @@
                 </form>
             </li>
             <li class="nav-item mr-2">
-                <form name="DesignCarport" action="FrontController" method="post">
-                    <input type="hidden" name="target" value="GoToLavcarport">
-                    <input type="submit" class="btn btn-link" style="color: white" value="Design carport">
+                <form name="Forespørgsler" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminForespørgsler">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Forespørgsler">
+                </form>
+            </li>
+            <li class="nav-item mr-2">
+                <form name="Ordrer" action="FrontController" method="post">
+                    <input type="hidden" name="target" value="AdminOrdrer">
+                    <input type="submit" class="btn btn-link" style="color: white" value="Ordrer">
                 </form>
             </li>
         </ul>
@@ -72,6 +78,9 @@
             <p>Fravalgt</p>
         </c:if>
 
+        <h5 class="mt-5">Total pris</h5>
+        <p>${applicationScope.styklistePris},-</p>
+
 
         <h5 class="mt-5">Tegning af carport</h5>
         <div>
@@ -101,7 +110,6 @@
             </tbody>
         </table>
 
-        <h5 class="mt-5">Total pris </h5>
     </div>
 </div>
 </body>

@@ -23,6 +23,7 @@ public class AdminSeForespørgsel extends Command {
         servletContext.setAttribute("forespørgselTag", tag);
         servletContext.setAttribute("forespørgselSkur", skur);
         servletContext.setAttribute("forespørgselStykliste", stykliste.getListe());
+        servletContext.setAttribute("styklistePris", LogicFacade.getStyklistePris(forespørgselsId));
         servletContext.setAttribute("svg", LogicFacade.tegnSVG(carport, tag, skur));
         return "seForespørgslerAdmin";
     }
