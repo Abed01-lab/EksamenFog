@@ -196,6 +196,23 @@ public class StyklisteMapper {
         return overlist;
     }
 
+    public static int getStandardStykliste(String itemName){
+        int serienummer = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.styklistedefault WHERE item = '" + itemName + "'";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                serienummer = rs.getInt("styklisteitemId");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return serienummer;
+    }
+
     public static void lavStyklisterTilCarport(int forespørgselsId, Carport carport, Tag tag, Skur skur) throws CarportException {
         int serienummer = 0;
 
@@ -213,7 +230,7 @@ public class StyklisteMapper {
         for (int i = 0; i < liste.size(); i++) {
             String itemName = liste.get(i).getItemNavn();
 
-            switch (itemName) {
+            /* switch (itemName) {
                 case "breddestolper":
                     serienummer = 2;
                     break;
@@ -229,7 +246,9 @@ public class StyklisteMapper {
                 case "lægter":
                     serienummer = 7;
                     break;
-            }
+            }*/
+
+            serienummer = getStandardStykliste(itemName);
 
             try {
                 Connection con = Connector.connection();
