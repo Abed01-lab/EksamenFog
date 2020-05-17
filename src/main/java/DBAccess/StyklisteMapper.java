@@ -11,9 +11,10 @@ public class StyklisteMapper {
 
     public static ArrayList<Materials> getStyklister() throws CarportException {
         ArrayList<Materials> materialer = new ArrayList<>();
-        String SQL = "SELECT * FROM fogprojekt.styklisteitems";
+        String SQL = "SELECT * FROM fogprojekt.styklisteitems;";
 
         try {
+            System.out.println("virker");
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
@@ -203,7 +204,7 @@ public class StyklisteMapper {
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new CarportException("Fejl ved indhentning af stykliste");
+            throw new CarportException("Fejl ved indhentning  asd af stykliste");
         }
         return overlist;
     }
