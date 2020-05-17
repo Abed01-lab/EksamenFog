@@ -122,6 +122,40 @@
         </form>
 
 
+        <h6 class="mt-5" style="color: black">Sæt standard stykliste</h6>
+        <form action="FrontController" method="post">
+            <input type="hidden" name="target" value="SetStandardStykliste">
+
+            <p></p>
+
+            <div class="form-row mt-4">
+
+                <div class="col-5">
+                    <select class="form-control" name="styklisteType">
+                        <c:forEach var="element" items="${applicationScope.styklisteTyper}">
+                            <option value="${element}"> ${element}
+                                </option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="col-5">
+                    <select class="form-control" name="materialeId">
+                        <c:forEach var="element" items="${applicationScope.materials}">
+                            <option value="${element.itemId}">Serienummer ${element.itemId}
+                                : ${element.beskrivelse}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+
+                <div class="col-2">
+                    <button type="submit" class="btn btn-success float-right"> Sæt standard liste</button>
+                </div>
+            </div>
+
+        </form>
+
+
         <div class="mt-5">
             <h6 class="mb-3">Se og fjern materiale</h6>
             <table class="table table-bordered table-hover">

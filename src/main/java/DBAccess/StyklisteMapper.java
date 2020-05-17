@@ -62,6 +62,18 @@ public class StyklisteMapper {
         }
     }
 
+    public static void opdaterStandardStykliste(String styklisteType, int serienummer) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE fogprojekt.styklistedefault SET styklisteitemId = '" + serienummer + "' WHERE item = '" + styklisteType + "'";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void deleteMaterial(int serienummer) throws CarportException {
         try {
             Connection con = Connector.connection();

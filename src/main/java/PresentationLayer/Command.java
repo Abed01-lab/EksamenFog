@@ -27,6 +27,7 @@ abstract class Command {
         commands.put("AdminAfvisForespørgsel", new AdminAfvisForespørgsel());
         commands.put("AdminOrdrer", new AdminOrdrer());
         commands.put("SeForside", new SeForside());
+        commands.put("SetStandardStykliste", new SetStandardStykliste());
 
     }
 
