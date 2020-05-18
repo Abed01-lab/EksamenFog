@@ -1,6 +1,5 @@
 package FunctionLayer;
 
-import DBAccess.StyklisteMapper;
 
 public class SVGTegner {
 
@@ -15,10 +14,10 @@ public class SVGTegner {
         System.out.println(stolper);
         int stolpeAfstand = (int) (carport.getLængde()/(stolper/2));
         int afstand = stolpeAfstand - 100;
-        if (skur.getBredde() != 0 && skur.getBredde() != 0){
+/*        if (skur.getBredde() != 0 && skur.getBredde() != 0){
             svg.addRect(carport.getLængde()-skur.getLængde(), 0, skur.getLængde(), skur.getBredde());
             stolper = stolper + 4;
-        }
+        }*/
         for (int i = 0; i < (stolper/2); i++){
             svg.addRect(afstand, 20, (int)9.7, (int)9.7);
             svg.addRect(afstand, carport.getBredde()-30, (int)9.7, (int)9.7);
@@ -49,15 +48,16 @@ public class SVGTegner {
 
         //Kryds
         int kryds1 = (carport.getLængde()/6)*5;
-        svg.addArrow(0, 23, kryds1, carport.getBredde()-23);
-        svg.addArrow(kryds1, 23, 0, carport.getBredde()-23);
-        //svg.addKryds(0, 23, kryds1, carport.getBredde()-23);
-        //svg.addKryds(kryds1, 23, 0, carport.getBredde()-23);
+        //svg.addArrow(0, 23, kryds1, carport.getBredde()-23);
+        //svg.addArrow(kryds1, 23, 0, carport.getBredde()-23);
+        svg.addKryds(0, 23, kryds1, carport.getBredde()-23);
+        svg.addKryds(0, carport.getBredde()-23, kryds1, 23);
 
         // Outer Drawing
-        //Svg outerDrawing = new Svg(carport.getLængde()+30 + 100, carport.getBredde() + 100, "0,0, 900+30, 800", 0, 0);
+
         outerDrawing.insertDrawing(svg);
-        //outerDrawing.addLabel(carport.getLængde()/2, carport.getBredde()+15);
+        outerDrawing.addLabelX(carport.getLængde()/2 + 75, carport.getBredde()+65, String.valueOf(carport.getLængde()));
+        outerDrawing.addLabelY(15, carport.getBredde()/2+30, String.valueOf(carport.getBredde()));
 
         // Tegn pile osv
         outerDrawing.addArrow(30, 30, 30 , carport.getBredde()+30);
