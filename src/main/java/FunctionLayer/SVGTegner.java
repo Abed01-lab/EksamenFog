@@ -4,7 +4,7 @@ package FunctionLayer;
 public class SVGTegner {
 
     public static String tegnSVG(Carport carport, Tag tag, Skur skur) {
-        Svg outerDrawing = new Svg(carport.getLængde()+30 + 100, carport.getBredde() + 100, "0,0, 900+30, 800", 0, 0);
+        Svg outerDrawing = new Svg(carport.getLængde()+30 + 100, carport.getBredde() + 100, "0,0, 900+30, 900", 0, 0);
         Svg svg = new Svg(carport.getLængde() + 30, carport.getBredde(), "0,0,800+30,700", 75, 30);
         svg.addRect(0, 0, (int) carport.getBredde(), (int) carport.getLængde());
 
@@ -35,7 +35,8 @@ public class SVGTegner {
         int spærAfstand = 55;
         int pile = 55;
         for (int i=0;i<spær-1;i++) {
-            outerDrawing.addArrow(spaces + 77, 15, pile + 75, 15);
+            outerDrawing.addArrow(spaces + 77, 18, pile + 75, 18);
+            outerDrawing.addLabelX(spaces + 105, 11, String.valueOf(spærAfstand));
             spaces += spærAfstand;
             pile = pile + spærAfstand;
         }
@@ -48,8 +49,6 @@ public class SVGTegner {
 
         //Kryds
         int kryds1 = (carport.getLængde()/6)*5;
-        //svg.addArrow(0, 23, kryds1, carport.getBredde()-23);
-        //svg.addArrow(kryds1, 23, 0, carport.getBredde()-23);
         svg.addKryds(0, 23, kryds1, carport.getBredde()-23);
         svg.addKryds(0, carport.getBredde()-23, kryds1, 23);
 

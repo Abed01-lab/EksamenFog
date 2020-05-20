@@ -1,9 +1,6 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.LoginSampleException;
-import FunctionLayer.Skur;
-import FunctionLayer.Tag;
+import FunctionLayer.*;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -42,6 +39,7 @@ public class LavCarport extends Command {
         servletContext.setAttribute("carportObject", carportobject);
         servletContext.setAttribute("tagObject", tagobject);
         servletContext.setAttribute("skurObject", skurobject);
+        servletContext.setAttribute("svg", LogicFacade.tegnSVG(carportobject, tagobject, skurobject));
 
         return "seTegningKunde";
     }
