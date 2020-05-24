@@ -5,6 +5,7 @@ public class Carport {
     int højde;
     int bredde;
     int længde;
+    int id;
     String materiale;
 
     public static int[] breddearray = new int[]{240, 270, 300, 330, 360, 390, 420, 450, 480, 510, 540, 570, 600, 630, 660, 690, 720, 750};
@@ -34,6 +35,14 @@ public class Carport {
         this.materiale = materiale;
     }
 
+    public Carport(int id, int højde, int bredde, int længde, String materiale) {
+        this.id = id;
+        this.højde = højde;
+        this.bredde = bredde;
+        this.længde = længde;
+        this.materiale = materiale;
+    }
+
     public int getHøjde() {
         return højde;
     }
@@ -50,6 +59,9 @@ public class Carport {
         return materiale;
     }
 
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
