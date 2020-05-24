@@ -61,7 +61,8 @@
         <h4>Tegning af carport</h4>
 
         <div>
-            ${requestScope.svgtegning}
+            <br>
+            ${applicationScope.svg}
         </div>
 
         <div class="form-group mt-4 my-1">

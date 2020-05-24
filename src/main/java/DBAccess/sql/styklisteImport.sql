@@ -24,3 +24,11 @@ INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("4,5x50
 INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Stalddørsgreb 50x75", "Sæt", 199);
 INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("T hængsel 390mm.", "Stk", 139);
 INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Vinkelbeslag 35", "Stk", 45);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Betontagsten - Rød", "Tag", 45);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Betontagsten - Teglrød", "Tag", 45);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Betontagsten - Sort", "Tag", 45);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Teglrød", "Tag", 50);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Rødbrun", "Tag", 50);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Sort", "Tag", 50);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Grå", "Tag", 50);
+INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Moka", "Tag", 50);

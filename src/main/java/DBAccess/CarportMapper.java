@@ -6,6 +6,7 @@ import FunctionLayer.Skur;
 import FunctionLayer.Tag;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -14,7 +15,7 @@ public class CarportMapper {
     public static int createCarport(Carport carport) throws CarportException {
         try {
             Connection con = Connector.connection();
-            String SQL = "INSERT INTO fogprojekt.carport (højde, bredde, længde, materiale) VALUES (?, ?, ?, ?)";
+            String SQL = "INSERT INTO carport (højde, bredde, længde, materiale) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, carport.getHøjde());
             ps.setDouble(2, carport.getBredde());
@@ -27,6 +28,31 @@ public class CarportMapper {
         } catch (SQLException | ClassNotFoundException e) {
             throw new CarportException("Fejl i oprettelse af carport");
         }
+    }
+
+    public static ArrayList<Carport> getAllCarport() {
+        ArrayList<Carport> allCarport = new ArrayList<>();
+        try{
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM carport;";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                int id = rs.getInt("carportId");
+                int højde = rs.getInt("højde");
+                int bredde = rs.getInt("bredde");
+                int længde = rs.getInt("længde");
+                String materiale = rs.getString("materiale");
+                Carport carport = new Carport(id, højde, bredde, længde, materiale);
+                allCarport.add(carport);
+
+            }
+
+        } catch (SQLException | ClassNotFoundException e ) {
+            System.out.println("Could not return list of Carport" + e.getMessage());
+        }
+        return allCarport;
     }
 
     public static int createSkur(Skur skur) throws CarportException {
@@ -65,7 +91,7 @@ public class CarportMapper {
     public static Carport getCarport(int carportId) throws CarportException {
         try {
             Connection con = Connector.connection();
-            String SQL = "SELECT * FROM fogprojekt.carport WHERE carportId = ?";
+            String SQL = "SELECT * FROM carport WHERE carportId = ?";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, carportId);
             ResultSet rs = ps.executeQuery();

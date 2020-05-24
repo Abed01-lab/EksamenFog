@@ -4,24 +4,26 @@ import FunctionLayer.Carport;
 import FunctionLayer.CarportException;
 import FunctionLayer.LoginSampleException;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
 public class CarportMapperTest {
     private static Connection testConnection;
     private static String USER = "root";
-    private static String USERPW = "MichaelDue20!";
-    Carport carport = new Carport(240, 300, 420);
+    private static String USERPW = "Fokken9797";
 
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
         try {
-            // awoid making a new connection for each test
             if (testConnection == null) {
-                String url = "jdbc:mysql://localhost:3306/fogprojekt?serverTimezone=CET&useSSL=false";
+                String url = "jdbc:mysql://localhost:3306/fogprojekt_test?serverTimezone=CET&useSSL=false";
                 Class.forName("com.mysql.cj.jdbc.Driver");
 
                 testConnection = DriverManager.getConnection(url, USER, USERPW);
@@ -35,6 +37,24 @@ public class CarportMapperTest {
         }
     }
 
+    @Before
+    public void beforeEachTest() {
+        try(Statement stmt = testConnection.createStatement()) {
+            stmt.execute("drop table if exists carport;");
+            stmt.execute("create table `carport` like fogprojekt.carport;");
+            stmt.execute("insert into carport values" +
+                    "(1, 200, 240, 240, 'træ')," +
+                    "(2, 215, 300, 300, 'træ')," +
+                    "(3, 230, 360, 360, 'træ')," +
+                    "(4, 245, 420, 420, 'træ')," +
+                    "(5, 260, 480, 480, 'træ');");
+
+        } catch (SQLException ex) {
+            System.out.println("Could not open connection to database: " + ex.getMessage());
+        }
+
+    }
+
     @Test
     public void testSetUpOK() {
         assertNotNull(testConnection);
@@ -43,55 +63,32 @@ public class CarportMapperTest {
     @Test
     public void testCarportCreate() throws CarportException {
         // Can we map to database
-        int expected = CarportMapper.createCarport(carport);
-        assertTrue(expected != 0);
+        Carport carport = new Carport(240, 300, 420);
+        int expectedID = CarportMapper.createCarport(carport);
+        assertNotNull(CarportMapper.getCarport(expectedID));
+    }
+
+    @Test (expected = CarportException.class)
+    public void testForFail() throws CarportException {
+        Carport carport = new Carport(6,240, 300, 420, "træ");
+        assertNotNull(CarportMapper.getCarport(carport.getId()));
     }
 
     @Test
-    public void testCreateCarport() {
-        String SQL = "INSERT INTO fogprojekt.carport (højde, bredde, længde, materiale) VALUES (?, ?, ?, ?)";
-        int id = 0;
-        int højde = 0;
-        int bredde = 0;
-        int længde = 0;
-        String mat = "";
-        Carport carportTest = null;
-
-        try {
-            PreparedStatement ps = testConnection.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, carport.getHøjde());
-            ps.setDouble(2, carport.getBredde());
-            ps.setDouble(3, carport.getLængde());
-            ps.setString(4, "sten");
-            ps.executeUpdate();
-
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) id = rs.getInt(1);
-
-
-            SQL = "SELECT * FROM fogprojekt.carport Where carportId = " + id;
-            ps = testConnection.prepareStatement(SQL);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                højde = rs.getInt("højde");
-                bredde = rs.getInt("bredde");
-                længde = rs.getInt("længde");
-                mat = rs.getString("materiale");
-
-            }
-
-            carportTest = new Carport(højde, bredde, længde);
-
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-
-        assertEquals(carport.getHøjde(), carportTest.getHøjde(), 1);
-        assertEquals(carport.getBredde(), carportTest.getBredde(), 1);
-        assertEquals(carport.getLængde(), carportTest.getLængde(), 1);
-
+    public void testCarportArray() throws CarportException {
+        ArrayList<Carport> cp = CarportMapper.getAllCarport();
+        assertThat(cp, hasSize(5));
     }
 
+    @Test
+    public void testCarportArrayMedTilføjCarport() throws  CarportException{
+        Carport carport = new Carport(240, 300, 420);
+        int id = CarportMapper.createCarport(carport);
+        ArrayList<Carport> cp = CarportMapper.getAllCarport();
+        assertThat(cp, hasSize(6));
+    }
 
 }
+
+
+

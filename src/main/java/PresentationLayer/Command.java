@@ -21,12 +21,12 @@ abstract class Command {
         commands.put("OpdaterPris", new OpdaterPris());
         commands.put("AdminForespørgsler", new AdminForespørgsler());
         commands.put("AdminSeForespørgsel", new AdminSeForespørgsel());
-        commands.put("Tegning", new Tegning()); // skal muligvis ikke bruges
         commands.put("SendForespørgsel", new SendForespørgsel());
         commands.put("AdminAccepterForespørgsel", new AdminAccepterForespørgsel());
         commands.put("AdminAfvisForespørgsel", new AdminAfvisForespørgsel());
         commands.put("AdminOrdrer", new AdminOrdrer());
         commands.put("SeForside", new SeForside());
+        commands.put("SetStandardStykliste", new SetStandardStykliste());
 
     }
 

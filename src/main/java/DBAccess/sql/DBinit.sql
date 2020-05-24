@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`carport`
     PRIMARY KEY (`carportId`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 65
+    AUTO_INCREMENT = 76
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`skur`
     PRIMARY KEY (`skurId`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 72
+    AUTO_INCREMENT = 83
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`tag`
     PRIMARY KEY (`tagId`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 71
+    AUTO_INCREMENT = 82
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -75,15 +75,15 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`tag`
 CREATE TABLE IF NOT EXISTS `fogprojekt`.`forespørgsel`
 (
     `forespørgselsId` INT         NOT NULL AUTO_INCREMENT,
-    `fornavn`        VARCHAR(45) NOT NULL,
-    `efternavn`      VARCHAR(45) NOT NULL,
-    `adresse`        VARCHAR(45) NOT NULL,
-    `email`          VARCHAR(45) NOT NULL,
-    `telefonnummer`  VARCHAR(45) NOT NULL,
-    `carportId`      INT         NOT NULL,
-    `tagId`          INT         NOT NULL,
-    `skurId`         INT         NULL     DEFAULT NULL,
-    `status`         INT         NOT NULL DEFAULT '0',
+    `fornavn`         VARCHAR(45) NOT NULL,
+    `efternavn`       VARCHAR(45) NOT NULL,
+    `adresse`         VARCHAR(45) NOT NULL,
+    `email`           VARCHAR(45) NOT NULL,
+    `telefonnummer`   VARCHAR(45) NOT NULL,
+    `carportId`       INT         NOT NULL,
+    `tagId`           INT         NOT NULL,
+    `skurId`          INT         NULL     DEFAULT NULL,
+    `status`          INT         NOT NULL DEFAULT '0',
     PRIMARY KEY (`forespørgselsId`),
     INDEX `forespørgsel_carport_FK_idx` (`carportId` ASC) VISIBLE,
     INDEX `forespørgsel_tag_FK_idx` (`tagId` ASC) VISIBLE,
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`forespørgsel`
             REFERENCES `fogprojekt`.`tag` (`tagId`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 6
+    AUTO_INCREMENT = 18
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -117,11 +117,9 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`ordre`
     CONSTRAINT `Forespørgsel_Ordre_FK`
         FOREIGN KEY (`forespørgselsId`)
             REFERENCES `fogprojekt`.`forespørgsel` (`forespørgselsId`)
-            ON DELETE NO ACTION
-            ON UPDATE NO ACTION
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 60
+    AUTO_INCREMENT = 63
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -138,7 +136,7 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`styklisteitems`
     PRIMARY KEY (`itemId`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 51
+    AUTO_INCREMENT = 74
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -164,7 +162,27 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`stykliste`
             REFERENCES `fogprojekt`.`styklisteitems` (`itemId`)
 )
     ENGINE = InnoDB
-    AUTO_INCREMENT = 82
+    AUTO_INCREMENT = 129
+    DEFAULT CHARACTER SET = utf8mb4
+    COLLATE = utf8mb4_0900_ai_ci;
+
+
+-- -----------------------------------------------------
+-- Table `fogprojekt`.`styklistedefault`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `fogprojekt`.`styklistedefault`
+(
+    `styklistedefaultId` INT         NOT NULL AUTO_INCREMENT,
+    `item`               VARCHAR(90) NULL DEFAULT NULL,
+    `styklisteitemId`    INT         NOT NULL,
+    PRIMARY KEY (`styklistedefaultId`),
+    INDEX `styklisteitemId` (`styklisteitemId` ASC) VISIBLE,
+    CONSTRAINT `styklistedefault_ibfk_1`
+        FOREIGN KEY (`styklisteitemId`)
+            REFERENCES `fogprojekt`.`styklisteitems` (`itemId`)
+)
+    ENGINE = InnoDB
+    AUTO_INCREMENT = 6
     DEFAULT CHARACTER SET = utf8mb4
     COLLATE = utf8mb4_0900_ai_ci;
 
@@ -172,3 +190,4 @@ CREATE TABLE IF NOT EXISTS `fogprojekt`.`stykliste`
 SET SQL_MODE = @OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS = @OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS = @OLD_UNIQUE_CHECKS;
+

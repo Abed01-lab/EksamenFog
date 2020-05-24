@@ -11,9 +11,10 @@ public class StyklisteMapper {
 
     public static ArrayList<Materials> getStyklister() throws CarportException {
         ArrayList<Materials> materialer = new ArrayList<>();
-        String SQL = "SELECT * FROM fogprojekt.styklisteitems";
+        String SQL = "SELECT * FROM fogprojekt.styklisteitems;";
 
         try {
+            System.out.println("virker");
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
@@ -59,6 +60,18 @@ public class StyklisteMapper {
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             throw new CarportException("Fejl ved opdatering af pris");
+        }
+    }
+
+    public static void opdaterStandardStykliste(String styklisteType, int serienummer) {
+        try {
+            Connection con = Connector.connection();
+            String SQL = "UPDATE fogprojekt.styklistedefault SET styklisteitemId = '" + serienummer + "' WHERE item = '" + styklisteType + "'";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
@@ -191,9 +204,26 @@ public class StyklisteMapper {
             }
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
-            throw new CarportException("Fejl ved indhentning af stykliste");
+            throw new CarportException("Fejl ved indhentning  asd af stykliste");
         }
         return overlist;
+    }
+
+    public static int getStandardStykliste(String itemName){
+        int serienummer = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.styklistedefault WHERE item = '" + itemName + "'";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()){
+                serienummer = rs.getInt("styklisteitemId");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return serienummer;
     }
 
     public static void lavStyklisterTilCarport(int forespørgselsId, Carport carport, Tag tag, Skur skur) throws CarportException {
@@ -213,7 +243,7 @@ public class StyklisteMapper {
         for (int i = 0; i < liste.size(); i++) {
             String itemName = liste.get(i).getItemNavn();
 
-            switch (itemName) {
+            /* switch (itemName) {
                 case "breddestolper":
                     serienummer = 2;
                     break;
@@ -229,7 +259,9 @@ public class StyklisteMapper {
                 case "lægter":
                     serienummer = 7;
                     break;
-            }
+            }*/
+
+            serienummer = getStandardStykliste(itemName);
 
             try {
                 Connection con = Connector.connection();

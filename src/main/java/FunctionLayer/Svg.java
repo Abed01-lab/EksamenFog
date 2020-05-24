@@ -9,13 +9,17 @@ public class Svg {
     private int y;
     private StringBuilder svg = new StringBuilder();
     private final String headerTemplate = "<svg  version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\"  xmlns:xlink=\"http://www.w3.org/1999/xlink\" height=\"%d\" width=\"%d\" viewBox=\"%s\" x=\"%d\" y=\"%d\" preserveAspectRatio=\"xMinYMin\">";
+
     private final String rectTemplate = "<rect x=\"%d\" y=\"%d\" height=\"%d\" width=\"%d\" style=\"stroke:#000000; fill: #ffffff\" />";
-    private final String labelTemplate = "<text style=\"text-anchor: middle\" x=\"%d\" y=\"%d\"> cm </text>"
-                                        + "<text style=\"text-anchor: middle\" transform=\"translate(\"%d\",\"%d\") rotate(-90)\"> 600 cm </text>";
+    private final String labelTemplateY = "<text style=\"text-anchor: middle; writing-mode: tb;\" x=\"%d\" y=\"%d\"> %s cm </text>";
+   // private final String labelTemplateY = "<text style=\"text-anchor: middle\" transform=\"translate(\"%d\",\"%d\") rotate(-90)\"> 600 cm </text>";
+    private final String labelTemplateX = "<text style=\"text-anchor: middle\" x=\"%d\" y=\"%d\"> %s cm </text>";
+
+
     private final String arrowTemplate = "<defs> <marker id=\"beginArrow\" markerWidth=\"12\" markerHeight=\"12\" refX=\"0\" refY=\"6\" orient=\"auto\"> <path d=\"M0,6 L12,0 L12,12 L0,6\" style=\"fill: #000000s;\" /> </marker>"
                                               + "<marker id=\"endArrow\" markerWidth=\"12\" markerHeight=\"12\" refX=\"12\" refY=\"6\" orient=\"auto\"> <path d=\"M0,0 L12,6 L0,12 L0,0\" style=\"fill: #000000;\" /> </marker> </defs>"
                                               + "<line x1=\"%d\"  y1=\"%d\" x2=\"%d\" y2=\"%d\" style=\"stroke:#006600; marker-start: url(#beginArrow); marker-end: url(#endArrow);\"/>";
-    private final String krydsTemplate = "<line x=\"%d\" y=\"%d\" x1=\"%d\" y1=\"%d\" style=\"stroke:#000000; stroke-dasharray: 10 5\" />";
+    private final String krydsTemplate = "<line x1=\"%d\" y1=\"%d\" x2=\"%d\" y2=\"%d\" style=\"stroke:#000000; stroke-dasharray: 10 5\" />";
 
     public Svg(int width, int height, String viewbox, int x, int y) {
         this.width = width;
@@ -42,8 +46,11 @@ public class Svg {
         svg.append(String.format(krydsTemplate, x, y, x1, y1));
     }
 
-    public void addLabel(int x, int y, int height, int width){
-        svg.append(String.format(labelTemplate, x, y, height, width));
+    public void addLabelX (int x, int y, String width){
+        svg.append(String.format(labelTemplateX, x, y, width));
+    }
+    public void addLabelY (int x, int y, String length){
+        svg.append(String.format(labelTemplateY, x, y, length));
     }
 
     public int getWidth() {
