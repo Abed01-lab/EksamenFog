@@ -24,7 +24,7 @@ public class CalculatorTest {
 
     @Test
     public void beregnAntalStolperTestPositiv2() {
-
+        
         // Arrange
         Carport carport = new Carport(200, 240, 240);
         Skur skur = new Skur(180, 240);
@@ -192,6 +192,22 @@ public class CalculatorTest {
 
         // Assert
         Assert.assertEquals(8.0, result, 0.005);
+    }
+
+
+    @Test
+    public void udregnStyklisterSkråtTestPositiv1() {
+
+        // Arrange
+        Carport carport = new Carport(200, 240, 240);
+        Tag tag = new Tag("Fladt tag", 0, "Træ");
+        Skur skur = new Skur(180, 240);
+
+        // Act
+        ArrayList<CalculatedItems>  result = Calculator.udregnStyklisterSkråt(carport, tag, skur);
+
+        // Assert
+        Assert.assertEquals(5, result.size());
     }
 
 }
