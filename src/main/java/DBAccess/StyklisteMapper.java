@@ -381,52 +381,6 @@ public class StyklisteMapper {
             e.printStackTrace();
             throw new CarportException("Fejl ved oprettelse af styklister");
         }
-
-    }
-
-
-    public static void main(String[] args) throws CarportException {
-        Carport carport = new Carport(220, 400, 720);
-        Tag tag = new Tag("Fladt", 15, "Eternittag - Rødbrun");
-        Skur skur = new Skur(300, 420);
-       // int forespørgselsId = ForespørgselMapper.createForespørgsel(new Forespørgsel("John", "Doe", "Somewhere", "John@something.com", "54325425"));
-        //lavStyklisterTilCarport(forespørgselsId, carport, tag, skur);
-
-        ArrayList<Stykliste> styklist = getAllStyklister();
-
-        System.out.println("--" + tag.getMateriale() + "--");
-        int tagId = getTagId(tag.getMateriale());
-        System.out.println(tagId);
-
-        int a = getTagId("Eternittag - Rødbrun");
-        System.out.println(a);
-
-        System.out.println("------");
-        System.out.println("------");
-        System.out.println("------");
-        System.out.println("------");
-
-        for (int i = 0; i < styklist.size(); i++) {
-            System.out.println("Ordre : " + styklist.get(i).getForespørgselsId());
-            for (int h = 0; h < styklist.get(i).getListe().size(); h++) {
-                System.out.println(styklist.get(i).getListe().get(h).getLængde());
-            }
-        }
-
-        for (int i = 0; i < styklist.size(); i++) {
-            System.out.println("Ordre : " + styklist.get(i).getForespørgselsId());
-            for (int h = 0; h < styklist.get(i).getListe().size(); h++) {
-                System.out.println(styklist.get(i).getListe().get(h));
-            }
-            System.out.println(styklist.get(i).getListe().size());
-        }
-        System.out.println("HER:" + styklist.size());
-
-        ArrayList<String> tagma = getTagMaterialer();
-        for(int i = 0; i < tagma.size(); i++){
-            System.out.println(tagma.get(i));
-        }
-
     }
 }
 
