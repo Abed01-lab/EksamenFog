@@ -32,3 +32,11 @@ INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eterni
 INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Sort", "Tag", 50);
 INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Grå", "Tag", 50);
 INSERT INTO fogprojekt.styklisteitems (beskrivelse, enhed, pris) VALUES ("Eternittag - Moka", "Tag", 50);
+
+
+INSERT INTO fogprojekt.styklistedefault (styklistedefaultId, item, styklisteitemId) VALUES (1, "breddestolper", 3);
+INSERT INTO fogprojekt.styklistedefault (styklistedefaultId, item, styklisteitemId) VALUES (2, "længdestolper", 5);
+INSERT INTO fogprojekt.styklistedefault (styklistedefaultId, item, styklisteitemId) VALUES (3, "stolper", 6);
+INSERT INTO fogprojekt.styklistedefault (styklistedefaultId, item, styklisteitemId) VALUES (4, "spær", 5);
+INSERT INTO fogprojekt.styklistedefault (styklistedefaultId, item, styklisteitemId) VALUES (5, "lægter", 7);
+INSERT INTO fogprojekt.styklistedefault (styklistedefaultId, item, styklisteitemId) VALUES (6, "skurbrædder", 1);

@@ -45,6 +45,16 @@ public class Calculator {
         return areal / 10000;
     }
 
+    public static double beregnAntalBrædderSkur(Skur skur){
+        double antalBrædder = ((skur.getBredde() * 2) + (skur.getLængde() * 2)) / 20;
+        return antalBrædder;
+    }
+
+    public static double beregnAntalBrædderSkurTag(Skur skur){
+        double antalBrædder = (skur.getLængde()) / 20;
+        return antalBrædder;
+    }
+
     public static ArrayList<CalculatedItems> udregnStyklisterFladt(Carport carport, Tag tag, Skur skur) {
         double stolperAntal = beregnAntalStolper(carport, skur);
         double spærAntal = beregnAntalSpærFladt(carport);

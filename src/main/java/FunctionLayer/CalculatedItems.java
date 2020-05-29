@@ -1,5 +1,7 @@
 package FunctionLayer;
 
+import java.util.ArrayList;
+
 public class CalculatedItems {
 
     String itemNavn;
@@ -34,5 +36,15 @@ public class CalculatedItems {
 
     public void setItemLængde(int itemLængde) {
         this.itemLængde = itemLængde;
+    }
+
+    public static double getSpærAntal(ArrayList<CalculatedItems> items) {
+        double antalSpær = 0;
+        for(int i = 0; i < items.size(); i++){
+            if(items.get(i).getItemNavn().equals("spær")){
+                antalSpær = items.get(i).getItemAntal();
+            }
+        }
+        return antalSpær;
     }
 }

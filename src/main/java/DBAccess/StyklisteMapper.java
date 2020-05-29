@@ -99,17 +99,17 @@ public class StyklisteMapper {
         throw new CarportException("Fejl ved indhentning af stykliste");
     }
 
-    public static ArrayList<String> getTagMaterialer(){
+    public static ArrayList<String> getTagMaterialer() {
         ArrayList<String> liste = new ArrayList<>();
         try {
             Connection con = Connector.connection();
             String SQL = "SELECT * FROM fogprojekt.styklisteitems";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 String tag = rs.getString("beskrivelse");
                 String type = rs.getString("enhed");
-                if(type.equals("Tag")){
+                if (type.equals("Tag")) {
                     liste.add(tag);
                 }
             }
@@ -118,6 +118,23 @@ public class StyklisteMapper {
         }
         return liste;
     }
+
+    public static int getTagId(String tagNavn) {
+        int tagId = 0;
+        try {
+            Connection con = Connector.connection();
+            String SQL = "SELECT * FROM fogprojekt.styklisteitems WHERE beskrivelse = '" + tagNavn + "'";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                tagId = rs.getInt("itemId");
+            }
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return tagId;
+    }
+
 
     public static double getStyklistePris(int id) throws CarportException {
         double total = 0;
@@ -130,16 +147,15 @@ public class StyklisteMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 int antal = rs.getInt("antal");
                 int længde = rs.getInt("længde");
                 int pris = rs.getInt("pris");
 
-                if(længde != 0){
-                    double sum = (((double)længde / 100) * pris) * antal;
+                if (længde != 0) {
+                    double sum = (((double) længde / 100) * pris) * antal;
                     total = total + sum;
-                }
-                else {
+                } else {
                     double sum = pris * antal;
                     total = total + sum;
                 }
@@ -187,10 +203,10 @@ public class StyklisteMapper {
                         int længde = rs2.getInt("længde");
 
                         String SQL3 = "SELECT * FROM fogprojekt.styklisteitems WHERE itemId = '" + serienummer + "'";
-                        PreparedStatement ps3 =  con.prepareStatement(SQL3, Statement.RETURN_GENERATED_KEYS);
+                        PreparedStatement ps3 = con.prepareStatement(SQL3, Statement.RETURN_GENERATED_KEYS);
                         ResultSet rs3 = ps3.executeQuery();
                         String beskrivelse = "temp";
-                        while(rs3.next()) {
+                        while (rs3.next()) {
                             beskrivelse = rs3.getString("beskrivelse");
                         }
 
@@ -209,7 +225,7 @@ public class StyklisteMapper {
         return overlist;
     }
 
-    public static int getStandardStykliste(String itemName){
+    public static int getStandardStykliste(String itemName) {
         int serienummer = 0;
         try {
             Connection con = Connector.connection();
@@ -217,7 +233,7 @@ public class StyklisteMapper {
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 serienummer = rs.getInt("styklisteitemId");
             }
         } catch (SQLException | ClassNotFoundException e) {
@@ -243,24 +259,6 @@ public class StyklisteMapper {
         for (int i = 0; i < liste.size(); i++) {
             String itemName = liste.get(i).getItemNavn();
 
-            /* switch (itemName) {
-                case "breddestolper":
-                    serienummer = 2;
-                    break;
-                case "længdestolper":
-                    serienummer = 4;
-                    break;
-                case "stolper":
-                    serienummer = 6;
-                    break;
-                case "spær":
-                    serienummer = 5;
-                    break;
-                case "lægter":
-                    serienummer = 7;
-                    break;
-            }*/
-
             serienummer = getStandardStykliste(itemName);
 
             try {
@@ -284,10 +282,11 @@ public class StyklisteMapper {
             String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
 
-            //serienummer = tag.getTagmateriale();
+            int tagId = getTagId(tag.getMateriale());
             double areal = beregnTagAreal(carport, tag);
+
             ps.setInt(1, forespørgselsId);
-            ps.setInt(2, 2);
+            ps.setInt(2, tagId);
             ps.setDouble(3, areal);
             ps.setDouble(4, 0);
             ps.executeUpdate();
@@ -296,16 +295,116 @@ public class StyklisteMapper {
             e.printStackTrace();
             throw new CarportException("Fejl ved oprettelse af styklister");
         }
+
+        if (skur.getBredde() != 0) {
+            try {
+                Connection con = Connector.connection();
+                String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+
+                double brædder = beregnAntalBrædderSkur(skur);
+                serienummer = getStandardStykliste("skurbrædder");
+
+                ps.setInt(1, forespørgselsId);
+                ps.setDouble(2, serienummer);
+                ps.setDouble(3, brædder);
+                ps.setDouble(4, carport.getHøjde());
+                ps.executeUpdate();
+
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new CarportException("Fejl ved oprettelse af styklister");
+            }
+        }
+
+        int nummer = 11;
+        for(int h = 0; h < 2; h++) {
+            //tilføjer dele til montering af spær
+
+            try {
+                Connection con = Connector.connection();
+                String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+
+                double spær = CalculatedItems.getSpærAntal(liste);
+
+                ps.setInt(1, forespørgselsId);
+                ps.setDouble(2, nummer);
+                ps.setDouble(3, spær);
+                ps.setDouble(4, 0);
+                ps.executeUpdate();
+
+
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new CarportException("Fejl ved oprettelse af styklister");
+            }
+            nummer = nummer + 1;
+        }
+
+        int skruenummer = 17;
+        for(int h = 0; h < 2; h++) {
+            try {
+                Connection con = Connector.connection();
+                String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
+                PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+
+                int antal = 2;
+                if(carport.getBredde() > 600 && carport.getLængde() > 600){
+                    antal = 3;
+                }
+                ps.setInt(1, forespørgselsId);
+                ps.setDouble(2, skruenummer);
+                ps.setDouble(3, antal);
+                ps.setDouble(4, 0);
+                ps.executeUpdate();
+
+            } catch (SQLException | ClassNotFoundException e) {
+                e.printStackTrace();
+                throw new CarportException("Fejl ved oprettelse af styklister");
+            }
+            skruenummer = skruenummer + 1;
+        }
+
+        try {
+            Connection con = Connector.connection();
+            String SQL = "INSERT INTO fogprojekt.stykliste (forespørgselsId, serienummer, antal, længde) VALUES (?, ?, ?, ?)";
+            PreparedStatement ps = con.prepareStatement(SQL, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, forespørgselsId);
+            ps.setDouble(2, 15);
+            ps.setDouble(3, 18);
+            ps.setDouble(4, 0);
+            ps.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new CarportException("Fejl ved oprettelse af styklister");
+        }
+
     }
+
 
     public static void main(String[] args) throws CarportException {
         Carport carport = new Carport(220, 400, 720);
-        Tag tag = new Tag("Fladt", 15, "Sten");
+        Tag tag = new Tag("Fladt", 15, "Eternittag - Rødbrun");
         Skur skur = new Skur(300, 420);
        // int forespørgselsId = ForespørgselMapper.createForespørgsel(new Forespørgsel("John", "Doe", "Somewhere", "John@something.com", "54325425"));
         //lavStyklisterTilCarport(forespørgselsId, carport, tag, skur);
 
         ArrayList<Stykliste> styklist = getAllStyklister();
+
+        System.out.println("--" + tag.getMateriale() + "--");
+        int tagId = getTagId(tag.getMateriale());
+        System.out.println(tagId);
+
+        int a = getTagId("Eternittag - Rødbrun");
+        System.out.println(a);
+
+        System.out.println("------");
+        System.out.println("------");
+        System.out.println("------");
+        System.out.println("------");
 
         for (int i = 0; i < styklist.size(); i++) {
             System.out.println("Ordre : " + styklist.get(i).getForespørgselsId());
